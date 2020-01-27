@@ -1,134 +1,117 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using TMPro;
 
 public class DateManagement : MonoBehaviour
 {
-    System.DateTime curDate;
+    DateTime curDate;
 
     //launch date retrieved from PlayerPrefs and transformed back to DateTime
-    System.DateTime savedLaunchDate;
+    DateTime savedLaunchDate;
 
     //how many days from launch date, launch date being 1
-    int daysInWar = 0;
+    int numberOfCurrentDay;
 
     //how many days from launch date, launch date being 0 ---for arrays
-    int curIndexInArray = 0;
+    int indexOfCurrentDay;
+    
+    //index of the current week
+    int currentWeekIndex;
 
-    //week arrays
-    System.DateTime[] firstWeek = new System.DateTime[7];
-    System.DateTime[] secondWeek = new System.DateTime[7];
-    System.DateTime[] thirdWeek = new System.DateTime[7];
-    System.DateTime[] fourthWeek = new System.DateTime[7];
-    System.DateTime[] lastTwoDays = new System.DateTime[2];
+    //array of 7 calendar gameobjects 
+    [SerializeField] TextMeshProUGUI[] daysArray7 = new TextMeshProUGUI[7];
 
-    //array of week arrays
-    System.DateTime[][] arrayOfWeeks = new System.DateTime[5][];
+    //array of 2 calendar gameobjects
+    [SerializeField] TextMeshProUGUI[] daysArray2 = new TextMeshProUGUI[2];
 
-    //index in arrayOfWeeks
-    int indexWeeksArray;
-
-    //array of calendar gameobjects
-    [SerializeField] TextMeshProUGUI[] arrayOfDays;
 
     void Start()
     {
         Date();
-        FillArrayOfWeeks();
-        CreateCalendar();
+        SetupBeforeCreateCalendar();
     }
-
-    //populate the arrayOfWeeks
-    void FillArrayOfWeeks()
-    {
-        arrayOfWeeks[0] = firstWeek;
-        arrayOfWeeks[1] = secondWeek;
-        arrayOfWeeks[2] = thirdWeek;
-        arrayOfWeeks[3] = fourthWeek;
-        arrayOfWeeks[4] = lastTwoDays;
-    }
-
-
     
     //used to define the launch date and current date and save/get from PlayerPrefs
     void Date()
     {
-        curDate = System.DateTime.Now.Date;
+        curDate = DateTime.Now.Date;
 
-        //for now ---for testing
-        savedLaunchDate = curDate.AddDays(-5);
-
-
-        curIndexInArray = (curDate - savedLaunchDate).Days;
-        daysInWar = curIndexInArray + 1;
-
-    }
-
-    void CreateCalendar()
-    {
-        PopulateArrays();
-
-        if (curIndexInArray < 7)
-        {
-            indexWeeksArray = 0;
-        }
-        else if (curIndexInArray < 14)
-        {
-            indexWeeksArray = 1;
-        }
-        else if (curIndexInArray < 21)
-        {
-            indexWeeksArray = 2;
-        }
-        else if (curIndexInArray < 28)
-        {
-            indexWeeksArray = 3;
-        }
-        else if (curIndexInArray < 30)
-        {
-            indexWeeksArray = 4;
-        }
+        //for now ---for testing (array index number - add 1)
+        savedLaunchDate = curDate.AddDays(-28);
 
 
+        //savedDate is got from PlayerPrefs ---to be used instead of savedLaunchDate
 
-
-    }
-
-    void PopulateArrays()
-    {
-        for (int i = 0; i < 30; i++)
-        {
-            var cur = savedLaunchDate.AddDays(i);
-            if (i < 7)
-            {
-                firstWeek[i] = cur;
-            }
-            else if (i < 14)
-            {
-                secondWeek[i - 7] = cur;
-            }
-            else if (i < 21)
-            {
-                thirdWeek[i - 14] = cur;
-            }
-            else if (i < 28)
-            {
-                fourthWeek[i - 21] = cur;
-            }
-            else if (i < 30)
-            {
-                lastTwoDays[i - 28] = cur;
-            }
-        }
-
-        //testing purposes
-
-        //for (int i = 0; i < lastTwoDays.Length; i++)
-        //{
-        //    Debug.Log(lastTwoDays[i]);
+        //// try to get the launch date saved as a string:
+        //string savedDateString = PlayerPrefs.GetString("savedLaunchDate", "");
+        //if (savedDateString == "")
+        //{ // if not saved yet...
+        //  // convert current date to string...
+        //    savedDateString = curDate.ToString();
+        //    // and save it in PlayerPrefs as LaunchDate:
+        //    PlayerPrefs.SetString("savedLaunchDate", savedDateString);
         //}
+        //// at this point, the string savedDate contains the launch date
+        //// let's convert it to DateTime:
+        //DateTime savedDate;
+        //DateTime.TryParse(savedDateString, out savedDate);
+        
+        indexOfCurrentDay = (curDate - savedLaunchDate).Days;
+        numberOfCurrentDay = indexOfCurrentDay + 1;
+        currentWeekIndex = indexOfCurrentDay / 7;       //floored number after division
     }
 
+    void SetupBeforeCreateCalendar()
+    {
+        if (currentWeekIndex % 4 == 0 && currentWeekIndex != 0) 
+        {
+            CreateCalendar(daysArray2);
+        }
+        else
+        {
+            CreateCalendar(daysArray7);
+        } 
+    }
 
+    void CreateCalendar(TextMeshProUGUI[] arrayOfCalendarObjects)
+    {
+        for (int i = 0; i < arrayOfCalendarObjects.Length; i++)
+        {
+            var cur = arrayOfCalendarObjects[i];
+            //Debug.Log((currentWeekIndex * 7) + i + 1);
+            int dayInArr = (currentWeekIndex * 7) + i; //current day in loop - array number
+            int dayGlobal = dayInArr + 1; //current day in loop - global number
+            cur.text = dayGlobal.ToString();
+
+            string[] stringValues = GetComponent<ValueManagement>().GetValuesOfIndex(dayInArr); //gets values for the current day in loop
+            cur.GetComponentsInChildren<TextMeshProUGUI>()[1].text = stringValues[0]; //sets the first daily check
+            cur.GetComponentsInChildren<TextMeshProUGUI>()[2].text = stringValues[1]; //sets the second daily check
+
+            //if (stringValues[2] != "") //colors all survived days
+            //{
+            //    cur.color = new Color32(50, 50, 50, 255);
+            //}
+
+            if (dayGlobal == numberOfCurrentDay)
+            {
+                //indicate this is the current day
+                cur.fontStyle = FontStyles.Underline;
+            }
+        }
+    }
+
+    //put these on buttons
+    public void NextWeek()
+    {
+        currentWeekIndex++;
+        SetupBeforeCreateCalendar();
+    }
+
+    public void LastWeek()
+    {
+        currentWeekIndex--;
+        SetupBeforeCreateCalendar();
+    }
 }

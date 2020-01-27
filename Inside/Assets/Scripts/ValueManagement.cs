@@ -1,18 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class ValueManagement : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    string[] firstDailyCheck = new string[30];
+    string[] secondDailyCheck = new string[30];
+    string[] habitDailyCheck = new string[30];
+
+    string[] firstdailyName = new string[30];
+    string[] secondDailyName = new string[30];
+
+    string badHabit;
+    string firstCheck;
+    string secondCheck;
+
+    [SerializeField] TMP_InputField inputHabit;
+
+    public void SetBadHabit()
     {
-        
+        badHabit = inputHabit.text;
     }
 
-    // Update is called once per frame
-    void Update()
+    public string[] GetValuesOfIndex(int index)
     {
-        
+        string[] arrays = {firstDailyCheck[index], secondDailyCheck[index], habitDailyCheck[index]};
+        return arrays;
     }
+
 }

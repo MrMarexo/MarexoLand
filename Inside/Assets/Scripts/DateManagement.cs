@@ -30,7 +30,7 @@ public class DateManagement : MonoBehaviour
     void Start()
     {
         Date();
-        SetupBeforeCreateCalendar();
+        CurrentWeek(); //later this will be put on a button ---now its here for testing
     }
     
     //used to define the launch date and current date and save/get from PlayerPrefs
@@ -60,8 +60,15 @@ public class DateManagement : MonoBehaviour
         
         indexOfCurrentDay = (curDate - savedLaunchDate).Days;
         numberOfCurrentDay = indexOfCurrentDay + 1;
-        currentWeekIndex = indexOfCurrentDay / 7;       //floored number after division
+        
     }
+    
+    public void CurrentWeek()
+    {
+        currentWeekIndex = indexOfCurrentDay / 7;       //floored number after division
+        SetupBeforeCreateCalendar();
+    }
+
 
     void SetupBeforeCreateCalendar()
     {

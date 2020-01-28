@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,9 +13,9 @@ public class ValueManagement : MonoBehaviour
     string[] firstdailyName = new string[30];
     string[] secondDailyName = new string[30];
 
-    string badHabit;
-    string firstCheck;
-    string secondCheck;
+    string badHabitName;
+    string firstCheckName;
+    string secondCheckName;
 
     [SerializeField] TMP_InputField inputHabit;
 
@@ -28,6 +28,12 @@ public class ValueManagement : MonoBehaviour
     {
         string[] arrays = {firstDailyCheck[index], secondDailyCheck[index], habitDailyCheck[index]};
         return arrays;
+    }
+
+    public string[] GetNames()
+    {
+        string[] names = {badHabitName, firstCheckName, secondCheckName};
+        return names;
     }
 
 }

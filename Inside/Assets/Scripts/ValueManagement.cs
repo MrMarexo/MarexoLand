@@ -16,12 +16,48 @@ public class ValueManagement : MonoBehaviour
     string badHabitName;
     string firstCheckName;
     string secondCheckName;
+    string weeklyCheckName;
 
     [SerializeField] TMP_InputField inputHabit;
+    [SerializeField] TMP_InputField inputFirst;
+    [SerializeField] TMP_InputField inputSecond;
+    [SerializeField] TMP_InputField inputWeekly;
 
-    public void SetBadHabit()
+    private void Awake()
     {
-        badHabit = inputHabit.text;
+        PlayerPrefs.DeleteAll(); //for testing purposes
+        badHabitName = PlayerPrefs.GetString("badHabitName", "");
+        firstCheckName = PlayerPrefs.GetString("firstCheckName", "");
+        secondCheckName = PlayerPrefs.GetString("secondCheckName", "");
+        weeklyCheckName = PlayerPrefs.GetString("weeklyCheckName", "");
+    }
+
+    public void SaveBadHabit()
+    {
+        string inputBadHabit = inputHabit.text;
+        PlayerPrefs.SetString("badHabitName", inputBadHabit);
+        badHabitName = PlayerPrefs.GetString("badHabitName", "");
+    }
+
+    public void SaveFirstName()
+    {
+        string inputFirstName = inputFirst.text;
+        PlayerPrefs.SetString("firstCheckName", inputFirstName);
+        firstCheckName = PlayerPrefs.GetString("firstCheckName", "");
+    }
+
+    public void SaveSecondName()
+    {
+        string inputSecondName = inputSecond.text;
+        PlayerPrefs.SetString("secondCheckName", inputSecondName);
+        secondCheckName = PlayerPrefs.GetString("secondCheckName", "");
+    }
+
+    public void SaveWeeklyName()
+    {
+        string inputWeeklyName = inputWeekly.text;
+        PlayerPrefs.SetString("weeklyCheckName", inputWeeklyName);
+        weeklyCheckName = PlayerPrefs.GetString("weeklyCheckName", "");
     }
 
     public string[] GetValuesOfIndex(int index)
@@ -32,8 +68,9 @@ public class ValueManagement : MonoBehaviour
 
     public string[] GetNames()
     {
-        string[] names = {badHabitName, firstCheckName, secondCheckName};
+        string[] names = {badHabitName, firstCheckName, weeklyCheckName, secondCheckName };
         return names;
     }
-
+    
+    
 }

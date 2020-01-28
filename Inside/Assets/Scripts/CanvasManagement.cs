@@ -4,36 +4,26 @@ using UnityEngine;
 
 public class CanvasManagement : MonoBehaviour
 {
-    [SerializeField] GameObject canvasIntro;
-    [SerializeField] GameObject canvasCalendar7;
-    [SerializeField] GameObject canvasCalendar2;
-
+    [SerializeField] List<GameObject> canvases;
 
     [SerializeField] float timeToSwitchCanvas = 0.2f;
 
-    void Start()
+    private void Start()
     {
-        TurnOffCanvases();
+        DisableCanvases();
     }
 
-    IEnumerator LoadCanvasInTime(GameObject canvas, bool enableDisable)
+    IEnumerator LoadCanvas(GameObject canvas, bool enableDisable)
     {
-        yield return new WaitForSecondsRealTime(timeToSwitchCanvas);
-        canvas.setActive(enableDisable);
+        yield return new WaitForSecondsRealtime(timeToSwitchCanvas);
+        canvas.SetActive(enableDisable);
     }
-
-    void TurnOffCanvases() 
-    {
-        for (int i = 0; i < canvases.Length; i++)
-        {
-            canvases[i].setActive(false);
-        }
-    }
-
+    
     public void StartGame()
     {
+        //checking if the name values have been saved ---if the intro has been already completed
         string[] names = GetComponent<ValueManagement>().GetNames();
-        if (names[0] == "" || names[1] == "") 
+        if (names[0] == "" || names[1] == "" || names[2] == "") //badHabitName and firstCheckName
         {
             EnableIntro();
         }
@@ -41,32 +31,74 @@ public class CanvasManagement : MonoBehaviour
 
     public void EnableIntro()
     {
-        StartCoroutine(LoadCanvasInTime(canvasIntro, true));
+        StartCoroutine(LoadCanvas(canvases[0], true));
     }
 
-    public void DisableIntro()
+    public int GetActiveCanvasIndex()
     {
-        StartCoroutine(LoadCanvasInTime(canvasIntro, false));
+        int activeCanvasIndex = 0;
+        for (int i = 0; i < canvases.Count; i++)
+        {
+            if (canvases[i].active == true)
+            {
+                activeCanvasIndex = i;
+            }
+        }
+        return activeCanvasIndex;
     }
 
-    public void EnableCalendar7()
+    public void NextCanvas()
     {
-        StartCoroutine(LoadCanvasInTime(canvasCalendar7, true));
+        if (canvases[GetActiveCanvasIndex() + 1].tag == "Calendar")
+        {
+            ShowCalendar();
+        }
+        else
+        {
+            int activeIndex = GetActiveCanvasIndex();
+            StartCoroutine(LoadCanvas(canvases[activeIndex], false));
+            StartCoroutine(LoadCanvas(canvases[activeIndex + 1], true));
+        } 
     }
 
-    public void DisableCalendar7()
+    public void DisableCanvases()
     {
-        StartCoroutine(LoadCanvasInTime(canvasCalendar7, false));
+        for (int i = 0; i < canvases.Count; i++)
+        {
+            canvases[i].SetActive(false);
+        }
     }
 
-    public void EnableCalendar2()
+    public void ShowCalendar()
     {
-        StartCoroutine(LoadCanvasInTime(canvasCalendar2, true));
+        int activeIndex = GetActiveCanvasIndex();
+
+        int currentCalendarIndex = GetComponent<DateManagement>().GetCalendarIndex();
+
+        GameObject currentCalendar = canvases[canvases.Count - 1].transform.GetChild(currentCalendarIndex).gameObject;
+        GameObject otherCalendar = canvases[canvases.Count - 1].transform.GetChild(Mathf.Abs(currentCalendarIndex - 1)).gameObject;
+        Debug.Log(currentCalendar.name);
+        Debug.Log(GetComponent<DateManagement>().GetCalendarIndex());
+        GetComponent<DateManagement>().LoadWeek();
+        StartCoroutine(LoadCanvas(canvases[activeIndex], false)); //disable current active canvas
+
+
+        StartCoroutine(LoadCanvas(canvases[canvases.Count - 1], true));
+        StartCoroutine(LoadCanvas(otherCalendar, false)); //turns off the other canvas
+        StartCoroutine(LoadCanvas(currentCalendar, true));
+        Debug.Log(currentCalendar.name);
     }
 
-    public void DisableCalendar2()
+    public void PreviousWeek()
     {
-        StartCoroutine(LoadCanvasInTime(canvasCalendar2, false));
+        GetComponent<DateManagement>().DecreaseWeekIndex();
+        ShowCalendar();
     }
 
+    public void NextWeek()
+    {
+        GetComponent<DateManagement>().IncreaseWeekIndex();
+        ShowCalendar();
+    }
+    
 }

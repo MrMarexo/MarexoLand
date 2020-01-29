@@ -79,14 +79,21 @@ public class CanvasManagement : MonoBehaviour
         GameObject otherCalendar = canvases[canvases.Count - 1].transform.GetChild(Mathf.Abs(currentCalendarIndex - 1)).gameObject;
         Debug.Log(currentCalendar.name);
         Debug.Log(GetComponent<DateManagement>().GetCalendarIndex());
-        GetComponent<DateManagement>().LoadWeek();
+        
         StartCoroutine(LoadCanvas(canvases[activeIndex], false)); //disable current active canvas
 
 
         StartCoroutine(LoadCanvas(canvases[canvases.Count - 1], true));
         StartCoroutine(LoadCanvas(otherCalendar, false)); //turns off the other canvas
-        StartCoroutine(LoadCanvas(currentCalendar, true));
-        Debug.Log(currentCalendar.name);
+        StartCoroutine(LoadCalendar(currentCalendar));
+    }
+
+    //special one with LoadWeek ----put here to get rid of time discrepancy when loading other calendar type
+    IEnumerator LoadCalendar(GameObject canvas)
+    {
+        yield return new WaitForSecondsRealtime(timeToSwitchCanvas);
+        GetComponent<DateManagement>().LoadWeek();
+        canvas.SetActive(true);
     }
 
     public void PreviousWeek()

@@ -47,7 +47,7 @@ public class DateManagement : MonoBehaviour
         curDate = DateTime.Now.Date;
 
         //for now ---for testing (array index number - add 1)
-        savedLaunchDate = curDate.AddDays(-2);
+        savedLaunchDate = curDate.AddDays(-5);
 
 
         //savedDate is got from PlayerPrefs ---to be used instead of savedLaunchDate
@@ -90,6 +90,7 @@ public class DateManagement : MonoBehaviour
         for (int i = 0; i < calendars[index].Length; i++)
         {
             var cur = calendars[index][i];
+            cur.fontStyle = FontStyles.Normal;              //to get rid of underline in every week while scrolling through weeks
             //Debug.Log((currentWeekIndex * 7) + i + 1);
             int dayInArr = (currentWeekIndex * 7) + i; //current day in loop - array number
             int dayGlobal = dayInArr + 1; //current day in loop - global number
@@ -121,13 +122,18 @@ public class DateManagement : MonoBehaviour
 
     public void IncreaseWeekIndex()
     {
-        currentWeekIndex++;
+        if (currentWeekIndex != 4)
+        {
+            currentWeekIndex++;
+        }
     }
 
     public void DecreaseWeekIndex()
     {
-        currentWeekIndex--;
+        if (currentWeekIndex != 0)
+        {
+            currentWeekIndex--;
+        }
     }
-
     
 }

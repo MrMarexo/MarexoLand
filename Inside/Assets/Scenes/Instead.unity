@@ -3823,7 +3823,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.23798503, g: 0.24816065, b: 0.26415092, a: 0}
+  m_BackGroundColor: {r: 0.2735849, g: 0.21035066, b: 0.21035066, a: 1}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -3863,7 +3863,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 21.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5406,6 +5406,12 @@ MonoBehaviour:
   - {fileID: 515270383}
   - {fileID: 201725463}
   - {fileID: 1678310634}
+  previousWeekButtons:
+  - {fileID: 349725843}
+  - {fileID: 1963228590}
+  nextWeekButtons:
+  - {fileID: 204155341}
+  - {fileID: 1053631917}
   timeToSwitchCanvas: 0.1
 --- !u!114 &741992738
 MonoBehaviour:
@@ -5450,6 +5456,9 @@ MonoBehaviour:
   incompleteColor:
     serializedVersion: 2
     rgba: 4283914080
+  invisibleColor:
+    serializedVersion: 2
+    rgba: 0
   daysArray7:
   - {fileID: 1020994015}
   - {fileID: 553170080}
@@ -8342,7 +8351,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1024626712
 RectTransform:
   m_ObjectHideFlags: 0

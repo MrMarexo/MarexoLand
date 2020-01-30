@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CanvasManagement : MonoBehaviour
 {
     [SerializeField] List<GameObject> canvases;
+
+    //buttons to browse through calendar --0 is 7day, 1 is 2day
+    [SerializeField] List<GameObject> previousWeekButtons; 
+    [SerializeField] List<GameObject> nextWeekButtons;
 
     [SerializeField] float timeToSwitchCanvas = 0.2f;
 
@@ -146,13 +151,47 @@ public class CanvasManagement : MonoBehaviour
         GetComponent<DateManagement>().LoadWeek();  //creates a calendar
         other.SetActive(false);     //disables off the other canvas
         current.SetActive(true);    //enables the correct canvas
+
+        //checks if week buttons should be active or not
+        CheckButtons();
+    }
+
+    //
+    void CheckButtons()
+    {
+        //learn the current week index
+        int[] weekIndexes = GetComponent<DateManagement>().GetCurrentWeek(); //0 is current, 1 is original
+
+        //learn the calendar index
+        int calendarIndex = GetComponent<DateManagement>().GetCalendarIndex(); //0 for 7day, 1 for 2day
+
+        //get the buttons of the proper calendar and enable them
+        previousWeekButtons[calendarIndex].SetActive(true);
+        nextWeekButtons[calendarIndex].SetActive(true);
+
+        //if current is 0 disable the previous button
+        if (weekIndexes[0] == 0)
+        {
+            previousWeekButtons[calendarIndex].SetActive(false);
+        }
+
+        //if current is four disable the next button and dont run further
+        if (weekIndexes[0] == 4) //will later tweak when more weeks will be possible
+        {
+            nextWeekButtons[calendarIndex].SetActive(false);
+        }
+        else if (weekIndexes[0] == weekIndexes[1])
+        {
+            nextWeekButtons[calendarIndex].SetActive(false);
+        }
+
     }
 
     //methods to browse through the calendar
     public void PreviousWeek()
     {
-        GetComponent<DateManagement>().DecreaseWeekIndex();
-        ShowCalendar();
+            GetComponent<DateManagement>().DecreaseWeekIndex();
+            ShowCalendar();
     }
 
     public void NextWeek()

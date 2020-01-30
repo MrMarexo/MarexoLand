@@ -10,6 +10,7 @@ public class DateManagement : MonoBehaviour
     [SerializeField] Color32 completeColor = new Color32(255, 255, 255, 255);
     [SerializeField] Color32 failedColor = new Color32(0, 0, 0, 255);
     [SerializeField] Color32 incompleteColor = new Color32(96, 87, 87, 255);
+    [SerializeField] Color32 invisibleColor = new Color32(0, 0, 0, 0);
 
     //current date
     DateTime curDate;
@@ -23,8 +24,11 @@ public class DateManagement : MonoBehaviour
     //how many days from launch date, launch date being 0 ---zero based
     int curDateIndex;
     
-    //index of the current week
+    //index of the current week, can change to browse the calendar
     int currentWeekIndex;
+
+    //insex of current week, stays the same
+    int originalCurrentWeekIndex;
 
     //array of 7 calendar gameobjects 
     [SerializeField] TextMeshProUGUI[] daysArray7 = new TextMeshProUGUI[7];
@@ -77,6 +81,7 @@ public class DateManagement : MonoBehaviour
         curDateNumber = curDateIndex + 1;
 
         currentWeekIndex = curDateIndex / 7;       //floored number after division
+        originalCurrentWeekIndex = curDateIndex / 7;
     }
 
     public int GetCurrentDayIndex()
@@ -105,6 +110,11 @@ public class DateManagement : MonoBehaviour
 
             //0 is day text, 1 is the first check, 2 is the second, 3 is the underline
             TextMeshProUGUI[] arrayOfTMs = cur.GetComponentsInChildren<TextMeshProUGUI>();
+            Debug.Log("length of arrayTMs: " + arrayOfTMs.Length);
+            Debug.Log("name of the first GO: " + arrayOfTMs[0].gameObject.name);
+            Debug.Log("name of the second GO: " + arrayOfTMs[1].gameObject.name);
+            Debug.Log("name of the third GO: " + arrayOfTMs[2].gameObject.name);
+            Debug.Log("name of the fourth GO: " + arrayOfTMs[3].gameObject.name);
 
             int dayInArr = (currentWeekIndex * 7) + i; //current day in loop - array number == zero based
             int dayGlobal = dayInArr + 1; //current day in loop = 1 based number
@@ -112,22 +122,21 @@ public class DateManagement : MonoBehaviour
 
             //set up regular properties
             cur.color = incompleteColor;
-            arrayOfTMs[3].color = incompleteColor; //colors the underline grey
-            cur.transform.GetChild(2).gameObject.SetActive(false); //disables the underline
-            cur.gameObject.SetActive(false); //disables the day object itself 
+            arrayOfTMs[3].color = invisibleColor; //colors the underline bkg color -- its invisible
+            arrayOfTMs[0].color = invisibleColor; //disables the day object itself -------this only makes it invisible --need to figure out how to disable it
             //-- only the present and past days will be active (visible, clickable), thanks to the fragment right below
 
             //set for today and all days before today
             if (dayGlobal <= curDateNumber)
             {
-                cur.gameObject.SetActive(true);
+                arrayOfTMs[0].color = incompleteColor;
             }
 
             //set for today
             if (dayGlobal == curDateNumber)
             {
                 //indicate this is the current day
-                cur.transform.GetChild(2).gameObject.SetActive(true);
+                arrayOfTMs[3].color = incompleteColor;
             }
 
             //gets values for the current day in loop
@@ -167,13 +176,21 @@ public class DateManagement : MonoBehaviour
             if (stringValues[2] == "S") 
             {
                 cur.color = completeColor;
-                arrayOfTMs[3].color = completeColor;
+                //colors underline only if its the current date
+                if (dayGlobal == curDateNumber)
+                {
+                    arrayOfTMs[3].color = completeColor;
+                }
 
             }
             if (stringValues[2] == "F") 
             {
                 cur.color = failedColor;
-                arrayOfTMs[3].color = failedColor;
+                //colors underline only if its the current date
+                if (dayGlobal == curDateNumber)
+                {
+                    arrayOfTMs[3].color = failedColor;
+                }
             }
         }
     }
@@ -187,18 +204,18 @@ public class DateManagement : MonoBehaviour
 
     public void IncreaseWeekIndex()
     {
-        if (currentWeekIndex != 4)
-        {
-            currentWeekIndex++;
-        }
+        currentWeekIndex++;
     }
 
     public void DecreaseWeekIndex()
     {
-        if (currentWeekIndex != 0)
-        {
-            currentWeekIndex--;
-        }
+        currentWeekIndex--;
+    }
+
+    public int[] GetCurrentWeek()
+    {
+        int[] indexes = { currentWeekIndex, originalCurrentWeekIndex };
+        return indexes;
     }
     
 }

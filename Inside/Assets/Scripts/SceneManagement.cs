@@ -8,14 +8,7 @@ using TMPro;
 public class SceneManagement : MonoBehaviour
 {
     [SerializeField] float timeToLoadScene = 0.1f;
-
-
-    public void ClosePopup()
-    {
-        GameObject parentCanvas = EventSystem.current.currentSelectedGameObject.transform.parent.gameObject;
-        Debug.Log(parentCanvas.tag);
-        StartCoroutine(LoadPopup(parentCanvas, false));
-    }
+    
 
     IEnumerator LoadScene(int index)
     {
@@ -23,11 +16,6 @@ public class SceneManagement : MonoBehaviour
         SceneManager.LoadScene(index);
     }
 
-    IEnumerator LoadPopup(GameObject popupCanvas, bool enableDisable)
-    {
-        yield return new WaitForSecondsRealtime(timeToLoadScene);
-        popupCanvas.SetActive(enableDisable);
-    }
 
     public void LoadNextScene()
     {
@@ -47,14 +35,16 @@ public class SceneManagement : MonoBehaviour
             if (inputComponent.text == "")
             {
                 //enable a pop-up canvas that prompts the user to input sth and return
-                var popup = popupMgmt.GetPopup();
-                StartCoroutine(LoadPopup(popup, true));
+                popupMgmt.EnablePopup();
                 return;
             }
         }
         StartCoroutine(LoadScene(currentIndex + 1));     
     }
 
-    
+    public float GetTimeToLoad()
+    {
+        return timeToLoadScene;
+    }
 
 }

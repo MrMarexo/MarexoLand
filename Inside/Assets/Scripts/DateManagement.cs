@@ -8,8 +8,8 @@ public class DateManagement : MonoBehaviour
 {
     //colors
     [SerializeField] Color32 completeColor = new Color32(255, 255, 255, 255);
-    [SerializeField] Color32 incompleteColor = new Color32(0, 0, 0, 255);
-    [SerializeField] Color32 failedColor = new Color32(140, 48, 48, 255);
+    [SerializeField] Color32 failedColor = new Color32(0, 0, 0, 255);
+    [SerializeField] Color32 incompleteColor = new Color32(96, 87, 87, 255);
 
     //current date
     DateTime curDate;
@@ -71,7 +71,7 @@ public class DateManagement : MonoBehaviour
         DateTime.TryParse(savedLaunchDateString, out savedLaunchDate);
 
         //for testing (zero based)
-        savedLaunchDate = savedLaunchDate.AddDays(-5);
+        savedLaunchDate = savedLaunchDate.AddDays(-8);
 
         curDateIndex = (curDate - savedLaunchDate).Days;
         curDateNumber = curDateIndex + 1;
@@ -103,57 +103,77 @@ public class DateManagement : MonoBehaviour
         {
             var cur = calendars[index][i];
 
-            //set up regular properties
-            cur.fontStyle = FontStyles.Normal;              
-            cur.color = incompleteColor;
+            //0 is day text, 1 is the first check, 2 is the second, 3 is the underline
+            TextMeshProUGUI[] arrayOfTMs = cur.GetComponentsInChildren<TextMeshProUGUI>();
 
-            
-            //Debug.Log((currentWeekIndex * 7) + i + 1);
             int dayInArr = (currentWeekIndex * 7) + i; //current day in loop - array number == zero based
-            int dayGlobal = dayInArr + 1; //current day in loop - 1 based number
+            int dayGlobal = dayInArr + 1; //current day in loop = 1 based number
             cur.text = dayGlobal.ToString();
 
-            string[] stringValues = GetComponent<ValueManagement>().GetValuesOfIndex(dayInArr); //gets values for the current day in loop
+            //set up regular properties
+            cur.color = incompleteColor;
+            arrayOfTMs[3].color = incompleteColor; //colors the underline grey
+            cur.transform.GetChild(2).gameObject.SetActive(false); //disables the underline
+            cur.gameObject.SetActive(false); //disables the day object itself 
+            //-- only the present and past days will be active (visible, clickable), thanks to the fragment right below
 
-            //the index after getcomponents is +1 because the first TextMeshPro component is the day number(current one)
-            cur.GetComponentsInChildren<TextMeshProUGUI>()[1].text = stringValues[0]; //sets the first daily check
-            cur.GetComponentsInChildren<TextMeshProUGUI>()[2].text = stringValues[1]; //sets the second daily check
+            //set for today and all days before today
+            if (dayGlobal <= curDateNumber)
+            {
+                cur.gameObject.SetActive(true);
+            }
 
-            //colors days
+            //set for today
+            if (dayGlobal == curDateNumber)
+            {
+                //indicate this is the current day
+                cur.transform.GetChild(2).gameObject.SetActive(true);
+            }
+
+            //gets values for the current day in loop
+            string[] stringValues = GetComponent<ValueManagement>().GetValuesOfIndex(dayInArr);
+
+            //sets the default - if the value is "" then the dot won't be visible
+            arrayOfTMs[1].text = stringValues[0]; //sets the first daily check
+            arrayOfTMs[2].text = stringValues[1]; //sets the second daily check
+
+            //colors first daily checks
+            if (stringValues[0] == "S") //checks first daily check value
+            {
+                //the index after getcomponents is +1 because the first TextMeshPro component is the day number(current one)
+                arrayOfTMs[1].text = ".";
+                arrayOfTMs[1].color = completeColor;
+            }
+            else if (stringValues[0] == "F")
+            {
+                arrayOfTMs[1].text = ".";
+                arrayOfTMs[1].color = failedColor;
+            }
+
+            //colors second daily checks
+            if (stringValues[1] == "S") //checks second daily check value
+            {
+                //the index after getcomponents is +1 because the first TextMeshPro component is the day number(current one)
+                arrayOfTMs[2].text = ".";
+                arrayOfTMs[2].color = completeColor;
+            }
+            else if (stringValues[1] == "F")
+            {
+                arrayOfTMs[2].text = ".";
+                arrayOfTMs[2].color = failedColor;
+            }
+            
+            //colors days and underline
             if (stringValues[2] == "S") 
             {
                 cur.color = completeColor;
+                arrayOfTMs[3].color = completeColor;
+
             }
             if (stringValues[2] == "F") 
             {
                 cur.color = failedColor;
-            }
-
-            //colors first daily checks
-            if (stringValues[0] == "S")
-            {
-                cur.GetComponentsInChildren<TextMeshProUGUI>()[1].color = completeColor;
-            }
-            if (stringValues[0] == "F")
-            {
-                cur.GetComponentsInChildren<TextMeshProUGUI>()[1].color = failedColor;
-            }
-
-            //colors first daily checks
-            if (stringValues[1] == "S")
-            {
-                cur.GetComponentsInChildren<TextMeshProUGUI>()[2].color = completeColor;
-            }
-            if (stringValues[1] == "F")
-            {
-                cur.GetComponentsInChildren<TextMeshProUGUI>()[2].color = failedColor;
-            }
-
-
-            if (dayGlobal == curDateNumber)
-            {
-                //indicate this is the current day
-                cur.fontStyle = FontStyles.Underline;
+                arrayOfTMs[3].color = failedColor;
             }
         }
     }

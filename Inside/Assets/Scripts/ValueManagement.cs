@@ -56,32 +56,12 @@ public class ValueManagement : MonoBehaviour
         currentDayIndex = GetComponent<DateManagement>().GetCurrentDayIndex();
 
         //just for testing ---- fills up the calendar with successful previous days
-        for (int i = 0; i < currentDayIndex; i++)
-        {
-            firstDailyCheck[i] = options[0];
-            habitDailyCheck[i] = options[0];
-        }
-
-    }
-
-    //toggles between two buttons
-    void ToggleTwo(int activeIndex, GameObject parentButton)
-    {
-        int inactiveIndex = Mathf.Abs(activeIndex - 1);
-        parentButton.GetComponentsInChildren<TextMeshProUGUI>()[inactiveIndex].color = incompleteColor;
-        parentButton.GetComponentsInChildren<TextMeshProUGUI>()[activeIndex].color = completeColor;
-    }
-
-    public void FirstButton()
-    {
-        GameObject parentOfButton = EventSystem.current.currentSelectedGameObject.transform.parent.gameObject;
-        ToggleTwo(0, parentOfButton);
-    }
-
-    public void SecondButton()
-    {
-        GameObject parentOfButton = EventSystem.current.currentSelectedGameObject.transform.parent.gameObject;
-        ToggleTwo(1, parentOfButton);
+        //for (int i = 0; i < currentDayIndex; i++)
+        //{
+        //    firstDailyCheck[i] = options[0];
+        //    habitDailyCheck[i] = options[0];
+        //}
+        Debug.Log(currentDayIndex);
     }
 
     //methods on buttons to set a check reply

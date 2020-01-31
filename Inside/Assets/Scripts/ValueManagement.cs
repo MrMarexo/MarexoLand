@@ -61,7 +61,6 @@ public class ValueManagement : MonoBehaviour
         //    firstDailyCheck[i] = options[0];
         //    habitDailyCheck[i] = options[0];
         //}
-        Debug.Log(currentDayIndex);
     }
 
     //methods on buttons to set a check reply

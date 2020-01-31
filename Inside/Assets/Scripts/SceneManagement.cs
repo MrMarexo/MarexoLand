@@ -31,6 +31,7 @@ public class SceneManagement : MonoBehaviour
         var popupMgmt = FindObjectOfType<PopupManagement>();
         if (inputComponent && popupMgmt)
         {
+            
             //check if its text is not ""
             if (inputComponent.text == "")
             {

@@ -12,8 +12,6 @@ public class PopupManagement : MonoBehaviour
 
     float timeToLoadPopup;
 
-    int unifiedIndex = 0;
-
     void Start()
     {
         FindAllPopups();

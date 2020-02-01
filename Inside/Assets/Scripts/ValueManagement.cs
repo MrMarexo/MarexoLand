@@ -7,16 +7,13 @@ using UnityEngine.EventSystems;
 
 public class ValueManagement : MonoBehaviour
 {
-    //colors
-    [SerializeField] Color32 completeColor = new Color32(255, 255, 255, 255);
-    [SerializeField] Color32 incompleteColor = new Color32(0, 0, 0, 255);
-
     string[] firstDailyCheck = new string[30];
     string[] secondDailyCheck = new string[30];
     string[] habitDailyCheck = new string[30];
 
-    string[] firstDailyName = new string[30];
-    string[] secondDailyName = new string[30];
+    //in case you'll wanna change the name of the task later --not configured yet
+    string[] firstDailyName = new string[30]; 
+    string[] secondDailyName = new string[30]; 
 
     string badHabitName;
     string firstCheckName;
@@ -25,17 +22,10 @@ public class ValueManagement : MonoBehaviour
 
     int currentDayIndex;
 
-
-    string[] options = { "S", "F", "" };
-
-    [SerializeField] TMP_InputField inputHabit;
-    [SerializeField] TMP_InputField inputFirst;
-    [SerializeField] TMP_InputField inputSecond;
-    [SerializeField] TMP_InputField inputWeekly;
-    
-    private void Awake()
+    private void Start()
     {
-        PlayerPrefs.DeleteAll(); //for testing purposes ---deletes all prefs for all scripts
+        //for testing purposes ---deletes all prefs for all scripts
+        PlayerPrefs.DeleteAll(); 
 
         //getting all the prefs at the berginning of the game
         badHabitName = PlayerPrefs.GetString("badHabitName", "");
@@ -48,135 +38,119 @@ public class ValueManagement : MonoBehaviour
         habitDailyCheck = PlayerPrefsX.GetStringArray("habitDailyCheck", "", 30);
         firstDailyName = PlayerPrefsX.GetStringArray("firstDailyName", "", 30);
         secondDailyName = PlayerPrefsX.GetStringArray("secondDailyName", "", 30);
-    }
 
-    private void Start()
-    {
         //get current day - zero based
         currentDayIndex = GetComponent<DateManagement>().GetCurrentDayIndex();
 
         //just for testing ---- fills up the calendar with successful previous days
-        //for (int i = 0; i < currentDayIndex; i++)
-        //{
-        //    firstDailyCheck[i] = options[0];
-        //    habitDailyCheck[i] = options[0];
-        //}
+        currentDayIndex = 28;
+        for (int i = 0; i < currentDayIndex; i++)
+        {
+            firstDailyCheck[i] = OptionCodes.options[0];
+            habitDailyCheck[i] = OptionCodes.options[0];
+        }
+        foreach (string check in habitDailyCheck)
+        {
+            Debug.Log(check);
+        }
+
     }
 
     //methods on buttons to set a check reply
     public void FirstCheckYes()
     {
-        firstDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] = options[0]; //checks if it should write to yesterdays or tomorrows values
+        firstDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] = OptionCodes.options[0]; //checks if it should write to yesterdays or tomorrows values
     }
 
     public void FirstCheckNo()
     {
-        firstDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] = options[1];
+        firstDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] = OptionCodes.options[1];
     }
 
     public void FirstCheckMaybe()
     {
-        firstDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] = options[2];
+        firstDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] = OptionCodes.options[2];
     }
 
     public void HabitCheckYes()
     {
-        habitDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] = options[0];
+        habitDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] = OptionCodes.options[0];
     }
 
     public void HabitCheckNo()
     {
-        habitDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] = options[1];
+        habitDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] = OptionCodes.options[1];
     }
 
     public void HabitCheckMaybe()
     {
-        habitDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] = options[2];
+        habitDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] = OptionCodes.options[2];
     }
 
     public void SecondCheckYes()
     {
-        secondDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] = options[0];
+        secondDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] = OptionCodes.options[0];
     }
 
     public void SecondCheckNo()
     {
-        secondDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] = options[1];
+        secondDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] = OptionCodes.options[1];
     }
 
     public void SecondCheckMaybe()
     {
-        secondDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] = options[2];
+        secondDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] = OptionCodes.options[2];
     }
 
-    public void SubmitCheck()
+    public void SaveHabitAndFirstCheck(string habitResult, string firstResult, int index)
     {
-        //sets default values --- will add second check later
-        if (CheckValuesForDailyCheck() == 0) //in todays check default values are empty strings = not yet options
-        {
-            if (firstDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] == "")
-            {
-                firstDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] = options[2];
-            }
-            if (habitDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] == "")
-            {
-                habitDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] = options[2];
-            }
-        }
-        else //in yesterdays check default values are success
-        {
-            if (firstDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] == "")
-            {
-                firstDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] = options[0];
-            }
-            if (habitDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] == "")
-            {
-                habitDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] = options[0];
-            }
-        }
+        firstDailyCheck[index] = firstResult;
+        habitDailyCheck[index] = habitResult;
 
         PlayerPrefsX.SetStringArray("firstDailyCheck", firstDailyCheck);
-        PlayerPrefsX.SetStringArray("secondDailyCheck", secondDailyCheck);
         PlayerPrefsX.SetStringArray("habitDailyCheck", habitDailyCheck);
 
         firstDailyCheck = PlayerPrefsX.GetStringArray("firstDailyCheck");
-        secondDailyCheck = PlayerPrefsX.GetStringArray("secondDailyCheck");
         habitDailyCheck = PlayerPrefsX.GetStringArray("habitDailyCheck");
 
+        //foreach (string check in habitDailyCheck)
+        //{
+        //    Debug.Log(check);
+        //}
     }
 
 
     //methods to save to playerprefs
-    public void SaveBadHabit()
+    public void SaveBadHabit(string input)
     {
-        string inputBadHabit = inputHabit.text;
-        PlayerPrefs.SetString("badHabitName", inputBadHabit);
+        PlayerPrefs.SetString("badHabitName", input);
         badHabitName = PlayerPrefs.GetString("badHabitName", "");
     }
 
-    public void SaveFirstName()
+    public void SaveFirstName(string input)
     {
-        string inputFirstName = inputFirst.text;
-        PlayerPrefs.SetString("firstCheckName", inputFirstName);
+        PlayerPrefs.SetString("firstCheckName", input);
         firstCheckName = PlayerPrefs.GetString("firstCheckName", "");
     }
 
-    public void SaveSecondName()
+    public void SaveSecondName(string input)
     {
-        string inputSecondName = inputSecond.text;
-        PlayerPrefs.SetString("secondCheckName", inputSecondName);
+        PlayerPrefs.SetString("secondCheckName", input);
         secondCheckName = PlayerPrefs.GetString("secondCheckName", "");
     }
 
-    public void SaveWeeklyName()
+    public void SaveWeeklyName(string input)
     {
-        string inputWeeklyName = inputWeekly.text;
-        PlayerPrefs.SetString("weeklyCheckName", inputWeeklyName);
+        PlayerPrefs.SetString("weeklyCheckName", input);
         weeklyCheckName = PlayerPrefs.GetString("weeklyCheckName", "");
     }
 
     public string[] GetValuesOfIndex(int index)
     {
+        //foreach (string habit in habitDailyCheck)
+        //{
+        //    Debug.Log(habit);
+        //}
         string[] arrays = {firstDailyCheck[index], secondDailyCheck[index], habitDailyCheck[index]};
         return arrays;
     }
@@ -203,7 +177,7 @@ public class ValueManagement : MonoBehaviour
         {
             indexToReturn = 0; //today
         }
-        if (firstDailyCheck[yesterdayIndex] == "" || habitDailyCheck[yesterdayIndex] == "") //add second check later
+        if (firstDailyCheck[yesterdayIndex] == "" || habitDailyCheck[yesterdayIndex] == "") //add second check later   !!!!!!
         {
             indexToReturn = 1; //yesterday
         }

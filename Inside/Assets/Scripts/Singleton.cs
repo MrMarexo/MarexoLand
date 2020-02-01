@@ -9,6 +9,7 @@ public class Singleton : MonoBehaviour
         int count = FindObjectsOfType<Singleton>().Length;
         if (count > 1)
         {
+            gameObject.SetActive(false);
             Destroy(gameObject);
         }
         else

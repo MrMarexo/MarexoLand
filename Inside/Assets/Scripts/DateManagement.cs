@@ -6,12 +6,6 @@ using TMPro;
 
 public class DateManagement : MonoBehaviour
 {
-    //colors
-    [SerializeField] Color32 completeColor = new Color32(255, 255, 255, 255);
-    [SerializeField] Color32 failedColor = new Color32(0, 0, 0, 255);
-    [SerializeField] Color32 incompleteColor = new Color32(96, 87, 87, 255);
-    [SerializeField] Color32 invisibleColor = new Color32(0, 0, 0, 0);
-
     //current date
     DateTime curDate;
 
@@ -55,7 +49,7 @@ public class DateManagement : MonoBehaviour
         DateTime.TryParse(savedLaunchDateString, out savedLaunchDate);
 
         //for testing (zero based)
-        savedLaunchDate = savedLaunchDate.AddDays(-15);
+        savedLaunchDate = savedLaunchDate.AddDays(-28);
 
         curDateIndex = (curDate - savedLaunchDate).Days;
         curDateNumber = curDateIndex + 1;
@@ -93,10 +87,10 @@ public class DateManagement : MonoBehaviour
         currentWeekIndex--;
     }
 
-    public int[] GetCurrentWeek()
+    public int GetCurrentWeek()
     {
-        int[] indexes = { currentWeekIndex, originalCurrentWeekIndex };
-        return indexes;
+        return currentWeekIndex;
     }
+
     
 }

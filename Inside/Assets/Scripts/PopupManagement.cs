@@ -8,7 +8,7 @@ public class PopupManagement : MonoBehaviour
 {
     //list of popups
     List<GameObject> popups = new List<GameObject>();
-    List<GameObject> popupPanels = new List<GameObject>();
+    GameObject popupPanel;
 
     float timeToLoadPopup;
 
@@ -16,7 +16,7 @@ public class PopupManagement : MonoBehaviour
     {
         FindAllPopups();
         DisableAllPopups();
-        timeToLoadPopup = FindObjectOfType<SceneManagement>().GetTimeToLoad();
+        timeToLoadPopup = FindObjectOfType<SceneLoader>().GetTimeToLoad();
     }
 
     void FindAllPopups()
@@ -31,47 +31,45 @@ public class PopupManagement : MonoBehaviour
             }
         }
 
-        //finds all images(panels) in a scene and if their tag is popup, it adds them in the popups list
+        //finds the popup panel
         Image[] images = Resources.FindObjectsOfTypeAll<Image>();
         for (int i = 0; i < images.Length; i++)
         {
             if (images[i].gameObject.tag == "Popup")
             {
-                popupPanels.Add(images[i].gameObject);
+                popupPanel = images[i].gameObject;
             }
         }
     }
 
-    //disables all popups and popup panels
+    //disables all popups and the popup panel
     void DisableAllPopups()
     {
         foreach (GameObject popup in popups)
         {
             popup.SetActive(false);
         }
-        foreach (GameObject panel in popupPanels)
-        {
-            panel.SetActive(false);
-        }
+
+        popupPanel.SetActive(false);
+
 
     }
     
-    public void EnablePopup()
+    public void EnablePopup(GameObject popup)
     {
-        StartCoroutine(LoadPopup(0, true));
+        StartCoroutine(LoadPopup(popup, true));
     }
 
-    public void DisablePopup()
+    public void DisablePopup(GameObject popup)
     {
-        StartCoroutine(LoadPopup(0, false));
+        StartCoroutine(LoadPopup(popup, false));
     }
 
-    IEnumerator LoadPopup(int index, bool enableDisable)
+    IEnumerator LoadPopup(GameObject popup, bool enableDisable)
     {
         yield return new WaitForSecondsRealtime(timeToLoadPopup);
-        popups[index].SetActive(enableDisable);
-        popupPanels[index].SetActive(enableDisable);
+        popup.SetActive(enableDisable);
+        popupPanel.SetActive(enableDisable);
     }
-
     
 }

@@ -9,9 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4242754128498715373}
+  - component: {fileID: 3488855951389285388}
   - component: {fileID: 4242754128498715374}
   - component: {fileID: 4242754128498715375}
-  - component: {fileID: 7592606844625582139}
+  - component: {fileID: 8522827884644537804}
   m_Layer: 0
   m_Name: Management
   m_TagString: Untagged
@@ -33,6 +34,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3488855951389285388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4242754128498715346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e79c4b6e1f87a9345a7de0d1b0e2e721, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4242754128498715374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45,18 +58,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7913e77ab35b8924290a30a5235507e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  completeColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  failedColor:
-    serializedVersion: 2
-    rgba: 4281348236
-  incompleteColor:
-    serializedVersion: 2
-    rgba: 4283914080
-  invisibleColor:
-    serializedVersion: 2
-    rgba: 0
 --- !u!114 &4242754128498715375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,17 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5bc08ecfb86f28429f2e7b3baf0132d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  completeColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  incompleteColor:
-    serializedVersion: 2
-    rgba: 4278190080
-  inputHabit: {fileID: 0}
-  inputFirst: {fileID: 0}
-  inputSecond: {fileID: 0}
-  inputWeekly: {fileID: 0}
---- !u!114 &7592606844625582139
+--- !u!114 &8522827884644537804
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -88,6 +79,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4242754128498715346}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e79c4b6e1f87a9345a7de0d1b0e2e721, type: 3}
+  m_Script: {fileID: 11500000, guid: c56671cd34f18964e9b5b657f00c6daf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeToLoadScene: 0.1

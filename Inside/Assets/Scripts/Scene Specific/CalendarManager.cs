@@ -16,6 +16,9 @@ public class CalendarManager : MonoBehaviour
     //week number
     [SerializeField] TextMeshProUGUI weekNumberText;
 
+    //week task gOs
+    [SerializeField] TextMeshProUGUI[] weekTasks = new TextMeshProUGUI[2]; 
+
     //array of 7 calendar gameobjects 
     TextMeshProUGUI[] days7 = new TextMeshProUGUI[7];
 
@@ -84,7 +87,7 @@ public class CalendarManager : MonoBehaviour
     {
         //finds the 7 day game objects and puts them into the array
         Button[] gO7 = pages[0].GetComponentsInChildren<Button>();
-        for (int i = 0; i < gO7.Length; i++)
+        for (int i = 0; i < 7; i++) //because 7th is the week button
         {
             var tM = gO7[i].gameObject.GetComponent<TextMeshProUGUI>();
             days7[i] = tM;
@@ -92,7 +95,7 @@ public class CalendarManager : MonoBehaviour
 
         ////finds the 2 day game objects and puts them into the array
         Button[] gO2 = pages[1].GetComponentsInChildren<Button>();
-        for (int i = 0; i < gO2.Length; i++)
+        for (int i = 0; i < 2; i++) //because 2nd is the week button
         {
             var tM = gO2[i].gameObject.GetComponent<TextMeshProUGUI>();
             days2[i] = tM;
@@ -135,6 +138,7 @@ public class CalendarManager : MonoBehaviour
         UpdateWeekNumberText();
     }
 
+    //shows correct gameobject with days - also woth the week challenge
     void EnableDisableWeeks()
     {
         int correctPageIndex = GetCalendarIndex();
@@ -142,6 +146,24 @@ public class CalendarManager : MonoBehaviour
         pages[correctPageIndex].SetActive(true);
         //disable the other one
         pages[Mathf.Abs(correctPageIndex - 1)].SetActive(false);
+    }
+
+    void ShowWeeklyTask(int index)
+    {
+        var correctWeekObject = weekTasks[index];
+        string[] values = vM.GetWeeklyValues(); //0 is first week, 1 is second etc
+        if (values[weekIndex] == "") 
+        {
+            correctWeekObject.color = Colors.incompleteColor;
+        }
+        else if (values[weekIndex] == OptionCodes.options[0]) //if success
+        {
+            correctWeekObject.color = Colors.completeColor;
+        }
+        else if (values[weekIndex] == OptionCodes.options[1])
+        {
+            correctWeekObject.color = Colors.failedColor;
+        }
     }
 
     public void ShowNextWeek()
@@ -158,7 +180,11 @@ public class CalendarManager : MonoBehaviour
 
     void CalculateCalendar()
     {
-        var weekToShow = calendars[GetCalendarIndex()];
+        int calendarIndex = GetCalendarIndex();
+        var weekToShow = calendars[calendarIndex];
+
+        //show weekly task gameobject
+        ShowWeeklyTask(calendarIndex);
 
         for (int i = 0; i < weekToShow.Length; i++)
         {
@@ -169,6 +195,7 @@ public class CalendarManager : MonoBehaviour
             Color32 failedColor = Colors.failedColor;
 
             var cur = weekToShow[i];
+            var curButton = cur.GetComponent<Button>();
 
             int curDateNumber = currentDayIndex + 1;
 
@@ -182,19 +209,21 @@ public class CalendarManager : MonoBehaviour
             //set up regular properties
             arrayOfTMs[3].color = invisibleColor; //colors the underline color -- its invisible
             arrayOfTMs[0].color = invisibleColor; //this only makes it invisible --need to figure out how to disable it
+            curButton.enabled = false; //this disables the button component for all days(makes them unclickable)
             //-- only the present and past days will be active (visible, clickable), thanks to the fragment right below
 
             //set for today and all days before today
             if (dayGlobal <= curDateNumber)
             {
                 arrayOfTMs[0].color = incompleteColor;
+                curButton.enabled = true; //enable the button component for current day and days before
             }
 
             //set for today
             if (dayGlobal == curDateNumber)
             {
                 //indicate this is the current day
-                arrayOfTMs[3].color = incompleteColor;                                                          //!!!
+                arrayOfTMs[3].color = incompleteColor;                                                         
             }
 
             //gets values for the current day in loop

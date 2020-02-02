@@ -11,6 +11,9 @@ public class ValueManagement : MonoBehaviour
     string[] secondDailyCheck = new string[30];
     string[] habitDailyCheck = new string[30];
 
+    
+    string[] weeklyCheck = new string[5];
+
     //in case you'll wanna change the name of the task later --not configured yet
     string[] firstDailyName = new string[30]; 
     string[] secondDailyName = new string[30]; 
@@ -36,6 +39,9 @@ public class ValueManagement : MonoBehaviour
         firstDailyCheck = PlayerPrefsX.GetStringArray("firstDailyCheck", "", 30);
         secondDailyCheck = PlayerPrefsX.GetStringArray("secondDailyCheck", "", 30);
         habitDailyCheck = PlayerPrefsX.GetStringArray("habitDailyCheck", "", 30);
+
+        weeklyCheck = PlayerPrefsX.GetStringArray("weeklyCheck", "", 5);
+
         firstDailyName = PlayerPrefsX.GetStringArray("firstDailyName", "", 30);
         secondDailyName = PlayerPrefsX.GetStringArray("secondDailyName", "", 30);
 
@@ -43,14 +49,18 @@ public class ValueManagement : MonoBehaviour
         currentDayIndex = GetComponent<DateManagement>().GetCurrentDayIndex();
 
         //just for testing ---- fills up the calendar with successful previous days
-        currentDayIndex = 28;
+        //////////////////////////////////////////////
+        currentDayIndex = 7;
         for (int i = 0; i < currentDayIndex; i++)
         {
             firstDailyCheck[i] = OptionCodes.options[0];
             habitDailyCheck[i] = OptionCodes.options[0];
-        } 
+        }
+        //weeklyCheck[0] = OptionCodes.options[0];
+        //////////////////////////////////////////////////////
     }
 
+    //called by the checkup scene script to set the chosen values to prefs
     public void SaveHabitAndFirstCheck(string habitResult, string firstResult, int index)
     {
         firstDailyCheck[index] = firstResult;
@@ -66,6 +76,20 @@ public class ValueManagement : MonoBehaviour
         //{
         //    Debug.Log(check);
         //}
+    }
+
+    //called by the checkup scene script to set the chosen values to prefs
+    public void SaveWeeklyCheck(string result, int weekIndex)
+    {
+        weeklyCheck[weekIndex] = result;
+
+        PlayerPrefsX.SetStringArray("weeklyCheck", weeklyCheck);
+        weeklyCheck = PlayerPrefsX.GetStringArray("weeklyCheck");
+
+        foreach (string check in weeklyCheck)
+        {
+            Debug.Log(check);
+        }
     }
 
     //methods to save to playerprefs
@@ -101,6 +125,11 @@ public class ValueManagement : MonoBehaviour
         //}
         string[] arrays = {firstDailyCheck[index], secondDailyCheck[index], habitDailyCheck[index]};
         return arrays;
+    }
+
+    public string[] GetWeeklyValues()
+    {
+        return weeklyCheck;
     }
 
     public string[] GetNames()

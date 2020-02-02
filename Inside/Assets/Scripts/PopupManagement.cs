@@ -60,8 +60,9 @@ public class PopupManagement : MonoBehaviour
         StartCoroutine(LoadPopup(popup, true));
     }
 
-    public void DisablePopup(GameObject popup)
+    public void DisablePopup()
     {
+        GameObject popup = EventSystem.current.currentSelectedGameObject.transform.parent.gameObject;
         StartCoroutine(LoadPopup(popup, false));
     }
 

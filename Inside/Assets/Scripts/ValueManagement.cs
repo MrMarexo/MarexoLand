@@ -16,8 +16,9 @@ public class ValueManagement : MonoBehaviour
 
     //in case you'll wanna change the name of the task later --not configured yet
     string[] firstDailyName = new string[30]; 
-    string[] secondDailyName = new string[30]; 
+    string[] secondDailyName = new string[30];
 
+    string playerName;
     string badHabitName;
     string firstCheckName;
     string secondCheckName;
@@ -31,6 +32,7 @@ public class ValueManagement : MonoBehaviour
         PlayerPrefs.DeleteAll(); 
 
         //getting all the prefs at the berginning of the game
+        playerName = PlayerPrefs.GetString("playerName", "");
         badHabitName = PlayerPrefs.GetString("badHabitName", "");
         firstCheckName = PlayerPrefs.GetString("firstCheckName", "");
         secondCheckName = PlayerPrefs.GetString("secondCheckName", "");
@@ -97,6 +99,12 @@ public class ValueManagement : MonoBehaviour
     {
         PlayerPrefs.SetString("badHabitName", input);
         badHabitName = PlayerPrefs.GetString("badHabitName", "");
+    }
+
+    public void SavePlayerName(string name)
+    {
+        PlayerPrefs.SetString("playerName", name);
+        playerName = PlayerPrefs.GetString("playerName", "");
     }
 
     public void SaveFirstName(string input)

@@ -29,6 +29,6 @@ public class GoodHabitManager : MonoBehaviour
 
     public void DisablePopup()
     {
-        FindObjectOfType<PopupManagement>().DisablePopup(writePopup);
+        FindObjectOfType<PopupManagement>().DisablePopup();
     }
 }

@@ -110,7 +110,7 @@ public class BeforeCheckManager : MonoBehaviour
 
     public void ClosePopup()
     {
-        pM.DisablePopup(popupCheck);
+        pM.DisablePopup();
     }
 
     //called by the button in the popup

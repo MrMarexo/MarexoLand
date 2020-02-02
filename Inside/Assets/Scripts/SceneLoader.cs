@@ -14,6 +14,12 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene(index);
     }
 
+    IEnumerator LoadSceneName(string name)
+    {
+        yield return new WaitForSecondsRealtime(timeToLoadScene);
+        SceneManager.LoadScene(name);
+    }
+
     public void LoadPreviousScene()
     {
         int currentIndex = SceneManager.GetActiveScene().buildIndex;
@@ -23,9 +29,12 @@ public class SceneLoader : MonoBehaviour
     public void LoadNextScene()
     {
         int currentIndex = SceneManager.GetActiveScene().buildIndex;
-
-        //load next scene
         StartCoroutine(LoadScene(currentIndex + 1));     
+    }
+
+    public void LoadSceneByName(string sceneName)
+    {
+        StartCoroutine(LoadSceneName(sceneName));
     }
 
     public float GetTimeToLoad()

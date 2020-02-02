@@ -13,6 +13,9 @@ public class CalendarManager : MonoBehaviour
     [SerializeField] GameObject nextWeekButton;
     [SerializeField] GameObject previousWeekButton;
 
+    //week number
+    [SerializeField] TextMeshProUGUI weekNumberText;
+
     //array of 7 calendar gameobjects 
     TextMeshProUGUI[] days7 = new TextMeshProUGUI[7];
 
@@ -28,22 +31,28 @@ public class CalendarManager : MonoBehaviour
 
     int weekIndex;
 
+    float timeToWait;
+
     ValueManagement vM;
     DateManagement dM;
 
-    // Start is called before the first frame update
     void Start()
     {
         dM = FindObjectOfType<DateManagement>();
         vM = FindObjectOfType<ValueManagement>();
 
         FillUpCalendars();
-
+        timeToWait = FindObjectOfType<SceneLoader>().GetTimeToLoad();
         currentDayIndex = dM.GetCurrentDayIndex();
         curDateNumber = currentDayIndex + 1;
         currentWeekIndex = dM.GetCurrentWeek();
         weekIndex = currentWeekIndex;
-        StartCoroutine(CreateCalendar());
+        InstantlyCreateCalendar();
+    }
+
+    void UpdateWeekNumberText()
+    {
+        weekNumberText.text = "Week " + (weekIndex + 1).ToString();
     }
 
     //enables and disables the browse calendar buttons
@@ -107,13 +116,23 @@ public class CalendarManager : MonoBehaviour
         }
     }
 
+    //creates calendar without waiting
+    void InstantlyCreateCalendar()
+    {
+        EnableDisableWeeks();
+        CalculateCalendar();
+        ButtonsEnableDisable();
+        UpdateWeekNumberText();
+    }
+
+    //creates calendar with waiting to simulate loading a new scene
     IEnumerator CreateCalendar()
     {
-        float timeToWait = FindObjectOfType<SceneLoader>().GetTimeToLoad();
         yield return new WaitForSecondsRealtime(timeToWait);
         EnableDisableWeeks();
         CalculateCalendar();
         ButtonsEnableDisable();
+        UpdateWeekNumberText();
     }
 
     void EnableDisableWeeks()
@@ -155,10 +174,6 @@ public class CalendarManager : MonoBehaviour
 
             //0 is day text, 1 is the first check, 2 is the second, 3 is the underline
             TextMeshProUGUI[] arrayOfTMs = cur.GetComponentsInChildren<TextMeshProUGUI>();
-            for (int ind = 0; ind < arrayOfTMs.Length; ind++)
-            {
-                Debug.Log(cur.gameObject.name + ". day - " + ind + ". element's name is: " + arrayOfTMs[ind].gameObject.name);
-            }
             
             int dayInArr = (weekIndex * 7) + i; //current day in loop - array number == zero based
             int dayGlobal = dayInArr + 1; //current day in loop = 1 based number

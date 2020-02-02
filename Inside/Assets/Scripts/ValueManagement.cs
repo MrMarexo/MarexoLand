@@ -48,58 +48,7 @@ public class ValueManagement : MonoBehaviour
         {
             firstDailyCheck[i] = OptionCodes.options[0];
             habitDailyCheck[i] = OptionCodes.options[0];
-        }
-        foreach (string check in habitDailyCheck)
-        {
-            Debug.Log(check);
-        }
-
-    }
-
-    //methods on buttons to set a check reply
-    public void FirstCheckYes()
-    {
-        firstDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] = OptionCodes.options[0]; //checks if it should write to yesterdays or tomorrows values
-    }
-
-    public void FirstCheckNo()
-    {
-        firstDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] = OptionCodes.options[1];
-    }
-
-    public void FirstCheckMaybe()
-    {
-        firstDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] = OptionCodes.options[2];
-    }
-
-    public void HabitCheckYes()
-    {
-        habitDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] = OptionCodes.options[0];
-    }
-
-    public void HabitCheckNo()
-    {
-        habitDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] = OptionCodes.options[1];
-    }
-
-    public void HabitCheckMaybe()
-    {
-        habitDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] = OptionCodes.options[2];
-    }
-
-    public void SecondCheckYes()
-    {
-        secondDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] = OptionCodes.options[0];
-    }
-
-    public void SecondCheckNo()
-    {
-        secondDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] = OptionCodes.options[1];
-    }
-
-    public void SecondCheckMaybe()
-    {
-        secondDailyCheck[currentDayIndex - CheckValuesForDailyCheck()] = OptionCodes.options[2];
+        } 
     }
 
     public void SaveHabitAndFirstCheck(string habitResult, string firstResult, int index)
@@ -118,7 +67,6 @@ public class ValueManagement : MonoBehaviour
         //    Debug.Log(check);
         //}
     }
-
 
     //methods to save to playerprefs
     public void SaveBadHabit(string input)
@@ -155,36 +103,10 @@ public class ValueManagement : MonoBehaviour
         return arrays;
     }
 
-
     public string[] GetNames()
     {
         string[] names = {badHabitName, firstCheckName, weeklyCheckName, secondCheckName };
         return names;
     }
-    
-    //checks if yesterdays all todays values will be adjusted in the current daily check
-    public int CheckValuesForDailyCheck()
-    {
-        //if (all yesterdays values have not been set)
-        // load yesterdays check  --- if (no yesterday)
-        //load todays check
-        // else if (all todays values have nott been set)
-        //load todays check
-        int yesterdayIndex = currentDayIndex - 1;
-        int indexToReturn;
 
-        if (yesterdayIndex == -1) //if this is the first day
-        {
-            indexToReturn = 0; //today
-        }
-        if (firstDailyCheck[yesterdayIndex] == "" || habitDailyCheck[yesterdayIndex] == "") //add second check later   !!!!!!
-        {
-            indexToReturn = 1; //yesterday
-        }
-        else
-        {
-            indexToReturn = 0; //today
-        }
-        return indexToReturn;
-    }
 }

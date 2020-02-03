@@ -17,6 +17,9 @@ public class ValueManagement : MonoBehaviour
     //in case you'll wanna change the name of the task later --not configured yet
     string[] firstDailyName = new string[30]; 
     string[] secondDailyName = new string[30];
+    string[] habitDailyName = new string[30];
+
+    string[] weeklyName = new string[5];
 
     string playerName;
     string badHabitName;
@@ -44,14 +47,17 @@ public class ValueManagement : MonoBehaviour
 
         weeklyCheck = PlayerPrefsX.GetStringArray("weeklyCheck", "", 5);
 
+        habitDailyName = PlayerPrefsX.GetStringArray("habitDailyName", "", 30);
         firstDailyName = PlayerPrefsX.GetStringArray("firstDailyName", "", 30);
         secondDailyName = PlayerPrefsX.GetStringArray("secondDailyName", "", 30);
+
+        weeklyName = PlayerPrefsX.GetStringArray("weeklyName", "", 5);
 
         //get current day - zero based
         currentDayIndex = GetComponent<DateManagement>().GetCurrentDayIndex();
 
+        //////////////////////////////////////////////////////
         //just for testing ---- fills up the calendar with successful previous days
-        //////////////////////////////////////////////
         currentDayIndex = 7;
         for (int i = 0; i < currentDayIndex; i++)
         {
@@ -74,6 +80,16 @@ public class ValueManagement : MonoBehaviour
         firstDailyCheck = PlayerPrefsX.GetStringArray("firstDailyCheck");
         habitDailyCheck = PlayerPrefsX.GetStringArray("habitDailyCheck");
 
+        //saving the names as well
+        habitDailyName[index] = badHabitName;
+        firstDailyName[index] = firstCheckName;
+
+        PlayerPrefsX.SetStringArray("habitDailyName", habitDailyName);
+        PlayerPrefsX.SetStringArray("firstDailyName", firstDailyName);
+
+        habitDailyName = PlayerPrefsX.GetStringArray("habitDailyName");
+        firstDailyName = PlayerPrefsX.GetStringArray("firstDailyName");
+
         //foreach (string check in habitDailyCheck)
         //{
         //    Debug.Log(check);
@@ -88,10 +104,12 @@ public class ValueManagement : MonoBehaviour
         PlayerPrefsX.SetStringArray("weeklyCheck", weeklyCheck);
         weeklyCheck = PlayerPrefsX.GetStringArray("weeklyCheck");
 
-        foreach (string check in weeklyCheck)
-        {
-            Debug.Log(check);
-        }
+        //saving the name of the check as well
+        weeklyName[weekIndex] = weeklyCheckName;
+
+        PlayerPrefsX.SetStringArray("weeklyName", weeklyName);
+        weeklyName = PlayerPrefsX.GetStringArray("weeklyName");
+
     }
 
     //methods to save to playerprefs

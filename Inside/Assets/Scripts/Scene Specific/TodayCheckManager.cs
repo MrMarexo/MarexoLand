@@ -10,6 +10,9 @@ public class TodayCheckManager : MonoBehaviour
 
     int currentDayIndex;
 
+    //determines after how many weeks the second check will be added --will be later adjusted in the settings
+    int daysToStartWithSecondCheck = 14; 
+
     string firstDailyCheck = "";
     string habitDailyCheck = "";
 
@@ -89,8 +92,28 @@ public class TodayCheckManager : MonoBehaviour
         //sets the results to playerprefs
         vM.SaveHabitAndFirstCheck(habitDailyCheck, firstDailyCheck, currentDayIndex);
 
-        //loads the next scene
-        FindObjectOfType<SceneLoader>().LoadNextScene();
+        
+        //if the current week is higher than some number the second daily goal will be added
+        if (currentDayIndex + 1 > daysToStartWithSecondCheck)
+        {
+            
+            //if the name of the second is empty
+            if (vM.GetNames()[3] == "")
+            {
+                FindObjectOfType<SceneLoader>().LoadSceneByName("Second Task");
+            }
+            //if the current day value of the second check is empty
+            else if (vM.GetValuesOfIndex(currentDayIndex)[1] == "")
+            {
+                FindObjectOfType<SceneLoader>().LoadSceneByName("Second Check Today");
+            }
+        }
+        else
+        {
+            //loads the next scene
+            FindObjectOfType<SceneLoader>().LoadNextScene();
+        }
+        
     }
 
 }

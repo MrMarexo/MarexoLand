@@ -17,6 +17,9 @@ public class BeforeCheckManager : MonoBehaviour
     //counter to make sure popup only enables once
     int counter = 0;
 
+    //determines after how many weeks the second check will be added --will be later adjusted in the settings
+    int daysToStartWithSecondCheck = 14;
+
 
     [SerializeField] GameObject popupCheck;
 
@@ -140,45 +143,64 @@ public class BeforeCheckManager : MonoBehaviour
     //chooses the scene to load
     void LoadTheCorrectScene()
     {
-        string[] sceneNames = { "Calendar", "Today Check", "Yesterday Check" };
-        string scenetoLoad;
+        string[] sceneNames = { "Calendar", "Today Check", "Yesterday Check", "Second Check Yesterday", "Second Check Today", "Second Task Manager" };
+        string scenetoLoad = sceneNames[0]; //calendar is default
         string[] todayValues = vM.GetValuesOfIndex(currentDayIndex); //0 is first, 1 is second, 2 is habit
 
-        if (currentDayIndex > 2)
-        {
-            string[] beforeValues = vM.GetValuesOfIndex(currentDayIndex - 2); //0 is first, 1 is second, 2 is habit
-            if (beforeValues[0] == "" || beforeValues[2] == "")
-            {
-                ////////////////do a popup saying its been too long and you need to start over again
-            }
-        }
         if (currentDayIndex == 0) //launch day
         {
             if (todayValues[0] == "" || todayValues[2] == "")
             {
                 scenetoLoad = sceneNames[1];
             }
+            else if (vM.GetNames()[3] == "" && currentDayIndex + 1 > daysToStartWithSecondCheck)
+            {
+                scenetoLoad = sceneNames[5];
+            }
+            else if (todayValues[1] == "" && currentDayIndex + 1 > daysToStartWithSecondCheck)
+            {
+                scenetoLoad = sceneNames[4];
+            }
             else
             {
                 scenetoLoad = sceneNames[0];
             }
         }
-        else
+        else if (currentDayIndex > 0)
         {
             string[] yesterdayValues = vM.GetValuesOfIndex(currentDayIndex - 1); //0 is first, 1 is second, 2 is habit
             if (yesterdayValues[0] == "" || yesterdayValues[2] == "")
             {
                 scenetoLoad = sceneNames[2];
             }
+            else if (yesterdayValues[1] == "" && currentDayIndex + 1 - 1 > daysToStartWithSecondCheck)
+            {
+                scenetoLoad = sceneNames[3];
+            }
             else if (todayValues[0] == "" || todayValues[2] == "")
             {
                 scenetoLoad = sceneNames[1];
             }
-            else
+            else if (vM.GetNames()[3] == "" && currentDayIndex + 1 > daysToStartWithSecondCheck)
             {
-                scenetoLoad = sceneNames[0];
+                scenetoLoad = sceneNames[5];
+            }
+            else if (todayValues[1] == "" && currentDayIndex + 1 > daysToStartWithSecondCheck)
+            {
+                scenetoLoad = sceneNames[4];
+            }
+            
+            if (currentDayIndex > 1)
+            {
+                string[] beforeValues = vM.GetValuesOfIndex(currentDayIndex - 2); //0 is first, 1 is second, 2 is habit
+                if (beforeValues[0] == "" || beforeValues[2] == "")
+                {
+                    ////////////////do a popup saying its been too long and you need to start over again
+                    return;
+                }
             }
         }
+        
         //load chosen scene
         FindObjectOfType<SceneLoader>().LoadSceneByName(scenetoLoad);
     }

@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Before Check.unity
     guid: 629e55fa8eb9c074c8f4c866d0451d3d
   - enabled: 1
+    path: Assets/Scenes/Yesterday Check.unity
+    guid: 1e9a1edfc19f14c429e315ec514dea8a
+  - enabled: 1
     path: Assets/Scenes/Today Check.unity
     guid: d48ca71415cb2c7459531cc4ca55aa5e
   - enabled: 1
@@ -30,6 +33,12 @@ EditorBuildSettings:
     path: Assets/Scenes/2Calendar.unity
     guid: c735cae787a32c2449e0bacf5bdcc5ad
   - enabled: 1
-    path: Assets/Scenes/Yesterday Check.unity
-    guid: 1e9a1edfc19f14c429e315ec514dea8a
+    path: Assets/Scenes/Second Task.unity
+    guid: 0b13966484a67354b98e191b7ac67041
+  - enabled: 1
+    path: Assets/Scenes/Second Check Yesterday.unity
+    guid: f4b6e9c61857cb04c85cbc1806c0b67d
+  - enabled: 1
+    path: Assets/Scenes/Second Check Today.unity
+    guid: 60d85e90aedeeab49b42ae5bfe246166
   m_configObjects: {}

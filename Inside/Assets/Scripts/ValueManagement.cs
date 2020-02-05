@@ -112,6 +112,25 @@ public class ValueManagement : MonoBehaviour
 
     }
 
+    //called by secondcheckmanager to save the check results
+    public void SaveSecondCheck(string result, int index)
+    {
+        secondDailyCheck[index] = result;
+
+        PlayerPrefsX.SetStringArray("secondDailyCheck", secondDailyCheck);
+        secondDailyCheck = PlayerPrefsX.GetStringArray("secondDailyCheck");
+
+        //saving the name of the check as well
+        secondDailyName[index] = secondCheckName;
+
+        PlayerPrefsX.SetStringArray("secondDailyName", secondDailyName);
+        secondDailyName = PlayerPrefsX.GetStringArray("secondDailyName");
+    }
+
+
+
+
+
     //methods to save to playerprefs
     public void SaveBadHabit(string input)
     {

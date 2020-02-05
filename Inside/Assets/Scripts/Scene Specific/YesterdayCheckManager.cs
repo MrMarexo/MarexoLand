@@ -10,8 +10,11 @@ public class YesterdayCheckManager : MonoBehaviour
 
     int dayIndex;
 
-    string firstDailyCheck = "";
-    string habitDailyCheck = "";
+    string firstDailyCheck;
+    string habitDailyCheck;
+
+    //determines after how many weeks the second check will be added --will be later adjusted in the settings
+    int daysToStartWithSecondCheck = 14;
 
     //counter to make sure popup only enables once
     int counter = 0;
@@ -89,7 +92,16 @@ public class YesterdayCheckManager : MonoBehaviour
         //sets the results to playerprefs
         vM.SaveHabitAndFirstCheck(habitDailyCheck, firstDailyCheck, dayIndex);
 
-        //loads todays check
-        FindObjectOfType<SceneLoader>().LoadPreviousScene();
+        // + 1 for transfering idex into a number, since dayIndex is -1 this checks yesterday
+        if (dayIndex + 1 > daysToStartWithSecondCheck && vM.GetValuesOfIndex(dayIndex)[1] == "")
+        {
+            FindObjectOfType<SceneLoader>().LoadSceneByName("Second Check Yesterday");
+        }
+        else
+        {
+            //loads todays check
+            FindObjectOfType<SceneLoader>().LoadSceneByName("Today Check");
+        }
+        
     }
 }

@@ -73,10 +73,6 @@ public class BeforeCheckManager : MonoBehaviour
         int currentDay = currentDayIndex + 1;
         int currentWeek = currentWeekIndex + 1;
 
-        Debug.Log("current week index: " + currentWeekIndex);
-        Debug.Log("current week value: " + vM.GetWeeklyValues()[currentWeekIndex]);
-        Debug.Log("current day: " + currentDay);
-
         //check the date and values and decide
         if (currentDayIndex == 0) return 2;
         else if (ShouldSaveToPreviousWeek() == 1) return 1;
@@ -148,7 +144,7 @@ public class BeforeCheckManager : MonoBehaviour
     //chooses the scene to load
     void LoadTheCorrectScene()
     {
-        string[] sceneNames = { "Calendar", "Today Check", "Yesterday Check", "Second Check Yesterday", "Second Check Today", "Second Task Manager" };
+        string[] sceneNames = { "Calendar", "Today Check", "Yesterday Check", "Second Check Yesterday", "Second Check Today", "Second Task Manager", "New Week Name" };
         string scenetoLoad = sceneNames[0]; //calendar is default
         string[] todayValues = vM.GetValuesOfIndex(currentDayIndex); //0 is first, 1 is second, 2 is habit
 
@@ -173,8 +169,15 @@ public class BeforeCheckManager : MonoBehaviour
         }
         else if (currentDayIndex > 0)
         {
+            Debug.Log(currentDayIndex % 7 + " = first part");
+            Debug.Log(vM.GetWeeklyName(currentWeekIndex) + " = second part");
+            Debug.Log(currentWeekIndex + " = current week index ");
             string[] yesterdayValues = vM.GetValuesOfIndex(currentDayIndex - 1); //0 is first, 1 is second, 2 is habit
-            if (yesterdayValues[0] == "" || yesterdayValues[2] == "")
+            if (currentDayIndex % 7 == 0 && vM.GetWeeklyName(currentWeekIndex) == "") //if its the first day of the new week and the weekly challenge name is empty
+            {
+                scenetoLoad = sceneNames[6];
+            }
+            else if (yesterdayValues[0] == "" || yesterdayValues[2] == "")
             {
                 scenetoLoad = sceneNames[2];
             }

@@ -49,7 +49,7 @@ public class DateManagement : MonoBehaviour
         DateTime.TryParse(savedLaunchDateString, out savedLaunchDate);
 
         //for testing (zero based)
-        savedLaunchDate = savedLaunchDate.AddDays(-15);
+        savedLaunchDate = savedLaunchDate.AddDays(-14);
 
         curDateIndex = (curDate - savedLaunchDate).Days;
         curDateNumber = curDateIndex + 1;

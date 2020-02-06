@@ -28,6 +28,7 @@ public class ValueManagement : MonoBehaviour
     string weeklyCheckName;
 
     int currentDayIndex;
+    int currentWeekIndex;
 
     private void Start()
     {
@@ -56,10 +57,12 @@ public class ValueManagement : MonoBehaviour
         //get current day - zero based
         currentDayIndex = GetComponent<DateManagement>().GetCurrentDayIndex();
 
+        currentWeekIndex = GetComponent<DateManagement>().GetCurrentWeek();
+
         //////////////////////////////////////////////////////
         //just for testing ---- fills up the calendar with successful previous days
-        
-        for (int i = 0; i < currentDayIndex - 1; i++)
+
+        for (int i = 0; i < currentDayIndex -1; i++)
         {
             firstDailyCheck[i] = OptionCodes.options[0];
             habitDailyCheck[i] = OptionCodes.options[0];
@@ -76,7 +79,7 @@ public class ValueManagement : MonoBehaviour
         badHabitName = "lala";
         firstCheckName = "lala";
         weeklyCheckName = "lala";
-        secondCheckName = "lala";
+        //secondCheckName = "lala";
 
         //////////////////////////////////////////////////////
     }
@@ -86,11 +89,6 @@ public class ValueManagement : MonoBehaviour
     {
         firstDailyCheck[index] = firstResult;
         habitDailyCheck[index] = habitResult;
-
-        foreach (string check in habitDailyCheck)
-        {
-            Debug.Log(check);
-        }
 
         PlayerPrefsX.SetStringArray("firstDailyCheck", firstDailyCheck);
         PlayerPrefsX.SetStringArray("habitDailyCheck", habitDailyCheck);
@@ -120,12 +118,6 @@ public class ValueManagement : MonoBehaviour
 
         PlayerPrefsX.SetStringArray("weeklyCheck", weeklyCheck);
         weeklyCheck = PlayerPrefsX.GetStringArray("weeklyCheck");
-
-        //saving the name of the check as well
-        weeklyName[weekIndex] = weeklyCheckName;
-
-        PlayerPrefsX.SetStringArray("weeklyName", weeklyName);
-        weeklyName = PlayerPrefsX.GetStringArray("weeklyName");
 
     }
 
@@ -177,6 +169,11 @@ public class ValueManagement : MonoBehaviour
     {
         PlayerPrefs.SetString("weeklyCheckName", input);
         weeklyCheckName = PlayerPrefs.GetString("weeklyCheckName", "");
+
+        weeklyName[currentWeekIndex] = weeklyCheckName;
+
+        PlayerPrefsX.SetStringArray("weeklyName", weeklyName);
+        weeklyName = PlayerPrefsX.GetStringArray("weeklyName");
     }
 
     public string[] GetValuesOfIndex(int index)
@@ -200,4 +197,8 @@ public class ValueManagement : MonoBehaviour
         return names;
     }
 
+    public string GetWeeklyName(int weekIndex)
+    {
+        return weeklyName[weekIndex];
+    }
 }

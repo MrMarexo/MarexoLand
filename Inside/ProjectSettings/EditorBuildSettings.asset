@@ -41,4 +41,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Second Check Today.unity
     guid: 60d85e90aedeeab49b42ae5bfe246166
+  - enabled: 1
+    path: Assets/Scenes/New Week Name.unity
+    guid: 8c0ffb7600e3140438ec98fa2c902976
   m_configObjects: {}

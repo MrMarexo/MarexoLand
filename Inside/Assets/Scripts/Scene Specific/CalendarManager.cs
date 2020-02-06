@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+
 
 public class CalendarManager : MonoBehaviour
 {
@@ -26,7 +28,16 @@ public class CalendarManager : MonoBehaviour
     TextMeshProUGUI[] days2 = new TextMeshProUGUI[2];
 
     //array of 7 and 2 day arrays
-    TextMeshProUGUI[][] calendars = new TextMeshProUGUI[2][]; 
+    TextMeshProUGUI[][] calendars = new TextMeshProUGUI[2][];
+
+    [SerializeField] GameObject dayPopup;
+
+    //popup text elements
+    [SerializeField] TextMeshProUGUI day;
+    [SerializeField] TextMeshProUGUI weekly;
+    [SerializeField] TextMeshProUGUI first;
+    [SerializeField] TextMeshProUGUI second;
+
 
     int currentWeekIndex;
     int currentDayIndex;
@@ -164,6 +175,25 @@ public class CalendarManager : MonoBehaviour
         {
             correctWeekObject.color = Colors.failedColor;
         }
+    }
+
+    public void ShowDayInfo()
+    {
+        string dayString = EventSystem.current.currentSelectedGameObject.GetComponentsInChildren<TextMeshProUGUI>()[0].text;
+        int dayIndex = int.Parse(dayString) - 1;
+
+        //fill up texts
+        day.text = "Day " + (dayIndex + 1).ToString();
+        weekly.text = vM.GetWeeklyName(weekIndex);
+        first.text = vM.GetNames()[1];
+        second.text = vM.GetNames()[3];
+
+        FindObjectOfType<PopupManagement>().EnablePopup(dayPopup);
+    }
+
+    public void ClosePopup()
+    {
+        FindObjectOfType<PopupManagement>().DisablePopup();
     }
 
     public void ShowNextWeek()

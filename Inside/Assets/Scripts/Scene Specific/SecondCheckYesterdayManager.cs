@@ -10,7 +10,7 @@ public class SecondCheckYesterdayManager : MonoBehaviour
 
     int dayIndex;
 
-    string secondDailyCheck;
+    string secondDailyCheck = "";
 
     //counter to make sure popup only enables once
     int counter = 0;

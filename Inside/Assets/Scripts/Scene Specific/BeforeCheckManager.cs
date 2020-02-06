@@ -73,10 +73,15 @@ public class BeforeCheckManager : MonoBehaviour
         int currentDay = currentDayIndex + 1;
         int currentWeek = currentWeekIndex + 1;
 
+        Debug.Log("current week index: " + currentWeekIndex);
+        Debug.Log("current week value: " + vM.GetWeeklyValues()[currentWeekIndex]);
+        Debug.Log("current day: " + currentDay);
+
         //check the date and values and decide
         if (currentDayIndex == 0) return 2;
         else if (ShouldSaveToPreviousWeek() == 1) return 1;
-        else if (vM.GetWeeklyValues()[currentWeekIndex] == "" && ((currentWeek * 7) - 1 == currentDay || (currentWeek * 7) - 2 == currentDay)) return 0;
+        else if (vM.GetWeeklyValues()[currentWeekIndex] == "" && ((currentWeek * 7) - 1 == currentDay 
+                 || (currentWeek * 7) - 2 == currentDay || currentWeek * 7 == currentDay)) return 0;
         else return 2;
     }
 

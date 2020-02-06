@@ -42,7 +42,7 @@ public class SecondTaskManager : MonoBehaviour
             vM.SaveSecondName(input);
             vM.SaveSecondCheck(secondDailyCheck, FindObjectOfType<DateManagement>().GetCurrentDayIndex());
 
-            FindObjectOfType<SceneLoader>().LoadSceneByName("After Check");
+            FindObjectOfType<SceneLoader>().LoadSceneByName("Calendar");
         }
     }
 

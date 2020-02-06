@@ -58,13 +58,26 @@ public class ValueManagement : MonoBehaviour
 
         //////////////////////////////////////////////////////
         //just for testing ---- fills up the calendar with successful previous days
-        currentDayIndex = 7;
-        for (int i = 0; i < currentDayIndex; i++)
+        
+        for (int i = 0; i < currentDayIndex - 1; i++)
         {
             firstDailyCheck[i] = OptionCodes.options[0];
             habitDailyCheck[i] = OptionCodes.options[0];
+            habitDailyName[i] = "lala";
+            firstDailyName[i] = "lala";
         }
-        //weeklyCheck[0] = OptionCodes.options[0];
+        weeklyCheck[0] = OptionCodes.options[0];
+        weeklyCheck[1] = OptionCodes.options[1];
+
+        weeklyName[0] = "lala";
+        weeklyName[1] = "lala";
+
+        playerName = "lala";
+        badHabitName = "lala";
+        firstCheckName = "lala";
+        weeklyCheckName = "lala";
+        secondCheckName = "lala";
+
         //////////////////////////////////////////////////////
     }
 
@@ -74,11 +87,18 @@ public class ValueManagement : MonoBehaviour
         firstDailyCheck[index] = firstResult;
         habitDailyCheck[index] = habitResult;
 
+        foreach (string check in habitDailyCheck)
+        {
+            Debug.Log(check);
+        }
+
         PlayerPrefsX.SetStringArray("firstDailyCheck", firstDailyCheck);
         PlayerPrefsX.SetStringArray("habitDailyCheck", habitDailyCheck);
 
         firstDailyCheck = PlayerPrefsX.GetStringArray("firstDailyCheck");
         habitDailyCheck = PlayerPrefsX.GetStringArray("habitDailyCheck");
+
+        
 
         //saving the names as well
         habitDailyName[index] = badHabitName;
@@ -90,10 +110,7 @@ public class ValueManagement : MonoBehaviour
         habitDailyName = PlayerPrefsX.GetStringArray("habitDailyName");
         firstDailyName = PlayerPrefsX.GetStringArray("firstDailyName");
 
-        //foreach (string check in habitDailyCheck)
-        //{
-        //    Debug.Log(check);
-        //}
+        
     }
 
     //called by the checkup scene script to set the chosen values to prefs

@@ -10,8 +10,8 @@ public class YesterdayCheckManager : MonoBehaviour
 
     int dayIndex;
 
-    string firstDailyCheck;
-    string habitDailyCheck;
+    string firstDailyCheck = "";
+    string habitDailyCheck = "";
 
     //determines after how many weeks the second check will be added --will be later adjusted in the settings
     int daysToStartWithSecondCheck = 14;

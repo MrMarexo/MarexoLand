@@ -31,13 +31,18 @@ public class CalendarManager : MonoBehaviour
     TextMeshProUGUI[][] calendars = new TextMeshProUGUI[2][];
 
     [SerializeField] GameObject dayPopup;
+    [SerializeField] GameObject weekPopup;
 
-    //popup text elements
+
+    //day popup text elements
     [SerializeField] TextMeshProUGUI day;
     [SerializeField] TextMeshProUGUI weekly;
     [SerializeField] TextMeshProUGUI first;
     [SerializeField] TextMeshProUGUI second;
+    [SerializeField] TextMeshProUGUI secondText;
 
+    //week popup elements
+    [SerializeField] TextMeshProUGUI weeklyInWeek;
 
     int currentWeekIndex;
     int currentDayIndex;
@@ -185,10 +190,28 @@ public class CalendarManager : MonoBehaviour
         //fill up texts
         day.text = "Day " + (dayIndex + 1).ToString();
         weekly.text = vM.GetWeeklyName(weekIndex);
-        first.text = vM.GetNames()[1];
-        second.text = vM.GetNames()[3];
+        first.text = vM.GetNamesOfDayIndex(dayIndex)[0];
 
+        //if there is no name for the second task dont show it in the info at all
+        if (vM.GetNamesOfDayIndex(dayIndex)[1] == "")
+        {
+            second.gameObject.SetActive(false);
+            secondText.gameObject.SetActive(false);
+        }
+        else
+        {
+            second.gameObject.SetActive(true);
+            secondText.gameObject.SetActive(true);
+            second.text = vM.GetNamesOfDayIndex(dayIndex)[1];
+        }
         FindObjectOfType<PopupManagement>().EnablePopup(dayPopup);
+    }
+
+    public void ShowWeekInfo()
+    {
+        weeklyInWeek.text = vM.GetWeeklyName(weekIndex);
+
+        FindObjectOfType<PopupManagement>().EnablePopup(weekPopup);
     }
 
     public void ClosePopup()

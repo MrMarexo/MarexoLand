@@ -200,4 +200,10 @@ public class ValueManagement : MonoBehaviour
     {
         return weeklyName[weekIndex];
     }
+
+    public string[] GetNamesOfDayIndex(int index)
+    {
+        string[] names = { firstDailyName[index], secondDailyName[index], habitDailyName[index] };
+        return names;
+    }
 }

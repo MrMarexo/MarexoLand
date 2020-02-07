@@ -10,8 +10,12 @@ public class ValueManagement : MonoBehaviour
     string[] secondDailyCheck = new string[30];
     string[] habitDailyCheck = new string[30];
 
-    
+
+
     string[] weeklyCheck = new string[5];
+
+    string[] dayJournal = new string[30];
+    string[] weekJournal = new string[5];
 
     //in case you'll wanna change the name of the task later --not configured yet
     string[] firstDailyName = new string[30]; 
@@ -44,6 +48,9 @@ public class ValueManagement : MonoBehaviour
         firstDailyCheck = PlayerPrefsX.GetStringArray("firstDailyCheck", "", 30);
         secondDailyCheck = PlayerPrefsX.GetStringArray("secondDailyCheck", "", 30);
         habitDailyCheck = PlayerPrefsX.GetStringArray("habitDailyCheck", "", 30);
+
+        dayJournal = PlayerPrefsX.GetStringArray("dayJournal", "", 30);
+        weekJournal = PlayerPrefsX.GetStringArray("weekJournal", "", 5);
 
         weeklyCheck = PlayerPrefsX.GetStringArray("weeklyCheck", "", 5);
 
@@ -105,9 +112,7 @@ public class ValueManagement : MonoBehaviour
         PlayerPrefsX.SetStringArray("firstDailyName", firstDailyName);
 
         habitDailyName = PlayerPrefsX.GetStringArray("habitDailyName");
-        firstDailyName = PlayerPrefsX.GetStringArray("firstDailyName");
-
-        
+        firstDailyName = PlayerPrefsX.GetStringArray("firstDailyName"); 
     }
 
     //called by the checkup scene script to set the chosen values to prefs
@@ -135,9 +140,21 @@ public class ValueManagement : MonoBehaviour
         secondDailyName = PlayerPrefsX.GetStringArray("secondDailyName");
     }
 
+    public void SaveDayJournal(string result, int dayIndex)
+    {
+        dayJournal[dayIndex] = result;
 
+        PlayerPrefsX.SetStringArray("dayJournal", dayJournal);
+        dayJournal = PlayerPrefsX.GetStringArray("dayJournal");
+    }
 
+    public void SaveWeekJournal(string result, int weekIndex)
+    {
+        weekJournal[weekIndex] = result;
 
+        PlayerPrefsX.SetStringArray("weekJournal", weekJournal);
+        weekJournal = PlayerPrefsX.GetStringArray("weekJournal");
+    }
 
     //methods to save to playerprefs
     public void SaveBadHabit(string input)
@@ -183,6 +200,16 @@ public class ValueManagement : MonoBehaviour
         //}
         string[] arrays = {firstDailyCheck[index], secondDailyCheck[index], habitDailyCheck[index]};
         return arrays;
+    }
+
+    public string GetDayJournalOfIndex(int dayIndex)
+    {
+        return dayJournal[dayIndex];
+    }
+
+    public string GetWeekJournalOfIndex(int weekIndex)
+    {
+        return weekJournal[weekIndex];
     }
 
     public string[] GetWeeklyValues()

@@ -8,11 +8,16 @@ public class PopupManagement : MonoBehaviour
 {
     //list of popups
     List<GameObject> popups = new List<GameObject>();
-    GameObject popupPanel;
+    [SerializeField] GameObject popupPanel;
 
     float timeToLoadPopup;
 
     void Start()
+    {
+        
+    }
+
+    private void OnEnable()
     {
         FindAllPopups();
         DisableAllPopups();
@@ -31,15 +36,18 @@ public class PopupManagement : MonoBehaviour
             }
         }
 
-        //finds the popup panel
-        Image[] images = Resources.FindObjectsOfTypeAll<Image>();
-        for (int i = 0; i < images.Length; i++)
-        {
-            if (images[i].gameObject.tag == "Popup")
-            {
-                popupPanel = images[i].gameObject;
-            }
-        }
+        //does not work for some fucked up reason
+
+        ////finds the popup panel
+        //Image[] images = Resources.FindObjectsOfTypeAll<Image>();
+        //for (int i = 0; i < images.Length; i++)
+        //{
+        //    if (images[i].gameObject.tag == "Popup")
+        //    {
+        //        popupPanel = images[i].gameObject;
+        //    }
+        //}
+
     }
 
     //disables all popups and the popup panel
@@ -51,8 +59,6 @@ public class PopupManagement : MonoBehaviour
         }
 
         popupPanel.SetActive(false);
-
-
     }
     
     public void EnablePopup(GameObject popup)
@@ -72,5 +78,6 @@ public class PopupManagement : MonoBehaviour
         popup.SetActive(enableDisable);
         popupPanel.SetActive(enableDisable);
     }
+
     
 }

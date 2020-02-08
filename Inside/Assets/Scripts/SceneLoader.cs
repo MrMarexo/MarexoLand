@@ -8,6 +8,8 @@ public class SceneLoader : MonoBehaviour
 {
     [SerializeField] float timeToLoadScene = 0.1f;
 
+    string savedSceneName;
+
     IEnumerator LoadScene(int index)
     {
         yield return new WaitForSecondsRealtime(timeToLoadScene);
@@ -40,6 +42,16 @@ public class SceneLoader : MonoBehaviour
     public float GetTimeToLoad()
     {
         return timeToLoadScene;
+    }
+
+    public void SaveCurrentSceneName()
+    {
+        savedSceneName = SceneManager.GetActiveScene().name;
+    }
+
+    public void LoadSavedScene()
+    {
+        StartCoroutine(LoadSceneName(savedSceneName));
     }
 
 }

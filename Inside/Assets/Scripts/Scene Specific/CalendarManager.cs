@@ -40,9 +40,11 @@ public class CalendarManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI first;
     [SerializeField] TextMeshProUGUI second;
     [SerializeField] TextMeshProUGUI secondText;
+    [SerializeField] TextMeshProUGUI journalDayText;
 
     //week popup elements
     [SerializeField] TextMeshProUGUI weeklyInWeek;
+    [SerializeField] TextMeshProUGUI journalWeekText;
 
     int currentWeekIndex;
     int currentDayIndex;
@@ -197,6 +199,7 @@ public class CalendarManager : MonoBehaviour
         day.text = "Day " + (dayIndex + 1).ToString();
         weekly.text = vM.GetWeeklyName(weekIndex);
         first.text = vM.GetNamesOfDayIndex(dayIndex)[0];
+        journalDayText.text = vM.GetDayJournalOfIndex(dayIndex);
 
         //if there is no name for the second task dont show it in the info at all
         if (vM.GetNamesOfDayIndex(dayIndex)[1] == "")
@@ -216,6 +219,7 @@ public class CalendarManager : MonoBehaviour
     public void ShowWeekInfo()
     {
         weeklyInWeek.text = vM.GetWeeklyName(weekIndex);
+        journalWeekText.text = vM.GetDayJournalOfIndex(weekIndex);
 
         FindObjectOfType<PopupManagement>().EnablePopup(weekPopup);
     }

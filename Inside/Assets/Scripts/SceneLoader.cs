@@ -8,19 +8,25 @@ public class SceneLoader : MonoBehaviour
 {
     [SerializeField] float timeToLoadScene = 0.1f;
 
-    string savedSceneName;
+    int pastSceneId = 0;
 
     IEnumerator LoadScene(int index)
     {
+        pastSceneId = SceneManager.GetActiveScene().buildIndex;
+        Debug.Log(pastSceneId);
         yield return new WaitForSecondsRealtime(timeToLoadScene);
         SceneManager.LoadScene(index);
     }
 
     IEnumerator LoadSceneName(string name)
     {
+        pastSceneId = SceneManager.GetActiveScene().buildIndex;
+        Debug.Log(pastSceneId);
         yield return new WaitForSecondsRealtime(timeToLoadScene);
         SceneManager.LoadScene(name);
     }
+
+
 
     public void LoadPreviousScene()
     {
@@ -44,14 +50,9 @@ public class SceneLoader : MonoBehaviour
         return timeToLoadScene;
     }
 
-    public void SaveCurrentSceneName()
+    public void LoadPastScene()
     {
-        savedSceneName = SceneManager.GetActiveScene().name;
-    }
-
-    public void LoadSavedScene()
-    {
-        StartCoroutine(LoadSceneName(savedSceneName));
+        StartCoroutine(LoadScene(pastSceneId));
     }
 
 }

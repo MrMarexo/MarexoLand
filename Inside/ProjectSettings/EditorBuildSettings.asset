@@ -30,7 +30,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Calendar.unity
     guid: edeabf1f2dd4b294e911ae9a43eb52eb
   - enabled: 0
-    path: Assets/Scenes/2Calendar.unity
+    path: 
     guid: c735cae787a32c2449e0bacf5bdcc5ad
   - enabled: 1
     path: Assets/Scenes/Second Task.unity
@@ -44,4 +44,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/New Week Name.unity
     guid: 8c0ffb7600e3140438ec98fa2c902976
+  - enabled: 1
+    path: Assets/Scenes/Journal.unity
+    guid: 71f2e4a6d1b22ad4abbd478ee35a3ac6
   m_configObjects: {}

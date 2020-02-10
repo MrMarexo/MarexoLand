@@ -76,10 +76,10 @@ public class ValueManagement : MonoBehaviour
             firstDailyName[i] = "lala";
         }
         weeklyCheck[0] = OptionCodes.options[0];
-        weeklyCheck[1] = OptionCodes.options[1];
+        //weeklyCheck[1] = OptionCodes.options[1];
 
         weeklyName[0] = "lala";
-        weeklyName[1] = "lala";
+        //weeklyName[1] = "lala";
 
         playerName = "lala";
         badHabitName = "lala";

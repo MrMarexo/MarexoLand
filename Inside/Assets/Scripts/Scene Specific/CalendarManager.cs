@@ -182,6 +182,12 @@ public class CalendarManager : MonoBehaviour
         }
     }
 
+    //loads whichever scene from where we got to the journal
+    public void GoBackToPastScene()
+    {
+        FindObjectOfType<SceneLoader>().LoadPastScene();
+    }
+
     public void ShowDayInfo()
     {
         string dayString = EventSystem.current.currentSelectedGameObject.GetComponentsInChildren<TextMeshProUGUI>()[0].text;

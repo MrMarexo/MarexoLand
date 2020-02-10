@@ -9,6 +9,7 @@ using UnityEngine.EventSystems;
 public class JournalManager : MonoBehaviour
 {
     [SerializeField] GameObject lastWeekButton;
+    [SerializeField] GameObject yesterdayButton;
 
     [SerializeField] GameObject popupFun;
     [SerializeField] GameObject popupWarning;
@@ -62,6 +63,7 @@ public class JournalManager : MonoBehaviour
         InputFieldInit();
         DisableAllExcept(generalPanel);
         HideOrShowLastWeek();
+        HideOrShowYesterday();
     }
 
     private void Update()
@@ -69,17 +71,30 @@ public class JournalManager : MonoBehaviour
         CheckRestore();
     }
 
+    void HideOrShowYesterday()
+    {
+        if (curDayIndex == 0)
+        {
+            yesterdayButton.GetComponent<TextMeshProUGUI>().color = Colors.incompleteColor;
+            yesterdayButton.GetComponent<Button>().enabled = false;
+        }
+        else
+        {
+            yesterdayButton.GetComponent<TextMeshProUGUI>().color = Colors.completeColor;
+            yesterdayButton.GetComponent<Button>().enabled = true;
+        }
+    }
     void HideOrShowLastWeek()
     {
         if (curWeekIndex > 0 && (curDayIndex % 7 == 0 || curDayIndex == 29))
         {
-            lastWeekButton.GetComponent<TextMeshProUGUI>().color = Colors.incompleteColor;
-            lastWeekButton.GetComponent<Button>().enabled = false;
+            lastWeekButton.GetComponent<TextMeshProUGUI>().color = Colors.completeColor;
+            lastWeekButton.GetComponent<Button>().enabled = true;
         }
         else
         {
-            lastWeekButton.GetComponent<TextMeshProUGUI>().color = Colors.completeColor;
-            lastWeekButton.GetComponent<Button>().enabled = true;
+            lastWeekButton.GetComponent<TextMeshProUGUI>().color = Colors.incompleteColor;
+            lastWeekButton.GetComponent<Button>().enabled = false;
         }
     }
 
@@ -125,6 +140,12 @@ public class JournalManager : MonoBehaviour
         GameObject parentOfButton = EventSystem.current.currentSelectedGameObject.transform.parent.gameObject;
         StartCoroutine(EnableOrDisable(parentOfButton, false));
         StartCoroutine(EnableOrDisable(generalPanel, true));
+    }
+
+    //loads whichever scene from where we got to the journal
+    public void GoBackToPastScene()
+    {
+        FindObjectOfType<SceneLoader>().LoadPastScene();
     }
 
     

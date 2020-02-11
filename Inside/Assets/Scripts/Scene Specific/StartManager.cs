@@ -33,7 +33,8 @@ public class StartManager : MonoBehaviour
         //disable both buttons
         startButton.gameObject.SetActive(false);
         continueButton.gameObject.SetActive(false);
-        if (FindObjectOfType<ValueManagement>().GetNames()[2] == "")
+        string[] names = FindObjectOfType<ValueManagement>().GetNames();
+        if (names[0] == "" || names[1] == "" || names[2] == "")
         {
             startButton.gameObject.SetActive(true);
         }

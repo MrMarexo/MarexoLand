@@ -8,9 +8,12 @@ public class NavigationManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI day;
 
+    SceneLoader sL;
+
     private void Start()
     {
         Init();
+        sL = FindObjectOfType<SceneLoader>();
 
     }
 
@@ -24,11 +27,19 @@ public class NavigationManager : MonoBehaviour
 
     public void GoToJournal()
     {
+        if (sL.GetCurrentSceneIndex() < 4)
+        {
+            return;
+        }
         FindObjectOfType<SceneLoader>().LoadSceneByName("Journal");
     }
 
     public void GoToCalendar()
     {
+        if (sL.GetCurrentSceneIndex() < 4)
+        {
+            return;
+        }
         FindObjectOfType<SceneLoader>().LoadSceneByName("Calendar");
     }
 

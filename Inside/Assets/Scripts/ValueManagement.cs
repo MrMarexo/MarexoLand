@@ -82,7 +82,7 @@ public class ValueManagement : MonoBehaviour
         //weeklyName[1] = "lala";
 
         playerName = "lala";
-        badHabitName = "lala";
+        //badHabitName = "lala";
         firstCheckName = "lala";
         weeklyCheckName = "lala";
         //secondCheckName = "lala";

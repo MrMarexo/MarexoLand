@@ -54,5 +54,9 @@ public class SceneLoader : MonoBehaviour
     {
         StartCoroutine(LoadScene(pastSceneId));
     }
+    public int GetCurrentSceneIndex()
+    {
+        return SceneManager.GetActiveScene().buildIndex;
+    }
 
 }

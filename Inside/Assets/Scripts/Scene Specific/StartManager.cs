@@ -72,5 +72,13 @@ public class StartManager : MonoBehaviour
         FindObjectOfType<SceneLoader>().LoadSceneByName("Before Check");
     }
 
+
+    //letter buttons
+
+    public void LoadInfo()
+    {
+        FindObjectOfType<SceneLoader>().LoadSceneByName("Info");
+    }
+
    
 }

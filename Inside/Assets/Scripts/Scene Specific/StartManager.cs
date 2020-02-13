@@ -17,7 +17,7 @@ public class StartManager : MonoBehaviour
 
     private void Start()
     {
-        StartOrContinue(); 
+        StartOrContinue();
     }
 
     void Update()

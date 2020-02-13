@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using TMPro;
 
 public class DateManagement : MonoBehaviour
 {
@@ -23,25 +22,25 @@ public class DateManagement : MonoBehaviour
 
     //insex of current week, stays the same
     int originalCurrentWeekIndex;
-    
-    void Awake()
-    {
-        Date();
-    }
+
+    int curRunIndex = 0;
+
 
     //used to define the launch date and current date and save/get from PlayerPrefs
-    void Date()
+    void LoadDateOrSetDate(int index)
     {
+        curRunIndex = index;
+
         curDate = DateTime.Now.Date;     
 
         // try to get the launch date saved as a string:
-        string savedLaunchDateString = PlayerPrefs.GetString("savedLaunchDate", "");
+        string savedLaunchDateString = PlayerPrefs.GetString("savedLaunchDate" + curRunIndex.ToString(), "");
         if (savedLaunchDateString == "")
         { // if not saved yet...
           // convert current date to string...
             savedLaunchDateString = curDate.ToString();
             // and save it in PlayerPrefs as LaunchDate:
-            PlayerPrefs.SetString("savedLaunchDate", savedLaunchDateString);
+            PlayerPrefs.SetString("savedLaunchDate" + curRunIndex.ToString(), savedLaunchDateString);
         }
         // at this point, the string savedDate contains the launch date
         // let's convert it to DateTime:
@@ -63,30 +62,6 @@ public class DateManagement : MonoBehaviour
         return curDateIndex;
     }
     
-    //returns index of calendar[][] .... also for CanvasManagement.calendars[]
-    public int GetCalendarIndex()
-    {
-        if (currentWeekIndex % 4 == 0 && currentWeekIndex != 0) 
-        {
-            return 1;
-        }
-        else
-        {
-            return 0;
-        } 
-    }
-
-
-    public void IncreaseWeekIndex()
-    {
-        currentWeekIndex++;
-    }
-
-    public void DecreaseWeekIndex()
-    {
-        currentWeekIndex--;
-    }
-
     public int GetCurrentWeek()
     {
         return currentWeekIndex;

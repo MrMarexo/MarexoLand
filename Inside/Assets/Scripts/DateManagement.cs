@@ -27,7 +27,7 @@ public class DateManagement : MonoBehaviour
 
 
     //used to define the launch date and current date and save/get from PlayerPrefs
-    void LoadDateOrSetDate(int index)
+    public void LoadDateOrSetDate(int index)
     {
         curRunIndex = index;
 

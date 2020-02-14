@@ -7,9 +7,9 @@ using TMPro;
 public class ValueManagement : MonoBehaviour
 {
     //5 is the limit for runs on one device
-    string[] runNames = new string[5];
     string[] runDates = new string[5];
     int curRunIndex = 0;
+    bool[] areRunsFinished = new bool[5];
 
     string[] firstDailyCheck = new string[30];
     string[] secondDailyCheck = new string[30];
@@ -39,18 +39,18 @@ public class ValueManagement : MonoBehaviour
     private void Awake()
     {
         //get Run data from prefs
-        runNames = PlayerPrefsX.GetStringArray("runNames", "", 5);
         runDates = PlayerPrefsX.GetStringArray("runDates", "", 5);
-    }
-
-    public string[] GetRunNames()
-    {
-        return runNames;
+        areRunsFinished = PlayerPrefsX.GetBoolArray("areRunsFinished", false, 5);
     }
 
     public string[] GetRunDates()
     {
         return runDates;
+    }
+
+    public bool[] GetRunsFinishedState()
+    {
+        return areRunsFinished;
     }
 
     public string GetBadHabitNameFromRun(int runIndex)
@@ -65,7 +65,7 @@ public class ValueManagement : MonoBehaviour
         ///////////////////////for testing purposes ---deletes all prefs for all scripts
         PlayerPrefs.DeleteAll();
         ///////////////////////
-        
+
         //getting all the prefs at the berginning of the game
         playerName = PlayerPrefs.GetString("playerName" + curRunIndex.ToString(), "");
         badHabitName = PlayerPrefs.GetString("badHabitName" + curRunIndex.ToString(), "");

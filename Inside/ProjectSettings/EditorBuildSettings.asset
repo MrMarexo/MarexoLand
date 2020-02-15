@@ -47,4 +47,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Journal.unity
     guid: 71f2e4a6d1b22ad4abbd478ee35a3ac6
+  - enabled: 1
+    path: Assets/Scenes/Letters/Info.unity
+    guid: 5c5113d1bccb47c499eb80c2385a1345
   m_configObjects: {}

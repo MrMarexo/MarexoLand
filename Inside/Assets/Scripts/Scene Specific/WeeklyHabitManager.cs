@@ -9,6 +9,18 @@ public class WeeklyHabitManager : MonoBehaviour
 
     [SerializeField] GameObject writePopup;
 
+    DateManagement dM;
+    ValueManagement vM;
+
+    int curWeekIndex;
+
+    private void Start()
+    {
+        dM = FindObjectOfType<DateManagement>();
+        vM = FindObjectOfType<ValueManagement>();
+
+        curWeekIndex = dM.GetCurrentWeek();
+    }
 
     public void SaveAndLoadNextIf()
     {
@@ -22,7 +34,9 @@ public class WeeklyHabitManager : MonoBehaviour
         }
         else
         {
-            FindObjectOfType<ValueManagement>().SaveWeeklyName(input);
+            vM.SaveIntroValues();
+            dM.SaveLaunchDateIntro();
+            vM.SaveWeeklyName(input, curWeekIndex);
             FindObjectOfType<SceneLoader>().LoadNextScene();
         }
     }

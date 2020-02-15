@@ -9,6 +9,15 @@ public class NewWeekNameManager : MonoBehaviour
 
     [SerializeField] GameObject writePopup;
 
+    DateManagement dM;
+
+    int curWeekIndex;
+
+    private void Start()
+    {
+        dM = FindObjectOfType<DateManagement>();
+        curWeekIndex = dM.GetCurrentWeek();
+    }
 
     public void SaveAndLoadNextIf()
     {
@@ -22,7 +31,7 @@ public class NewWeekNameManager : MonoBehaviour
         }
         else
         {
-            FindObjectOfType<ValueManagement>().SaveWeeklyName(input);
+            FindObjectOfType<ValueManagement>().SaveWeeklyName(input, curWeekIndex);
             FindObjectOfType<SceneLoader>().LoadSceneByName("Yesterday Check");
         }
     }

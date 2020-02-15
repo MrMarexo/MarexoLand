@@ -11,17 +11,14 @@ public class DateManagement : MonoBehaviour
     //launch date retrieved from PlayerPrefs and transformed back to DateTime
     DateTime savedLaunchDate;
 
-    //how many days from launch date, launch date being 1
-    int curDateNumber;
+    string savedLaunchDateString;
+    string savedLaunchDateStringForExport;
 
     //how many days from launch date, launch date being 0 ---zero based
     int curDateIndex;
     
     //index of the current week, can change to browse the calendar
     int currentWeekIndex;
-
-    //insex of current week, stays the same
-    int originalCurrentWeekIndex;
 
     int curRunIndex = 0;
 
@@ -34,7 +31,7 @@ public class DateManagement : MonoBehaviour
         curDate = DateTime.Now.Date;     
 
         // try to get the launch date saved as a string:
-        string savedLaunchDateString = PlayerPrefs.GetString("savedLaunchDate" + curRunIndex.ToString(), "");
+        savedLaunchDateString = PlayerPrefs.GetString("savedLaunchDate" + curRunIndex.ToString(), "");
         if (savedLaunchDateString == "")
         { // if not saved yet...
           // convert current date to string...
@@ -47,14 +44,30 @@ public class DateManagement : MonoBehaviour
         DateTime savedLaunchDate;
         DateTime.TryParse(savedLaunchDateString, out savedLaunchDate);
 
+        savedLaunchDateStringForExport = savedLaunchDate.ToShortDateString();
+
+
         //for testing (zero based)
         savedLaunchDate = savedLaunchDate.AddDays(-14);
 
         curDateIndex = (curDate - savedLaunchDate).Days;
-        curDateNumber = curDateIndex + 1;
 
         currentWeekIndex = curDateIndex / 7;       //floored number after division
-        originalCurrentWeekIndex = curDateIndex / 7;
+    }
+
+    //set by the run manager for the Intro scenes --then after the Intro section finalizes the LoadDateOrSet will be run
+    public void SetIndexes(int index)
+    {
+        curRunIndex = index;
+        curDateIndex = 0;
+        currentWeekIndex = 0;
+    }
+
+    //triggered by the last Intro scene
+    public void SaveLaunchDateIntro()
+    {
+        LoadDateOrSetDate(curRunIndex);
+        FindObjectOfType<ValueManagement>().SetRunDate(savedLaunchDateStringForExport, curRunIndex);
     }
 
     public int GetCurrentDayIndex()

@@ -33,14 +33,21 @@ public class ValueManagement : MonoBehaviour
     string secondCheckName;
     string weeklyCheckName;
 
-    int currentDayIndex;
-    int currentWeekIndex;
-
     private void Awake()
     {
+        ///////////////////////for testing purposes ---deletes all prefs for all scripts
+        PlayerPrefs.DeleteAll();
+        ///////////////////////
+        
         //get Run data from prefs
         runDates = PlayerPrefsX.GetStringArray("runDates", "", 5);
         areRunsFinished = PlayerPrefsX.GetBoolArray("areRunsFinished", false, 5);
+    }
+
+    //run by the RunManager
+    public void SetRunIndexForIntro(int index)
+    {
+        curRunIndex = index;
     }
 
     public string[] GetRunDates()
@@ -61,10 +68,6 @@ public class ValueManagement : MonoBehaviour
     public void LoadCurrentValuesFromPrefs(int index)
     {
         curRunIndex = index;
-
-        ///////////////////////for testing purposes ---deletes all prefs for all scripts
-        PlayerPrefs.DeleteAll();
-        ///////////////////////
 
         //getting all the prefs at the berginning of the game
         playerName = PlayerPrefs.GetString("playerName" + curRunIndex.ToString(), "");
@@ -88,14 +91,11 @@ public class ValueManagement : MonoBehaviour
 
         weeklyName = PlayerPrefsX.GetStringArray("weeklyName" + curRunIndex.ToString(), "", 5);
 
-
-        //get current day - zero based
-        currentDayIndex = GetComponent<DateManagement>().GetCurrentDayIndex();
-
-        currentWeekIndex = GetComponent<DateManagement>().GetCurrentWeek();
-
         //////////////////////////////////////////////////////
         //just for testing ---- fills up the calendar with successful previous days
+        int currentDayIndex = GetComponent<DateManagement>().GetCurrentDayIndex();
+
+        int currentWeekIndex = GetComponent<DateManagement>().GetCurrentWeek();
 
         for (int i = 0; i < currentDayIndex - 1; i++)
         {
@@ -173,37 +173,62 @@ public class ValueManagement : MonoBehaviour
         PlayerPrefsX.SetStringArray("weekJournal" + curRunIndex.ToString(), weekJournal);
     }
 
-    //methods to save to playerprefs
+    //methods from Intro Scenes
     public void SaveBadHabit(string input)
     {
         badHabitName = input;
-        PlayerPrefs.SetString("badHabitName" + curRunIndex.ToString(), input);
     }
 
     public void SavePlayerName(string name)
     {
         playerName = name;
-        PlayerPrefs.SetString("playerName" + curRunIndex.ToString(), name);
     }
 
     public void SaveFirstName(string input)
     {
         firstCheckName = input;
-        PlayerPrefs.SetString("firstCheckName" + curRunIndex.ToString(), input);
     }
 
     public void SaveSecondName(string input)
     {
         secondCheckName = input;
-        PlayerPrefs.SetString("secondCheckName" + curRunIndex.ToString(), input);
     }
 
-    public void SaveWeeklyName(string input)
+    //triggered in the last Intro scene to set up the normal game process
+    public void SaveIntroValues()
+    {
+        string badHabitCache = badHabitName;
+        string playerNameCache = playerName;
+        string firstCheckCache = firstCheckName;
+
+        //introduce and fill up all the arrays and other variables with empty values
+        LoadCurrentValuesFromPrefs(curRunIndex);
+
+        badHabitName = badHabitCache;
+        playerName = playerNameCache;
+        firstCheckName = firstCheckCache;
+
+        //save intro values to playerprefs
+        PlayerPrefs.SetString("badHabitName" + curRunIndex.ToString(), badHabitName);
+        PlayerPrefs.SetString("playerName" + curRunIndex.ToString(), playerName);
+        PlayerPrefs.SetString("firstCheckName" + curRunIndex.ToString(), firstCheckName);
+        PlayerPrefs.SetString("secondCheckName" + curRunIndex.ToString(), secondCheckName);
+    }
+
+    //by dM to save the date at the end of Intro scenes
+    public void SetRunDate(string runDateValue, int runIndex)
+    {
+        runDates[runIndex] = runDateValue;
+        PlayerPrefsX.SetStringArray("runDates", runDates);
+    }
+
+    //this is a special intro method because its also used outside of intro
+    public void SaveWeeklyName(string input, int weekIndex)
     {
         weeklyCheckName = input;
         PlayerPrefs.SetString("weeklyCheckName" + curRunIndex.ToString(), input);
 
-        weeklyName[currentWeekIndex] = weeklyCheckName;
+        weeklyName[weekIndex] = weeklyCheckName;
         PlayerPrefsX.SetStringArray("weeklyName" + curRunIndex.ToString(), weeklyName);
     }
 

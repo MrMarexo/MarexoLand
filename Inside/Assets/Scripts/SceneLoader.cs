@@ -13,7 +13,6 @@ public class SceneLoader : MonoBehaviour
     IEnumerator LoadScene(int index)
     {
         pastSceneId = SceneManager.GetActiveScene().buildIndex;
-        Debug.Log(pastSceneId);
         yield return new WaitForSecondsRealtime(timeToLoadScene);
         SceneManager.LoadScene(index);
     }
@@ -21,7 +20,6 @@ public class SceneLoader : MonoBehaviour
     IEnumerator LoadSceneName(string name)
     {
         pastSceneId = SceneManager.GetActiveScene().buildIndex;
-        Debug.Log(pastSceneId);
         yield return new WaitForSecondsRealtime(timeToLoadScene);
         SceneManager.LoadScene(name);
     }

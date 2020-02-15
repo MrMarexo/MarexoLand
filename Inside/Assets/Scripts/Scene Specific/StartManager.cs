@@ -12,11 +12,14 @@ public class StartManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI startButton;
     [SerializeField] TextMeshProUGUI continueButton;
 
+    RunManager rM;
+
     bool loopFinished = true;
 
 
     private void Start()
     {
+        rM = FindObjectOfType<RunManager>();
         StartOrContinue();
     }
 
@@ -33,14 +36,19 @@ public class StartManager : MonoBehaviour
         //disable both buttons
         startButton.gameObject.SetActive(false);
         continueButton.gameObject.SetActive(false);
-        string[] names = FindObjectOfType<ValueManagement>().GetNames();
-        if (names[0] == "" || names[1] == "" || names[2] == "")
+
+        string result = rM.StartOrContinue();
+        if (result == "Start")
         {
             startButton.gameObject.SetActive(true);
         }
-        else
+        else if (result == "Continue")
         {
             continueButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            Debug.LogWarning("OOOPs, something is wrong!");
         }
     }
 
@@ -64,20 +72,24 @@ public class StartManager : MonoBehaviour
 
     public void StartButton()
     {
-        FindObjectOfType<SceneLoader>().LoadNextScene();
+        rM.StartNewRun();
     }
 
     public void ContinueButton()
     {
-        FindObjectOfType<SceneLoader>().LoadSceneByName("Before Check");
+        rM.ContinueRun();
     }
-
 
     //letter buttons
 
     public void LoadInfo()
     {
         FindObjectOfType<SceneLoader>().LoadSceneByName("Info");
+    }
+
+    public void LoadNewRun()
+    {
+        rM.ShowRunSlots();
     }
 
    

@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Intro/Intro.unity
     guid: ba7b1a6e84572a349aa62009867e13a9
   - enabled: 1
+    path: Assets/Scenes/Intro/Bad Habit.unity
+    guid: 4fe2f5ec3ee4d8c428ea97854029de09
+  - enabled: 1
     path: Assets/Scenes/Intro/Good Habit.unity
     guid: 3525c9c4e6bffa0478901c137b71956e
   - enabled: 1
@@ -47,6 +50,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Journal.unity
     guid: 71f2e4a6d1b22ad4abbd478ee35a3ac6
+  - enabled: 1
+    path: Assets/Scenes/Intro/Intro Again.unity
+    guid: 182e4db84e29df644af2b1108086b365
   - enabled: 1
     path: Assets/Scenes/Letters/Info.unity
     guid: 5c5113d1bccb47c499eb80c2385a1345

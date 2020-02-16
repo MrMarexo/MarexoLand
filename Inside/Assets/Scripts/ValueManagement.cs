@@ -11,6 +11,11 @@ public class ValueManagement : MonoBehaviour
     int curRunIndex = 0;
     bool[] areRunsFinished = new bool[5];
 
+    //common for all runs once set
+    string playerName;
+    string gender;
+
+
     string[] firstDailyCheck = new string[30];
     string[] secondDailyCheck = new string[30];
     string[] habitDailyCheck = new string[30];
@@ -27,7 +32,6 @@ public class ValueManagement : MonoBehaviour
 
     string[] weeklyName = new string[5];
 
-    string playerName;
     string badHabitName;
     string firstCheckName;
     string secondCheckName;
@@ -70,7 +74,9 @@ public class ValueManagement : MonoBehaviour
         curRunIndex = index;
 
         //getting all the prefs at the berginning of the game
-        playerName = PlayerPrefs.GetString("playerName" + curRunIndex.ToString(), "");
+        playerName = PlayerPrefs.GetString("playerName", "");
+        gender = PlayerPrefs.GetString("gender", "");
+
         badHabitName = PlayerPrefs.GetString("badHabitName" + curRunIndex.ToString(), "");
         firstCheckName = PlayerPrefs.GetString("firstCheckName" + curRunIndex.ToString(), "");
         secondCheckName = PlayerPrefs.GetString("secondCheckName" + curRunIndex.ToString(), "");
@@ -184,6 +190,11 @@ public class ValueManagement : MonoBehaviour
         playerName = name;
     }
 
+    public void SaveGernder(string input)
+    {
+        gender = input;
+    }
+
     public void SaveFirstName(string input)
     {
         firstCheckName = input;
@@ -197,6 +208,7 @@ public class ValueManagement : MonoBehaviour
     //triggered in the last Intro scene to set up the normal game process
     public void SaveIntroValues()
     {
+        string genderCache = gender;
         string badHabitCache = badHabitName;
         string playerNameCache = playerName;
         string firstCheckCache = firstCheckName;
@@ -204,15 +216,16 @@ public class ValueManagement : MonoBehaviour
         //introduce and fill up all the arrays and other variables with empty values
         LoadCurrentValuesFromPrefs(curRunIndex);
 
+        gender = genderCache;
         badHabitName = badHabitCache;
         playerName = playerNameCache;
         firstCheckName = firstCheckCache;
 
         //save intro values to playerprefs
         PlayerPrefs.SetString("badHabitName" + curRunIndex.ToString(), badHabitName);
-        PlayerPrefs.SetString("playerName" + curRunIndex.ToString(), playerName);
+        PlayerPrefs.SetString("playerName", playerName);
+        PlayerPrefs.SetString("gender", gender);
         PlayerPrefs.SetString("firstCheckName" + curRunIndex.ToString(), firstCheckName);
-        PlayerPrefs.SetString("secondCheckName" + curRunIndex.ToString(), secondCheckName);
     }
 
     //by dM to save the date at the end of Intro scenes

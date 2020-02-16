@@ -6,22 +6,28 @@ using TMPro;
 
 public class IntroManager : MonoBehaviour
 {
-    string habit;
+    string gender = "male";
     string playerName;
 
     int counter = 0;
 
-    [SerializeField] TMP_InputField habitInput;
     [SerializeField] TMP_InputField nameInput;
 
-
-    [SerializeField] GameObject writePopup;
     [SerializeField] GameObject namePopup;
 
 
+    public void Male()
+    {
+        gender = "male";
+    }
+
+    public void Female()
+    {
+        gender = "female";
+    }
+
     public void CheckAndLoadPopup()
     {
-        habit = habitInput.text;
         playerName = nameInput.text;
         //check if text is not ""
         if (playerName == "" && counter == 0)
@@ -29,12 +35,6 @@ public class IntroManager : MonoBehaviour
             //enable a pop-up canvas that prompts the user to input sth and return
             FindObjectOfType<PopupManagement>().EnablePopup(namePopup);
             counter++;
-            return;
-        }
-        else if (habit == "")
-        {
-            //enable a pop-up canvas that prompts the user to input sth and return
-            FindObjectOfType<PopupManagement>().EnablePopup(writePopup);
             return;
         }
         else
@@ -52,8 +52,8 @@ public class IntroManager : MonoBehaviour
     void SaveValuesAndLoadNext()
     {
         var vM = FindObjectOfType<ValueManagement>();
+        vM.SaveGernder(gender);
         vM.SavePlayerName(playerName);
-        vM.SaveBadHabit(habit);
         FindObjectOfType<SceneLoader>().LoadNextScene();
     }
 

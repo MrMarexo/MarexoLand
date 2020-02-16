@@ -53,6 +53,7 @@ public class RunManager : MonoBehaviour
         for(int i = 0; i < runDates.Length; i++) 
         {
             var cur = runDates[i];
+            slots[i].color = Colors.greyColor;
             if(cur == "")
             {
                 slots[i].text = "Empty slot";
@@ -98,7 +99,15 @@ public class RunManager : MonoBehaviour
         //will be empty now
         vM.SetRunIndexForIntro(index);
 
-        sL.LoadSceneByName("Intro");
+        if (index == 0)
+        {
+            sL.LoadSceneByName("Intro");
+        }
+        else
+        {
+            sL.LoadSceneByName("Intro Again");
+        }
+        
         return;
     }
 

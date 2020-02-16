@@ -18,6 +18,8 @@ public class RunManager : MonoBehaviour
 
     [SerializeField] GameObject noEmptyPopup;
 
+    [SerializeField] GameObject alreadyActivePopup;
+
     [SerializeField] TextMeshProUGUI loadButton;
 
     TextMeshProUGUI[] slots = new TextMeshProUGUI[5];
@@ -84,6 +86,7 @@ public class RunManager : MonoBehaviour
     public void StartNewRun()
     {
         var listOfEmpty = GetListOfEmptyRuns();
+        var listOfActive = GetListOfActiveRuns();
         if (listOfEmpty.Count == 0)
         {
             FindObjectOfType<PopupManagement>().EnablePopup(noEmptyPopup);

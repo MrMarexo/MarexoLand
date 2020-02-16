@@ -2600,6 +2600,7 @@ MonoBehaviour:
   slot4: {fileID: 839122354}
   runTablePopup: {fileID: 2519093930554979185}
   noEmptyPopup: {fileID: 2052957915}
+  alreadyActivePopup: {fileID: 0}
   loadButton: {fileID: 362530377}
 --- !u!4 &1521022349
 Transform:
@@ -3583,7 +3584,7 @@ PrefabInstance:
     - target: {fileID: 3497171492611033305, guid: 9a3c80af1c5f88646b69974181a00ff2,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3497171492611033304, guid: 9a3c80af1c5f88646b69974181a00ff2,
         type: 3}

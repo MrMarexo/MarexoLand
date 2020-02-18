@@ -84,28 +84,20 @@ public class ReadingManager : MonoBehaviour
         if (shouldShowWeek)
         {
             isShowingDay = false;
-            prevDay.GetComponent<Button>().enabled = false;
-            prevDay.GetComponent<TextMeshProUGUI>().enabled = false;
-            nextDay.GetComponent<Button>().enabled = false;
-            nextDay.GetComponent<TextMeshProUGUI>().enabled = false;
+            prevDay.SetActive(false);
+            nextDay.SetActive(false);
 
-            prevWeek.GetComponent<Button>().enabled = true;
-            prevWeek.GetComponent<TextMeshProUGUI>().enabled = true;
-            nextWeek.GetComponent<Button>().enabled = true;
-            nextWeek.GetComponent<TextMeshProUGUI>().enabled = true;
+            prevWeek.SetActive(true);
+            nextWeek.SetActive(true);
         }
         else
         {
             isShowingDay = true;
-            prevDay.GetComponent<Button>().enabled = true;
-            prevDay.GetComponent<TextMeshProUGUI>().enabled = true;
-            nextDay.GetComponent<Button>().enabled = true;
-            nextDay.GetComponent<TextMeshProUGUI>().enabled = true;
+            prevDay.SetActive(true);
+            nextDay.SetActive(true);
 
-            prevWeek.GetComponent<Button>().enabled = false;
-            prevWeek.GetComponent<TextMeshProUGUI>().enabled = false;
-            nextWeek.GetComponent<Button>().enabled = false;
-            nextWeek.GetComponent<TextMeshProUGUI>().enabled = false;
+            prevWeek.SetActive(false);
+            nextWeek.SetActive(false);
         }
     }
 

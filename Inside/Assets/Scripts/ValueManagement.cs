@@ -11,6 +11,9 @@ public class ValueManagement : MonoBehaviour
     int curRunIndex = 0;
     bool[] areRunsFinished = new bool[5];
 
+    int dayLength = 30;
+    int weekLength = 5;
+
     //common for all runs once set
     string playerName;
     string gender;
@@ -285,5 +288,15 @@ public class ValueManagement : MonoBehaviour
     {
         string[] names = { firstDailyName[index], secondDailyName[index], habitDailyName[index] };
         return names;
+    }
+
+    public int GetDayLength()
+    {
+        return dayLength;
+    }
+
+    public int GetWeekLength()
+    {
+        return weekLength;
     }
 }

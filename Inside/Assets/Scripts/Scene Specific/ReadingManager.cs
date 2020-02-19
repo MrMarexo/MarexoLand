@@ -14,6 +14,9 @@ public class ReadingManager : MonoBehaviour
     [SerializeField] GameObject nextDay;
     [SerializeField] GameObject nextWeek;
 
+    [SerializeField] GameObject dayBtn;
+    [SerializeField] GameObject weekBtn;
+
     ValueManagement vM;
     DateManagement dM;
 
@@ -22,6 +25,9 @@ public class ReadingManager : MonoBehaviour
 
     int showDayIndex;
     int showWeekIndex;
+
+    int dayLength;
+    int weekLength;
 
     string dayString = "Day ";
     string weekString = "Week ";
@@ -35,10 +41,58 @@ public class ReadingManager : MonoBehaviour
 
         curDayIndex = dM.GetCurrentDayIndex();
         curWeekIndex = dM.GetCurrentWeek();
+        dayLength = vM.GetDayLength();
+        weekLength = vM.GetWeekLength();
+        
 
+        ShowDay();
         ShowDayJournalOfIndex(curDayIndex);
         ShowWeekButtons(false);
         showWeekIndex = curWeekIndex;
+    }
+
+    void LimitDayBrowseButtons()
+    {
+        Debug.Log("1");
+        if (showDayIndex == 0)
+        {
+            prevDay.SetActive(false);
+            Debug.Log("2");
+        }
+        else
+        {
+            prevDay.SetActive(true);
+        }
+
+        if (showDayIndex == dayLength - 1)
+        {
+            nextDay.SetActive(false);
+        }
+        else
+        {
+            nextDay.SetActive(true);
+        }
+    }
+
+    void LimitWeekBrowseButtons()
+    {
+        if (showWeekIndex == 0)
+        {
+            prevWeek.SetActive(false);
+        }
+        else
+        {
+            prevWeek.SetActive(true);
+        }
+
+        if (showWeekIndex == weekLength - 1)
+        {
+            nextWeek.SetActive(false);
+        }
+        else
+        {
+            nextWeek.SetActive(true);
+        }
     }
 
     void ShowDayJournalOfIndex(int dayIndex)
@@ -47,6 +101,8 @@ public class ReadingManager : MonoBehaviour
         text.text = textValue;
         dayText.text = dayString + (dayIndex + 1).ToString();
         showDayIndex = dayIndex;
+        LimitDayBrowseButtons();
+
     }
 
     void ShowWeekJournalOfIndex(int weekIndex)
@@ -55,6 +111,8 @@ public class ReadingManager : MonoBehaviour
         text.text = textValue;
         dayText.text = weekString + (weekIndex + 1).ToString();
         showWeekIndex = weekIndex;
+        LimitWeekBrowseButtons();
+        
     }
 
     //on buttons
@@ -105,11 +163,17 @@ public class ReadingManager : MonoBehaviour
     {
         ShowWeekButtons(true);
         ShowWeekJournalOfIndex(curWeekIndex);
+        dayBtn.SetActive(true);
+        weekBtn.SetActive(false);
     }
 
     public void ShowDay()
     {
         ShowWeekButtons(false);
         ShowDayJournalOfIndex(curDayIndex);
+        dayBtn.SetActive(false);
+        weekBtn.SetActive(true);
     }
+
+
 }

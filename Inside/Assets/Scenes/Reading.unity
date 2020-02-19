@@ -2851,6 +2851,8 @@ MonoBehaviour:
   prevWeek: {fileID: 1497235805}
   nextDay: {fileID: 2024716562}
   nextWeek: {fileID: 1593004111}
+  dayBtn: {fileID: 1760634088}
+  weekBtn: {fileID: 454690983}
 --- !u!4 &1538622806
 Transform:
   m_ObjectHideFlags: 0

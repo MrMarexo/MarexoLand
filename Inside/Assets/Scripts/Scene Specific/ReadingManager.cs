@@ -46,22 +46,21 @@ public class ReadingManager : MonoBehaviour
         
 
         ShowDay();
-        ShowDayJournalOfIndex(curDayIndex);
-        ShowWeekButtons(false);
         showWeekIndex = curWeekIndex;
     }
 
     void LimitDayBrowseButtons()
     {
-        Debug.Log("1");
+        Debug.Log("runs");
         if (showDayIndex == 0)
         {
             prevDay.SetActive(false);
-            Debug.Log("2");
+            Debug.Log("deactivate");
         }
         else
         {
             prevDay.SetActive(true);
+            Debug.Log("activate");
         }
 
         if (showDayIndex == dayLength - 1)
@@ -173,6 +172,11 @@ public class ReadingManager : MonoBehaviour
         ShowDayJournalOfIndex(curDayIndex);
         dayBtn.SetActive(false);
         weekBtn.SetActive(true);
+    }
+
+    public void ToJournal()
+    {
+        FindObjectOfType<SceneLoader>().LoadPastScene();
     }
 
 

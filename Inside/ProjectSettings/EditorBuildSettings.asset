@@ -56,4 +56,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Letters/Info.unity
     guid: 5c5113d1bccb47c499eb80c2385a1345
+  - enabled: 1
+    path: Assets/Scenes/Reading.unity
+    guid: c8506e7cddd3e7949b7cd6f9d5088828
   m_configObjects: {}

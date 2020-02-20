@@ -148,6 +148,11 @@ public class JournalManager : MonoBehaviour
         FindObjectOfType<SceneLoader>().LoadPastScene();
     }
 
+    public void ToReadingJournal()
+    {
+        FindObjectOfType<SceneLoader>().LoadSceneByName("Reading");
+    }
+
     
     void CheckRestore()
     {

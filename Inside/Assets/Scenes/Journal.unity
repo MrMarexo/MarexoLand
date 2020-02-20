@@ -657,7 +657,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1550686665}
-        m_MethodName: GoBackToPastScene
+        m_MethodName: ToReadingJournal
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3972,7 +3972,7 @@ PrefabInstance:
     - target: {fileID: 5154339364838494396, guid: 751bbfdc82535d746b5c5c367dc96221,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5154339364838494396, guid: 751bbfdc82535d746b5c5c367dc96221,
         type: 3}

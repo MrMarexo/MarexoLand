@@ -9,6 +9,7 @@ public class SceneLoader : MonoBehaviour
     [SerializeField] float timeToLoadScene = 0.1f;
 
     int pastSceneId = 0;
+    int savedSceneID;
 
     IEnumerator LoadScene(int index)
     {
@@ -24,7 +25,15 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene(name);
     }
 
+    public void SaveSceneIndex()
+    {
+        savedSceneID = SceneManager.GetActiveScene().buildIndex;
+    }
 
+    public void LoadSavedScene()
+    {
+        StartCoroutine(LoadScene(savedSceneID));
+    }
 
     public void LoadPreviousScene()
     {

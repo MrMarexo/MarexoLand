@@ -31,7 +31,8 @@ public class NavigationManager : MonoBehaviour
         {
             return;
         }
-        FindObjectOfType<SceneLoader>().LoadSceneByName("Journal");
+        sL.SaveSceneIndex();
+        sL.LoadSceneByName("Journal");
     }
 
     public void GoToCalendar()
@@ -40,12 +41,12 @@ public class NavigationManager : MonoBehaviour
         {
             return;
         }
-        FindObjectOfType<SceneLoader>().LoadSceneByName("Calendar");
+        sL.LoadSceneByName("Calendar");
     }
 
     public void GoToMenu()
     {
-        FindObjectOfType<SceneLoader>().LoadSceneByName("Menu");
+        sL.LoadSceneByName("Menu");
     }
 
 }

@@ -34,6 +34,7 @@ public class JournalManager : MonoBehaviour
 
     DateManagement dM;
     ValueManagement vM;
+    SceneLoader sL;
 
     int curDayIndex;
     int curWeekIndex;
@@ -56,10 +57,11 @@ public class JournalManager : MonoBehaviour
     {
         dM = FindObjectOfType<DateManagement>();
         vM = FindObjectOfType<ValueManagement>();
+        sL = FindObjectOfType<SceneLoader>();
 
         curDayIndex = dM.GetCurrentDayIndex();
         curWeekIndex = dM.GetCurrentWeek();
-        timeToLoad = FindObjectOfType<SceneLoader>().GetTimeToLoad();
+        timeToLoad = sL.GetTimeToLoad();
         InputFieldInit();
         DisableAllExcept(generalPanel);
         HideOrShowLastWeek();
@@ -145,12 +147,12 @@ public class JournalManager : MonoBehaviour
     //loads whichever scene from where we got to the journal
     public void GoBackToPastScene()
     {
-        FindObjectOfType<SceneLoader>().LoadPastScene();
+        sL.LoadSavedScene();
     }
 
     public void ToReadingJournal()
     {
-        FindObjectOfType<SceneLoader>().LoadSceneByName("Reading");
+        sL.LoadSceneByName("Reading");
     }
 
     

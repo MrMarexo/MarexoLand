@@ -60,7 +60,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Reading.unity
     guid: c8506e7cddd3e7949b7cd6f9d5088828
   - enabled: 1
-    path: Assets/Scenes/Success.unity
+    path: Assets/Scenes/Instead.unity
     guid: dd256febb3aa3f94fbe055dc8319e52c
   - enabled: 1
     path: Assets/Scenes/Failure.unity

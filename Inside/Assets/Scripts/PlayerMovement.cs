@@ -55,6 +55,10 @@ public class PlayerMovement : MonoBehaviour
             newVelocity.y = jumpForce;
             anim.SetTrigger("isJumping");
         }
+        if (CollideTest(Vector2.down) || CollideTest(Vector2.up) || CollideTest(Vector2.left) || CollideTest(Vector2.right))
+        {
+            //go back to idle
+        }
 
         if (horizontal == -1 && CollideTest(Vector2.left))
         {

@@ -34,65 +34,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-
-        CalcHorizontal();
-        isGrounded = CollideTest(Vector2.down);
-
-        //calc movement
-        curVelocity = rb.velocity;
-        newVelocity = new Vector2(horizontal * runSpeed, curVelocity.y);
-        if (Mathf.Abs(rb.velocity.x) > 0)
-        {
-            anim.SetBool("isRunning", true);
-        }
-        else
-        {
-            anim.SetBool("isRunning", false);
-        }
-
-        if (Input.GetButtonDown("Jump") && isGrounded)
-        {
-            newVelocity.y = jumpForce;
-            anim.SetTrigger("isJumping");
-        }
-        if (CollideTest(Vector2.down) || CollideTest(Vector2.up) || CollideTest(Vector2.left) || CollideTest(Vector2.right))
-        {
-            //go back to idle
-        }
-
-        if (horizontal == -1 && CollideTest(Vector2.left))
-        {
-            newVelocity.x = 0;
-        }
-
-        if (horizontal == 1 && CollideTest(Vector2.right))
-        {
-            newVelocity.x = 0;
-        }
-
-        rb.velocity = newVelocity;
+        Run();
+        Flip();
 
     }
 
-    void CalcHorizontal()
+    private void Update()
     {
-        
-        if (Input.GetAxis("Horizontal") > 0)
-        {
-            horizontal = 1;
-            var scale = new Vector3(horizontal, 1, 1);
-            transform.localScale = scale;
-        }
-        else if (Input.GetAxis("Horizontal") < 0)
-        {
-            horizontal = -1;
-            var scale = new Vector3(horizontal, 1, 1);
-            transform.localScale = scale;
-        }
-        else if (Input.GetAxis("Horizontal") == 0)
-        {
-            horizontal = 0;
-        }
+        isGrounded = CollideTest(Vector2.down);
+        Jump();
     }
 
 
@@ -111,7 +61,42 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    
+    //movement
+    private void Jump()
+    {
+        bool verticalInputUpwards = Input.GetButtonDown("Jump");
+
+        if (verticalInputUpwards && isGrounded)
+        {
+            var jumpVector = new Vector2(rb.velocity.x, jumpForce);
+            rb.velocity = jumpVector;
+        }
+    }
+
+    private void Run()
+    {
+        var input = Input.GetAxis("Horizontal");
+        bool playerHasSpeed = Mathf.Abs(input) > Mathf.Epsilon;
+        if (playerHasSpeed)
+        {
+            var moveVector = new Vector2(input * runSpeed * Time.fixedDeltaTime, rb.velocity.y);
+            rb.velocity = moveVector;
+        }
+        anim.SetBool("isRunning", playerHasSpeed);
+
+    }
+
+    private void Flip()
+    {
+        var input = Input.GetAxis("Horizontal");
+        bool playerHasSpeed = Mathf.Abs(input) > 0;
+        if (playerHasSpeed && !CollideTest(Vector2.left) && !CollideTest(Vector2.right))
+        {
+            transform.localScale = new Vector2(Mathf.Sign(rb.velocity.x), 1);
+        }
+    }
+
+
 
 
 }

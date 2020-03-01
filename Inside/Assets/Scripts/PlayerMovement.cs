@@ -23,6 +23,10 @@ public class PlayerMovement : MonoBehaviour
 
     bool isGrounded;
 
+    bool canRun = true;
+    bool canJump = true;
+    bool shooting = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +47,8 @@ public class PlayerMovement : MonoBehaviour
     {
         isGrounded = CollideTest(Vector2.down);
         Jump();
+        Shoot();
+        ShootingFlip();
     }
 
 
@@ -66,36 +72,89 @@ public class PlayerMovement : MonoBehaviour
     {
         bool verticalInputUpwards = Input.GetButtonDown("Jump");
 
-        if (verticalInputUpwards && isGrounded)
+        if (isGrounded)
+        {
+            anim.SetTrigger("isNotJumping");
+        }
+
+        if (verticalInputUpwards && isGrounded && canJump)
         {
             var jumpVector = new Vector2(rb.velocity.x, jumpForce);
             rb.velocity = jumpVector;
+            anim.SetTrigger("isJumping");
         }
     }
 
     private void Run()
     {
         var input = Input.GetAxis("Horizontal");
-        bool playerHasSpeed = Mathf.Abs(input) > Mathf.Epsilon;
-        if (playerHasSpeed)
+        bool runInputPositive = Mathf.Abs(input) > 0;
+        if (canRun)
         {
             var moveVector = new Vector2(input * runSpeed * Time.fixedDeltaTime, rb.velocity.y);
             rb.velocity = moveVector;
         }
-        anim.SetBool("isRunning", playerHasSpeed);
-
+        if (isGrounded && canRun)
+        {
+            anim.SetBool("isRunning", runInputPositive);
+        }
+        else
+        {
+            anim.SetBool("isRunning", false);
+        }
     }
 
     private void Flip()
     {
         var input = Input.GetAxis("Horizontal");
-        bool playerHasSpeed = Mathf.Abs(input) > 0;
-        if (playerHasSpeed && !CollideTest(Vector2.left) && !CollideTest(Vector2.right))
+        bool playerHasSpeed = Mathf.Abs(input) > 0 && Mathf.Abs(rb.velocity.x) > 0;
+        if (playerHasSpeed)
         {
             transform.localScale = new Vector2(Mathf.Sign(rb.velocity.x), 1);
         }
     }
+    
+    private void Shoot()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            anim.SetBool("shotgun", true);
+            rb.velocity = new Vector2(0f, 0f);
+            canJump = false;
+            canRun = false;
+            shooting = true;
+        }
+        else if (Input.GetMouseButtonUp(0) && rb.velocity.x == 0f && rb.velocity.y == 0f)
+        {
+            Debug.Log("weird");
+            anim.SetBool("shotgunShoot", true);
+        }
+        
+    }
 
+    public void HideShotgun()
+    {
+        anim.SetBool("shotgun", false);
+        anim.SetBool("shotgunShoot", false);
+        canRun = true;
+        canJump = true;
+        shooting = false;
+    }
+
+    void ShootingFlip()
+    {
+        if (shooting)
+        {
+            if (Input.GetAxis("Horizontal") > 0)
+            {
+                transform.localScale = new Vector2(1, 1);
+            }
+            else if (Input.GetAxis("Horizontal") < 0)
+            {
+                transform.localScale = new Vector2(-1, 1);
+            }
+        }
+    }
 
 
 

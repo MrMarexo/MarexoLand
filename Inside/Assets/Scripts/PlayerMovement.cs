@@ -51,6 +51,13 @@ public class PlayerMovement : MonoBehaviour
         ShootingFlip();
     }
 
+    public void Die()
+    {
+        canJump = false;
+        canRun = false;
+        anim.SetTrigger("isDead");
+        rb.velocity = new Vector2(0f, 0f);
+    }
 
     bool CollideTest(Vector2 direction)
     {

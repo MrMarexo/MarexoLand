@@ -4,17 +4,15 @@ using UnityEngine;
 
 public class PlatformMover : MonoBehaviour
 {
-    [SerializeField] Transform startPos;
     [SerializeField] Transform pos1;
     [SerializeField] Transform pos2;
 
     Transform nextPos;
-    [SerializeField] float moveSpeed = 10f;
+    [SerializeField] float moveSpeed = 1f;
 
     private void Start()
     {
         nextPos = pos2;
-        transform.position = startPos.position;
     }
 
     private void FixedUpdate()

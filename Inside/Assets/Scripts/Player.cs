@@ -15,7 +15,11 @@ public class Player : MonoBehaviour
     {
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            mov.Die();
+            if (GetComponent<PlayerMovement>().alive == true)
+            {
+                mov.Die();
+            }
+            
         }
     }
 }

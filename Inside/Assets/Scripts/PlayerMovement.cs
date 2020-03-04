@@ -28,6 +28,9 @@ public class PlayerMovement : MonoBehaviour
     bool canJump = true;
     bool shooting = false;
 
+    [HideInInspector]
+    public bool alive = true;
+
 
     // Start is called before the first frame update
     void Start()
@@ -63,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(0f, 0f);
         boxCol.enabled = true;
         col.enabled = false;
+        alive = false;
     }
 
     bool CollideTest(Vector2 direction)
@@ -129,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
     
     private void Shoot()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && alive)
         {
             anim.SetBool("shotgun", true);
             rb.velocity = new Vector2(0f, 0f);

@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpForce = 3f;
 
     CapsuleCollider2D col;
+    BoxCollider2D boxCol;
     LayerMask mask;
 
     Rigidbody2D rb;
@@ -34,6 +35,9 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<CapsuleCollider2D>();
         anim = GetComponent<Animator>();
+        boxCol = GetComponent<BoxCollider2D>();
+        col.enabled = true;
+        boxCol.enabled = false;
     }
 
     private void FixedUpdate()
@@ -57,6 +61,8 @@ public class PlayerMovement : MonoBehaviour
         canRun = false;
         anim.SetTrigger("isDead");
         rb.velocity = new Vector2(0f, 0f);
+        boxCol.enabled = true;
+        col.enabled = false;
     }
 
     bool CollideTest(Vector2 direction)

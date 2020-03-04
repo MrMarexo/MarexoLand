@@ -27,4 +27,20 @@ public class PlatformMover : MonoBehaviour
         }
         transform.position = Vector3.MoveTowards(transform.position, nextPos.position, moveSpeed * Time.fixedDeltaTime);
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<Player>())
+        {
+            //
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<Player>())
+        {
+            //
+        }
+    }
 }

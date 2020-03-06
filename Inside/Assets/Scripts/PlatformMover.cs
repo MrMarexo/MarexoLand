@@ -35,31 +35,12 @@ public class PlatformMover : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, nextPos, moveSpeed * Time.deltaTime);
     }
 
-    //private void LateUpdate()
-    //{
-    //    if (rbs.Count > 0)
-    //    {
-    //        foreach (Rigidbody2D rb in rbs)
-    //        {
-    //            Vector3 velocity = transform.position - lastPosition;
-    //            rb.transform.Translate(velocity, transform);
-    //        }
-
-    //        lastPosition = transform.position;
-    //    }
-    //}
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<Player>())
         {
-            Debug.Log("collision");
             collision.gameObject.transform.SetParent(transform);
-            //var rb = collision.gameObject.GetComponent<Rigidbody2D>();
-            //if (rb != null)
-            //{
-            //    AddRigidBody(rb);
-            //}
+            
         }
     }
 
@@ -68,28 +49,8 @@ public class PlatformMover : MonoBehaviour
         if (collision.gameObject.GetComponent<Player>())
         {
             collision.gameObject.transform.SetParent(null);
-            //var rb = collision.gameObject.GetComponent<Rigidbody2D>();
-            //if (rb != null)
-            //{
-            //    RemoveRigidBody(rb);
-            //}
+            
         }
     }
     
-
-    //void AddRigidBody( Rigidbody2D rb)
-    //{
-    //    if (!rbs.Contains(rb))
-    //    {
-    //        rbs.Add(rb);
-    //    }
-    //}
-
-    //void RemoveRigidBody(Rigidbody2D rb)
-    //{
-    //    if (rbs.Contains(rb))
-    //    {
-    //        rbs.Remove(rb);
-    //    }
-    //}
 }

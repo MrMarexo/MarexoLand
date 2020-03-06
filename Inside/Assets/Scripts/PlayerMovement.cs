@@ -143,7 +143,6 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (Input.GetMouseButtonUp(0) && rb.velocity.x == 0f && rb.velocity.y == 0f)
         {
-            Debug.Log("weird");
             anim.SetBool("shotgunShoot", true);
         }
         

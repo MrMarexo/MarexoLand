@@ -47,6 +47,12 @@ public class SceneLoader : MonoBehaviour
         StartCoroutine(LoadScene(currentIndex + 1));     
     }
 
+    public void ReloadCurrentScene()
+    {
+        int currentIndex = SceneManager.GetActiveScene().buildIndex;
+        StartCoroutine(LoadScene(currentIndex));
+    }
+
     public void LoadSceneByName(string sceneName)
     {
         StartCoroutine(LoadSceneName(sceneName));

@@ -8,6 +8,9 @@ TagManager:
   - Daily_Check
   - Pop_up
   - Popup
+  - Key
+  - Gate
+  - Border
   layers:
   - Default
   - TransparentFX

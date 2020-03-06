@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] GameObject winCanvas;
+    [SerializeField] GameObject loseCanvas;
+
     PlayerMovement mov;
+
+    bool gotKey = false;
 
     private void Start()
     {
@@ -18,8 +23,35 @@ public class Player : MonoBehaviour
             if (GetComponent<PlayerMovement>().alive == true)
             {
                 mov.Die();
-            }
-            
+                FindObjectOfType<PopupManagement>().EnablePopup(loseCanvas);
+            }    
+        }
+        if (collision.gameObject.tag == "Gate" && gotKey)
+        {
+            Destroy(collision.gameObject);
+        }
+        
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Key")
+        {
+            gotKey = true;
+            Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.tag == "Finish")
+        {
+            Destroy(collision.gameObject);
+            FindObjectOfType<PopupManagement>().EnablePopup(winCanvas);
+        }
+        if (collision.gameObject.tag == "Border")
+        {
+            mov.Die();
+            FindObjectOfType<PopupManagement>().EnablePopup(loseCanvas);
         }
     }
+
+
 }

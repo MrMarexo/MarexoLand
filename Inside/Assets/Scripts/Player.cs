@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
             if (GetComponent<PlayerMovement>().alive == true)
             {
                 mov.Die();
-                FindObjectOfType<PopupManagement>().EnablePopup(loseCanvas);
+                FindObjectOfType<PopupManagement>().EnableGameCanvas(loseCanvas);
             }    
         }
         if (collision.gameObject.tag == "Gate" && gotKey)
@@ -44,12 +44,12 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Finish")
         {
             Destroy(collision.gameObject);
-            FindObjectOfType<PopupManagement>().EnablePopup(winCanvas);
+            FindObjectOfType<PopupManagement>().EnableGameCanvas(winCanvas);
         }
         if (collision.gameObject.tag == "Border")
         {
             mov.Die();
-            FindObjectOfType<PopupManagement>().EnablePopup(loseCanvas);
+            FindObjectOfType<PopupManagement>().EnableGameCanvas(loseCanvas);
         }
     }
 

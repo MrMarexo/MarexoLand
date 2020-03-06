@@ -12,6 +12,8 @@ public class PopupManagement : MonoBehaviour
 
     float timeToLoadPopup;
 
+    [SerializeField] float timeToLoadCanvas = 0.7f;
+
     void Start()
     {
         
@@ -63,18 +65,23 @@ public class PopupManagement : MonoBehaviour
     
     public void EnablePopup(GameObject popup)
     {
-        StartCoroutine(LoadPopup(popup, true));
+        StartCoroutine(LoadPopup(popup, true, timeToLoadPopup));
     }
 
     public void DisablePopup()
     {
         GameObject popup = EventSystem.current.currentSelectedGameObject.transform.parent.gameObject;
-        StartCoroutine(LoadPopup(popup, false));
+        StartCoroutine(LoadPopup(popup, false, timeToLoadPopup));
     }
 
-    IEnumerator LoadPopup(GameObject popup, bool enableDisable)
+    public void EnableGameCanvas(GameObject popup)
     {
-        yield return new WaitForSecondsRealtime(timeToLoadPopup);
+        StartCoroutine(LoadPopup(popup, true, timeToLoadCanvas));
+    }
+
+    IEnumerator LoadPopup(GameObject popup, bool enableDisable, float time)
+    {
+        yield return new WaitForSecondsRealtime(time);
         popup.SetActive(enableDisable);
         popupPanel.SetActive(enableDisable);
     }

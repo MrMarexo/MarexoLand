@@ -13,6 +13,11 @@ public class Enemy : MonoBehaviour
     Vector3 nextPos;
     [SerializeField] float moveSpeed = 1f;
 
+    [SerializeField] float minRandom = 0.2f;
+    [SerializeField] float maxRandom = 3f;
+
+    bool waitOngoing = false;
+
     List<Rigidbody2D> rbs = new List<Rigidbody2D>();
 
     private void Start()
@@ -24,13 +29,13 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (transform.position == pos1P)
+        if (transform.position == pos1P && !waitOngoing)
         {
-            nextPos = pos2P;
+            StartCoroutine(WaitRandom(pos2P));
         }
-        else if (transform.position == pos2P)
+        else if (transform.position == pos2P && !waitOngoing)
         {
-            nextPos = pos1P;
+            StartCoroutine(WaitRandom(pos1P));
         }
 
         if (nextPos == pos1P)
@@ -42,5 +47,14 @@ public class Enemy : MonoBehaviour
             transform.localScale = new Vector3(-1, 1, 1);
         }
         transform.position = Vector3.MoveTowards(transform.position, nextPos, moveSpeed * Time.fixedDeltaTime);
+    }
+
+    IEnumerator WaitRandom(Vector3 nextPosition)
+    {
+        waitOngoing = true;
+        float randomTime = Random.Range(minRandom, maxRandom);
+        yield return new WaitForSecondsRealtime(randomTime);
+        nextPos = nextPosition;
+        waitOngoing = false;
     }
 }

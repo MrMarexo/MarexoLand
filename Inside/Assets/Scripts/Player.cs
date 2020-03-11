@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject winCanvas;
     [SerializeField] GameObject loseCanvas;
 
+
     PlayerMovement mov;
 
     bool gotKey = false;
@@ -51,7 +52,15 @@ public class Player : MonoBehaviour
             mov.Die();
             FindObjectOfType<PopupManagement>().EnableGameCanvas(loseCanvas);
         }
+        if (collision.gameObject.tag == "Portal")
+        {
+            var teleportLocation = collision.transform.GetComponent<Portal>().GetPortalTargetPosition();
+            Debug.Log(teleportLocation);
+            mov.StartTeleportAnim(teleportLocation);
+        }
     }
+
+    
 
 
 }

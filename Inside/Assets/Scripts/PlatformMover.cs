@@ -13,7 +13,12 @@ public class PlatformMover : MonoBehaviour
     Vector3 nextPos;
     [SerializeField] float moveSpeed = 1f;
 
+    [SerializeField] bool shouldPause = false;
+    [SerializeField] float pauseTime = 1f;
+
     List<Rigidbody2D> rbs = new List<Rigidbody2D>();
+
+    bool waitOngoing;
 
     private void Start()
     {
@@ -26,11 +31,32 @@ public class PlatformMover : MonoBehaviour
     {
         if (transform.position == pos1P)
         {
-            nextPos = pos2P;
+            if (!shouldPause)
+            {
+                nextPos = pos2P;
+            }
+            else
+            {
+                if (!waitOngoing)
+                {
+                    StartCoroutine(Wait(pos2P));
+                }
+            }
+            
         }
         else if (transform.position == pos2P)
         {
-            nextPos = pos1P;
+            if (!shouldPause)
+            {
+                nextPos = pos1P;
+            }
+            else
+            {
+                if (!waitOngoing)
+                {
+                    StartCoroutine(Wait(pos1P));
+                }
+            }
         }
         transform.position = Vector3.MoveTowards(transform.position, nextPos, moveSpeed * Time.deltaTime);
     }
@@ -52,5 +78,13 @@ public class PlatformMover : MonoBehaviour
             
         }
     }
-    
+
+    IEnumerator Wait(Vector3 nextPosition)
+    {
+        waitOngoing = true;
+        yield return new WaitForSecondsRealtime(pauseTime);
+        nextPos = nextPosition;
+        waitOngoing = false;
+    }
+
 }

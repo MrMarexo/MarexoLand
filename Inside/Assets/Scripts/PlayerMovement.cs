@@ -31,6 +31,8 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector]
     public bool alive = true;
 
+    Vector3 teleportLocation;
+
 
     // Start is called before the first frame update
     void Start()
@@ -170,6 +172,17 @@ public class PlayerMovement : MonoBehaviour
                 transform.localScale = new Vector2(-1, 1);
             }
         }
+    }
+
+    public void StartTeleportAnim(Vector3 location)
+    {
+        anim.Play("Teleport");
+        teleportLocation = location;
+    }
+
+    public void Teleport()
+    {
+        transform.position = teleportLocation;
     }
 
 

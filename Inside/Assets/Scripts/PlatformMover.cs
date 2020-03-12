@@ -29,6 +29,7 @@ public class PlatformMover : MonoBehaviour
 
     private void Update()
     {
+        transform.position = Vector3.MoveTowards(transform.position, nextPos, moveSpeed * Time.deltaTime);
         if (transform.position == pos1P)
         {
             if (!shouldPause)
@@ -58,7 +59,6 @@ public class PlatformMover : MonoBehaviour
                 }
             }
         }
-        transform.position = Vector3.MoveTowards(transform.position, nextPos, moveSpeed * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

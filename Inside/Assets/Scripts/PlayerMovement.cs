@@ -183,6 +183,15 @@ public class PlayerMovement : MonoBehaviour
     public void Teleport()
     {
         transform.position = teleportLocation;
+        canJump = true;
+        canRun = true;
+    }
+
+    public void StopMovement()
+    {
+        canJump = false;
+        canRun = false;
+        rb.velocity = new Vector3(0, 0, 0);
     }
 
 

@@ -12,6 +12,7 @@ TagManager:
   - Gate
   - Border
   - Portal
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX

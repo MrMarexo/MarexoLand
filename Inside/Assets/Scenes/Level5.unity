@@ -2755,7 +2755,7 @@ GameObject:
   - component: {fileID: 1033509506}
   m_Layer: 0
   m_Name: MP2
-  m_TagString: Untagged
+  m_TagString: MovingPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3196,7 +3196,7 @@ GameObject:
   - component: {fileID: 1168277453}
   m_Layer: 0
   m_Name: MP3
-  m_TagString: Untagged
+  m_TagString: MovingPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3799,7 +3799,7 @@ GameObject:
   - component: {fileID: 1362512756}
   m_Layer: 0
   m_Name: MP1
-  m_TagString: Untagged
+  m_TagString: MovingPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4325,9 +4325,9 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 42.88
+  field of view: 40
   orthographic: 1
-  orthographic size: 5.48
+  orthographic size: 10
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -4351,7 +4351,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1423013888}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.5650012, y: -2.440002, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 593235651}
@@ -4992,7 +4992,7 @@ GameObject:
   - component: {fileID: 1715317009}
   m_Layer: 0
   m_Name: MP4
-  m_TagString: Untagged
+  m_TagString: MovingPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5797,7 +5797,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1977370750}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.5650012, y: -2.440002, z: -10}
+  m_LocalPosition: {x: 4.0900016, y: -2.2900019, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 657669305}
@@ -6295,12 +6295,12 @@ PrefabInstance:
     - target: {fileID: 1588076994606023992, guid: 865648b83d4b3174eb86280bc44da440,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.565
+      value: 4.09
       objectReference: {fileID: 0}
     - target: {fileID: 1588076994606023992, guid: 865648b83d4b3174eb86280bc44da440,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.44
+      value: -2.29
       objectReference: {fileID: 0}
     - target: {fileID: 1588076994606023992, guid: 865648b83d4b3174eb86280bc44da440,
         type: 3}

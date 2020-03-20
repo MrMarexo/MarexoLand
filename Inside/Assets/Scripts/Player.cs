@@ -7,13 +7,22 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject winCanvas;
     [SerializeField] GameObject loseCanvas;
 
+    [SerializeField] GameObject key;
+
 
     PlayerMovement mov;
 
     bool gotKey = false;
+    bool gameEnded = false;
 
     private void Start()
     {
+        gotKey = PlayerPrefsX.GetBool("gotKeyCheckpoint", false);
+        if (gotKey)
+        {
+            key.SetActive(false);
+        }
+        FindObjectOfType<Level>().UpdateKeyText(gotKey);
         mov = GetComponent<PlayerMovement>();
     }
 
@@ -23,8 +32,12 @@ public class Player : MonoBehaviour
         {
             if (GetComponent<PlayerMovement>().alive == true)
             {
-                mov.Die();
-                FindObjectOfType<PopupManagement>().EnableGameCanvas(loseCanvas);
+                if (!gameEnded)
+                {
+                    gameEnded = true;
+                    mov.Die();
+                    FindObjectOfType<PopupManagement>().EnableGameCanvas(loseCanvas);
+                }
             }    
         }
         if (collision.gameObject.tag == "Gate" && gotKey)
@@ -41,16 +54,26 @@ public class Player : MonoBehaviour
         {
             gotKey = true;
             Destroy(collision.gameObject);
+            FindObjectOfType<Level>().UpdateKeyText(gotKey);
         }
         if (collision.gameObject.tag == "Finish")
         {
-            Destroy(collision.gameObject);
-            FindObjectOfType<PopupManagement>().EnableGameCanvas(winCanvas);
+            if (!gameEnded)
+            {
+                gameEnded = true;
+                mov.Win();
+                Destroy(collision.gameObject);
+                FindObjectOfType<PopupManagement>().EnableGameCanvas(winCanvas);
+            }
         }
         if (collision.gameObject.tag == "Border")
         {
-            mov.Die();
-            FindObjectOfType<PopupManagement>().EnableGameCanvas(loseCanvas);
+            if (!gameEnded)
+            {
+                gameEnded = true;
+                mov.Die();
+                FindObjectOfType<PopupManagement>().EnableGameCanvas(loseCanvas);
+            }
         }
         if (collision.gameObject.tag == "Portal")
         {
@@ -58,6 +81,16 @@ public class Player : MonoBehaviour
             Debug.Log(teleportLocation);
             mov.StartTeleportAnim(teleportLocation);
         }
+    }
+
+    public void SaveKey()
+    {
+        PlayerPrefsX.SetBool("gotKeyCheckpoint", gotKey);
+    }
+
+    public void DeleteKey()
+    {
+        PlayerPrefs.DeleteKey("gotKeyCheckpoint");
     }
 
     

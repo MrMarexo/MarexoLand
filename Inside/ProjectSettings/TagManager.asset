@@ -22,7 +22,7 @@ TagManager:
   - 
   - 
   - Enemy
-  - 
+  - Walls
   - 
   - 
   - 
@@ -48,6 +48,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Overground
+    uniqueID: 518765821
     locked: 0
   - name: UI
     uniqueID: 4137131479

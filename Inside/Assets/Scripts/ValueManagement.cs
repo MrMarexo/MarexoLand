@@ -29,7 +29,7 @@ public class ValueManagement : MonoBehaviour
     string[] weekJournal = new string[5];
 
     //in case you'll wanna change the name of the task later --not configured yet
-    string[] firstDailyName = new string[30]; 
+    string[] firstDailyName = new string[30];
     string[] secondDailyName = new string[30];
     string[] habitDailyName = new string[30];
 
@@ -45,7 +45,9 @@ public class ValueManagement : MonoBehaviour
         ///////////////////////for testing purposes ---deletes all prefs for all scripts
         PlayerPrefs.DeleteAll();
         ///////////////////////
-        
+
+        DeleteGamePrefs();
+
         //get Run data from prefs
         runDates = PlayerPrefsX.GetStringArray("runDates", "", 5);
         areRunsFinished = PlayerPrefsX.GetBoolArray("areRunsFinished", false, 5);
@@ -254,7 +256,7 @@ public class ValueManagement : MonoBehaviour
         //{
         //    Debug.Log(habit);
         //}
-        string[] arrays = {firstDailyCheck[index], secondDailyCheck[index], habitDailyCheck[index]};
+        string[] arrays = { firstDailyCheck[index], secondDailyCheck[index], habitDailyCheck[index] };
         return arrays;
     }
 
@@ -275,7 +277,7 @@ public class ValueManagement : MonoBehaviour
 
     public string[] GetNames()
     {
-        string[] names = {badHabitName, firstCheckName, weeklyCheckName, secondCheckName };
+        string[] names = { badHabitName, firstCheckName, weeklyCheckName, secondCheckName };
         return names;
     }
 
@@ -298,5 +300,21 @@ public class ValueManagement : MonoBehaviour
     public int GetWeekLength()
     {
         return weekLength;
+    }
+
+    //for game 
+    void DeleteGamePrefs() 
+    {
+        PlayerPrefs.DeleteKey("gotKeyCheckpoint");
+
+        PlayerPrefs.DeleteKey("mpName");
+
+        PlayerPrefs.DeleteKey("deathPosX");
+        PlayerPrefs.DeleteKey("deathPosY");
+        PlayerPrefs.DeleteKey("deathPosZ");
+
+        PlayerPrefs.DeleteKey("checkpointPosX");
+        PlayerPrefs.DeleteKey("checkpointPosY");
+        PlayerPrefs.DeleteKey("checkpointPosZ");
     }
 }

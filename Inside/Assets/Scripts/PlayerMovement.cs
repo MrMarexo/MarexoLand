@@ -7,14 +7,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float runSpeed = 4f;
     [SerializeField] float jumpForce = 3f;
 
-    CapsuleCollider2D col;
-    BoxCollider2D boxCol;
+    BoxCollider2D col;
+    CapsuleCollider2D capCol;
     LayerMask mask;
 
     Rigidbody2D rb;
     Animator anim;
 
     int horizontal = 0;
+
+    float regularGravity;
+
+    [SerializeField] float placementOffset = 0.6f;
 
     Vector2 curVelocity;
     Vector2 newVelocity;
@@ -33,16 +37,51 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 teleportLocation;
 
+    Vector3 startingPos;
+
+
+    private void Awake()
+    {
+        startingPos = transform.position;
+        StartFromCheckpoint();
+
+    }
+
+    private void StartFromCheckpoint()
+    {
+        if (PlayerPrefs.GetString("mpName", "NA") == "NA")
+        {
+            transform.position = LoadPositionFromPrefs();
+        }
+        else
+        {
+            string name = PlayerPrefs.GetString("mpName");
+            GameObject correctPM = null;
+            var pms = FindObjectsOfType<PlatformMover>();
+            foreach (PlatformMover pm in pms)
+            {
+                if (pm.name == name)
+                {
+                    correctPM = pm.gameObject;
+                }
+            }
+            //gameObject.transform.SetParent(correctPM.transform);
+            var pos = new Vector2(correctPM.transform.position.x, correctPM.transform.position.y + placementOffset);
+            transform.position = pos;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        col = GetComponent<CapsuleCollider2D>();
+        col = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
-        boxCol = GetComponent<BoxCollider2D>();
+        capCol = GetComponent<CapsuleCollider2D>();
         col.enabled = true;
-        boxCol.enabled = false;
+        capCol.enabled = false;
+        regularGravity = rb.gravityScale;
+        
     }
 
     private void FixedUpdate()
@@ -60,15 +99,73 @@ public class PlayerMovement : MonoBehaviour
         ShootingFlip();
     }
 
+    public void SaveCheckpointLocation()
+    {
+        if (transform.parent.tag == "MovingPlatform")
+        {
+            string name = transform.parent.name;
+            PlayerPrefs.SetString("mpName", name);
+        }
+        else
+        {
+            PlayerPrefs.DeleteKey("mpName");
+            SavePositionToPrefs();
+        }
+    } 
+
+    void SavePositionToPrefs()
+    {
+        PlayerPrefs.SetFloat("checkpointPosX", transform.position.x);
+        PlayerPrefs.SetFloat("checkpointPosY", transform.position.y);
+        PlayerPrefs.SetFloat("checkpointPosZ", transform.position.z);
+        Debug.Log(PlayerPrefs.GetFloat("checkpointPosX") + "" + PlayerPrefs.GetFloat("checkpointPosX"));
+    }
+
+    Vector3 LoadPositionFromPrefs()
+    {
+        var x = PlayerPrefs.GetFloat("checkpointPosX", startingPos.x);
+        var y = PlayerPrefs.GetFloat("checkpointPosY", startingPos.y);
+        var z = PlayerPrefs.GetFloat("checkpointPosZ", startingPos.z);
+        var pos = new Vector3(x, y, z);
+        return pos;
+    }
+
+    public void ResetPrefs()
+    {
+        PlayerPrefs.DeleteKey("mpName");
+
+        PlayerPrefs.DeleteKey("checkpointPosX");
+        PlayerPrefs.DeleteKey("checkpointPosY");
+        PlayerPrefs.DeleteKey("checkpointPosZ");
+    }
+
+    public Vector3 GetPosition()
+    {
+        return transform.position;
+    }
+
+    public Vector3 GetStartingPosition()
+    {
+        return startingPos;
+    }
+
+
     public void Die()
     {
         canJump = false;
         canRun = false;
         anim.SetTrigger("isDead");
         rb.velocity = new Vector2(0f, 0f);
-        boxCol.enabled = true;
+        capCol.enabled = true;
         col.enabled = false;
         alive = false;
+    }
+
+    public void Win()
+    {
+        canJump = false;
+        canRun = false;
+        rb.velocity = new Vector2(0f, 0f);
     }
 
     bool CollideTest(Vector2 direction)
@@ -183,8 +280,7 @@ public class PlayerMovement : MonoBehaviour
     public void Teleport()
     {
         transform.position = teleportLocation;
-        canJump = true;
-        canRun = true;
+        ReturnMovement();
     }
 
     public void StopMovement()
@@ -192,6 +288,14 @@ public class PlayerMovement : MonoBehaviour
         canJump = false;
         canRun = false;
         rb.velocity = new Vector3(0, 0, 0);
+        rb.gravityScale = 0f;
+    }
+
+    void ReturnMovement()
+    {
+        canJump = true;
+        canRun = true;
+        rb.gravityScale = regularGravity;
     }
 
 

@@ -101,7 +101,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void SaveCheckpointLocation()
     {
-        if (transform.parent.tag == "MovingPlatform")
+        //if (transform.parent.tag == "MovingPlatform")
+        if (transform.parent)
         {
             string name = transform.parent.name;
             PlayerPrefs.SetString("mpName", name);

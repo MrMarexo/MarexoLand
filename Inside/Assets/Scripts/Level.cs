@@ -15,6 +15,12 @@ public class Level : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI checkLoad;
 
+    [SerializeField] TextMeshProUGUI checkSlot1;
+    [SerializeField] TextMeshProUGUI checkSlot2;
+    [SerializeField] TextMeshProUGUI checkSlot3;
+
+    [SerializeField] TextMeshProUGUI dayNumber;
+
     int checkpointAllowed = 1;
     int checkpointCount = 0;
 
@@ -22,13 +28,47 @@ public class Level : MonoBehaviour
     private void Start()
     {
         checkpointCount = PlayerPrefs.GetInt("checkpointCount", 0);
-
         keyText.color = keyText.color = Colors.semiTransparentColor;
         ShouldShowCheckpoint();
         ShouldShowLoadCheckpoint();
+        UpdateCheckSlots();
         mov = FindObjectOfType<PlayerMovement>();
         sL = FindObjectOfType<SceneLoader>();
         pl = FindObjectOfType<Player>();
+        dayNumber.text = sL.GetCurrentSceneName();
+    }
+
+    void UpdateCheckSlots()
+    {
+        int actualCheckpointSum = checkpointAllowed - checkpointCount;
+        if (actualCheckpointSum == 3)
+        {
+            checkSlot1.color = Colors.completeColor;
+            checkSlot2.color = Colors.completeColor;
+            checkSlot3.color = Colors.completeColor;
+        } 
+        else if (actualCheckpointSum == 2)
+        {
+            checkSlot1.color = Colors.completeColor;
+            checkSlot2.color = Colors.completeColor;
+            checkSlot3.color = Colors.failedColor;
+        }
+        else if (actualCheckpointSum == 1)
+        {
+            checkSlot1.color = Colors.completeColor;
+            checkSlot2.color = Colors.failedColor;
+            checkSlot3.color = Colors.failedColor;
+        }
+        else if (actualCheckpointSum == 0)
+        {
+            checkSlot1.color = Colors.failedColor;
+            checkSlot2.color = Colors.failedColor;
+            checkSlot3.color = Colors.failedColor;
+        }
+        else
+        {
+            Debug.LogError("invalid number of checkpoints: " + actualCheckpointSum);
+        }
     }
     
     public void ReloadLevel()
@@ -59,6 +99,7 @@ public class Level : MonoBehaviour
 
         ShouldShowCheckpoint();
         ShouldShowLoadCheckpoint();
+        UpdateCheckSlots();
     }
 
     public void LoadFromCheckpoint()

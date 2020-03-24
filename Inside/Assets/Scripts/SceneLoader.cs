@@ -72,4 +72,9 @@ public class SceneLoader : MonoBehaviour
         return SceneManager.GetActiveScene().buildIndex;
     }
 
+    public string GetCurrentSceneName()
+    {
+        return SceneManager.GetActiveScene().name;
+    }
+
 }

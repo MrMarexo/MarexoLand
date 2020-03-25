@@ -2125,6 +2125,10 @@ MonoBehaviour:
   keyText: {fileID: 1744190169}
   checkpointText: {fileID: 484749499805153397}
   checkLoad: {fileID: 911045881}
+  checkSlot1: {fileID: 3405877021931340492}
+  checkSlot2: {fileID: 3212489686568421808}
+  checkSlot3: {fileID: 2144368185198930972}
+  dayNumber: {fileID: 6590697671015932505}
 --- !u!1 &5335454239524040063
 GameObject:
   m_ObjectHideFlags: 0

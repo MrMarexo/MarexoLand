@@ -117,7 +117,7 @@ public class Level : MonoBehaviour
         mov.ResetPrefs();
         pl.DeleteKey();
         DeletePrefCount();
-        sL.LoadSceneByName("Menu");
+        sL.LoadSceneByName("Calendar");
     }
 
     public void UpdateKeyText(bool gotKey)

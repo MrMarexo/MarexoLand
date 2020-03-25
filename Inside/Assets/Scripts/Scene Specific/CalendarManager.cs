@@ -50,6 +50,8 @@ public class CalendarManager : MonoBehaviour
     int currentDayIndex;
     int curDateNumber;
 
+    int playLevelNumber = -1;
+
     int weekIndex;
 
     float timeToWait;
@@ -194,6 +196,7 @@ public class CalendarManager : MonoBehaviour
     {
         string dayString = EventSystem.current.currentSelectedGameObject.GetComponentsInChildren<TextMeshProUGUI>()[0].text;
         int dayIndex = int.Parse(dayString) - 1;
+        playLevelNumber = dayIndex + 1;
 
         //fill up texts
         day.text = "Day " + (dayIndex + 1).ToString();
@@ -222,6 +225,11 @@ public class CalendarManager : MonoBehaviour
         journalWeekText.text = vM.GetDayJournalOfIndex(weekIndex);
 
         FindObjectOfType<PopupManagement>().EnablePopup(weekPopup);
+    }
+
+    public void StartLevel()
+    {
+        FindObjectOfType<SceneLoader>().LoadSceneByName("Day " + playLevelNumber.ToString());
     }
 
     public void ClosePopup()

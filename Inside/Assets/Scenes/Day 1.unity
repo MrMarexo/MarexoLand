@@ -3104,9 +3104,9 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 42.88
+  field of view: 40
   orthographic: 1
-  orthographic size: 5.48
+  orthographic size: 10
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -3130,7 +3130,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1423013888}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.0599988, y: -2.520002, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 593235651}
@@ -3249,6 +3249,31 @@ PrefabInstance:
       propertyPath: key
       value: 
       objectReference: {fileID: 1398526339}
+    - target: {fileID: 1588076994606023969, guid: 865648b83d4b3174eb86280bc44da440,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0.08390498
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588076994606023969, guid: 865648b83d4b3174eb86280bc44da440,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.13484271
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588076994606023969, guid: 865648b83d4b3174eb86280bc44da440,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0.007943511
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588076994606023969, guid: 865648b83d4b3174eb86280bc44da440,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.6583526
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588076994606023996, guid: 865648b83d4b3174eb86280bc44da440,
+        type: 3}
+      propertyPath: jumpTimeLimit
+      value: 0.08
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 865648b83d4b3174eb86280bc44da440, type: 3}
 --- !u!4 &1460901895 stripped
@@ -3325,7 +3350,6 @@ GameObject:
   - component: {fileID: 1553907890}
   - component: {fileID: 1553907892}
   - component: {fileID: 1553907891}
-  - component: {fileID: 1553907893}
   m_Layer: 0
   m_Name: Gate1
   m_TagString: Gate
@@ -3426,27 +3450,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1553907893
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1553907889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32d40088a6124c578ad6b428df586e2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_pivot: {x: 0, y: 0}
-  m_anchorPosition: 4
-  m_rect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 0
-    height: 0
-  m_margins: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1562169721
 GameObject:
   m_ObjectHideFlags: 0

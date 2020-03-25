@@ -39,6 +39,9 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 startingPos;
 
+    float groundedTimer = 0f;
+    [SerializeField] float jumpTimeLimit = 0.2f; 
+
 
     private void Awake()
     {
@@ -192,13 +195,22 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded)
         {
             anim.SetTrigger("isNotJumping");
+            groundedTimer = 0f;
         }
 
-        if (verticalInputUpwards && isGrounded && canJump)
+        if (!isGrounded)
+        {
+            groundedTimer += Time.deltaTime;
+        }
+        Debug.Log(groundedTimer);
+        bool kindaGrounded = groundedTimer <= jumpTimeLimit;
+
+        if (verticalInputUpwards && kindaGrounded && canJump)
         {
             var jumpVector = new Vector2(rb.velocity.x, jumpForce);
             rb.velocity = jumpVector;
             anim.SetTrigger("isJumping");
+            
         }
     }
 

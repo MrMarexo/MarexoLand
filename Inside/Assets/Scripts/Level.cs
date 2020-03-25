@@ -135,16 +135,13 @@ public class Level : MonoBehaviour
 
     void ShouldShowCheckpoint()
     {
-        Debug.Log("show");
         if (IsCheckpointAllowed())
         {
-            Debug.Log("show true");
             checkpointText.color = Colors.completeColor;
             checkpointText.gameObject.GetComponent<Button>().enabled = true;
         }
         else
         {
-            Debug.Log("show false");
             checkpointText.color = Colors.semiTransparentColor;
             checkpointText.gameObject.GetComponent<Button>().enabled = false;
         }

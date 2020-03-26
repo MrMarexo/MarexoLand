@@ -3104,9 +3104,9 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 40
+  field of view: 42.88
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 5.48
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -3130,7 +3130,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1423013888}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -3.0599988, y: -2.520002, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 593235651}
@@ -5067,6 +5067,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 905208372, guid: 0dcdd7e70ae783346bcd368ed6042eca, type: 3}
+      propertyPath: m_text
+      value: back to calendar
+      objectReference: {fileID: 0}
+    - target: {fileID: 905208372, guid: 0dcdd7e70ae783346bcd368ed6042eca, type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 905208372, guid: 0dcdd7e70ae783346bcd368ed6042eca, type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 905208372, guid: 0dcdd7e70ae783346bcd368ed6042eca, type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1055047969, guid: 0dcdd7e70ae783346bcd368ed6042eca, type: 3}
+      propertyPath: m_text
+      value: back to calendar
+      objectReference: {fileID: 0}
+    - target: {fileID: 1055047969, guid: 0dcdd7e70ae783346bcd368ed6042eca, type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1055047969, guid: 0dcdd7e70ae783346bcd368ed6042eca, type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1055047969, guid: 0dcdd7e70ae783346bcd368ed6042eca, type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 484749499805153397, guid: 0dcdd7e70ae783346bcd368ed6042eca,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -5077,6 +5109,16 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2350758817890081653, guid: 0dcdd7e70ae783346bcd368ed6042eca,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7776409901084728565, guid: 0dcdd7e70ae783346bcd368ed6042eca,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1744190169, guid: 0dcdd7e70ae783346bcd368ed6042eca, type: 3}
       propertyPath: m_havePropertiesChanged
       value: 1
@@ -5084,6 +5126,10 @@ PrefabInstance:
     - target: {fileID: 1744190169, guid: 0dcdd7e70ae783346bcd368ed6042eca, type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1055047966, guid: 0dcdd7e70ae783346bcd368ed6042eca, type: 3}
+      propertyPath: m_Name
+      value: Calendar
       objectReference: {fileID: 0}
     - target: {fileID: 6590697671015932505, guid: 0dcdd7e70ae783346bcd368ed6042eca,
         type: 3}

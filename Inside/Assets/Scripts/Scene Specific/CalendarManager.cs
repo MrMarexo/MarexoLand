@@ -42,6 +42,9 @@ public class CalendarManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI secondText;
     [SerializeField] TextMeshProUGUI journalDayText;
 
+    [SerializeField] TextMeshProUGUI pointsNumberDay;
+    [SerializeField] TextMeshProUGUI checkpointNumberDay;
+
     //week popup elements
     [SerializeField] TextMeshProUGUI weeklyInWeek;
     [SerializeField] TextMeshProUGUI journalWeekText;
@@ -55,6 +58,14 @@ public class CalendarManager : MonoBehaviour
     int weekIndex;
 
     float timeToWait;
+
+    int checkpointsBought = 0;
+
+    //prices
+    [SerializeField] int checkpointPrice = 5;
+
+    //will be taken from value management
+    int points = 20;
 
     ValueManagement vM;
     DateManagement dM;
@@ -71,11 +82,41 @@ public class CalendarManager : MonoBehaviour
         currentWeekIndex = dM.GetCurrentWeek();
         weekIndex = currentWeekIndex;
         InstantlyCreateCalendar();
+
+        UpdatePointsAndSkills();
     }
 
     void UpdateWeekNumberText()
     {
         weekNumberText.text = "Week " + (weekIndex + 1).ToString();
+    }
+
+    void UpdatePointsAndSkills()
+    {
+        checkpointNumberDay.text = checkpointsBought.ToString();
+        pointsNumberDay.text = points.ToString();
+    }
+
+    public void AddCheckpoint()
+    {
+        if (points - checkpointsBought >= 0 && checkpointsBought < 3)
+        {
+            ++checkpointsBought;
+            points -= checkpointPrice;
+            UpdatePointsAndSkills();
+        }
+        
+    }
+
+    public void SubtractCheckpoint()
+    {
+        if (checkpointsBought > 0)
+        {
+            --checkpointsBought;
+            points += checkpointPrice;
+            UpdatePointsAndSkills();
+        }
+        
     }
 
     //enables and disables the browse calendar buttons

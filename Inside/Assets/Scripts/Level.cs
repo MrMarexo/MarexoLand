@@ -22,6 +22,9 @@ public class Level : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI dayNumber;
 
+    [SerializeField] float timeSlowedDown = 3f;
+    [SerializeField] float slowDownRatio = 2.5f;
+
     int checkpointAllowed = 0;
     int checkpointCount = 0;
 
@@ -41,6 +44,17 @@ public class Level : MonoBehaviour
         UpdateCheckSlots();
         dayNumber.text = sL.GetCurrentSceneName();
     }
+
+    public void SlowDownAbility()
+    {
+
+        var pms = FindObjectsOfType<PlatformMover>();
+        foreach (PlatformMover pm in pms)
+        {
+            pm.SlowDown(timeSlowedDown, slowDownRatio);
+        }
+        FindObjectOfType<Death>().SlowDown(timeSlowedDown, slowDownRatio);
+    } 
 
     void UpdateCheckSlots()
     {

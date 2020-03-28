@@ -6,6 +6,11 @@ public class Death : MonoBehaviour
 {
     [SerializeField] float speed = 0.5f;
 
+    float regularSpeed;
+    float slowDownTimer = 0f;
+    bool timerOn = false;
+    float timeSlowedDown;
+
     Vector3 startingPos;
 
     private void Awake()
@@ -14,8 +19,14 @@ public class Death : MonoBehaviour
         transform.position = LoadPositionFromPrefs();
     }
 
+    private void Start()
+    {
+        regularSpeed = speed;
+    }
+
     void Update()
     {
+        Timer();
         transform.Translate(Vector3.up * Time.deltaTime * speed);
     }
 
@@ -40,6 +51,32 @@ public class Death : MonoBehaviour
         PlayerPrefs.DeleteKey("deathPosX");
         PlayerPrefs.DeleteKey("deathPosY");
         PlayerPrefs.DeleteKey("deathPosZ");
+    }
+
+    public void SlowDown(float time, float ratio)
+    {
+        slowDownTimer = 0f;
+        timeSlowedDown = time;
+        speed = speed / ratio;
+        timerOn = true;
+    }
+
+    void SlowUp()
+    {
+        speed = regularSpeed;
+        timerOn = false;
+    }
+
+    void Timer()
+    {
+        if (timerOn)
+        {
+            slowDownTimer += Time.deltaTime;
+            if (slowDownTimer >= timeSlowedDown)
+            {
+                SlowUp();
+            }
+        }
     }
 
 }

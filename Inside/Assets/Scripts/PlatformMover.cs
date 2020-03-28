@@ -16,12 +16,20 @@ public class PlatformMover : MonoBehaviour
     [SerializeField] bool shouldPause = false;
     [SerializeField] float pauseTime = 1f;
 
+    float regularPauseTime;
+    float regularMoveSpeed;
+    float slowDownTimer = 0f;
+    bool timerOn = false;
+    float timeSlowedDown;
+
     List<Rigidbody2D> rbs = new List<Rigidbody2D>();
 
     bool waitOngoing;
 
     private void Start()
     {
+        regularMoveSpeed = moveSpeed;
+        regularPauseTime = pauseTime;
         pos1P = pos1.position;
         pos2P = pos2.position;
         nextPos = pos2P;
@@ -29,6 +37,7 @@ public class PlatformMover : MonoBehaviour
 
     private void Update()
     {
+        Timer();
         transform.position = Vector3.MoveTowards(transform.position, nextPos, moveSpeed * Time.deltaTime);
         if (transform.position == pos1P)
         {
@@ -76,6 +85,34 @@ public class PlatformMover : MonoBehaviour
         {
             collision.gameObject.transform.SetParent(null);
             
+        }
+    }
+
+    public void SlowDown(float time, float ratio)
+    {
+        slowDownTimer = 0f;
+        timeSlowedDown = time;
+        moveSpeed = moveSpeed / ratio;
+        pauseTime = pauseTime / ratio;
+        timerOn = true;
+    }
+
+    void SlowUp()
+    {
+        moveSpeed = regularMoveSpeed;
+        pauseTime = regularPauseTime;
+        timerOn = false;
+    }
+
+    void Timer()
+    {
+        if (timerOn)
+        {
+            slowDownTimer += Time.deltaTime;
+            if (slowDownTimer >= timeSlowedDown)
+            {
+                SlowUp();
+            }
         }
     }
 

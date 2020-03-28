@@ -2276,6 +2276,7 @@ MonoBehaviour:
   moveSpeed: 2.5
   shouldPause: 0
   pauseTime: 1
+  timeSlowedDown: 3
 --- !u!61 &707114406
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3312,6 +3313,7 @@ MonoBehaviour:
   moveSpeed: 2.5
   shouldPause: 0
   pauseTime: 1
+  timeSlowedDown: 3
 --- !u!61 &1015638780
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3420,6 +3422,7 @@ MonoBehaviour:
   moveSpeed: 2
   shouldPause: 0
   pauseTime: 1
+  timeSlowedDown: 3
 --- !u!61 &1105865458
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4493,6 +4496,7 @@ MonoBehaviour:
   moveSpeed: 2
   shouldPause: 0
   pauseTime: 1
+  timeSlowedDown: 3
 --- !u!1 &1398526339
 GameObject:
   m_ObjectHideFlags: 0
@@ -4825,6 +4829,74 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1744190169, guid: 0dcdd7e70ae783346bcd368ed6042eca, type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1744190169, guid: 0dcdd7e70ae783346bcd368ed6042eca, type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6590697671015932505, guid: 0dcdd7e70ae783346bcd368ed6042eca,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6590697671015932505, guid: 0dcdd7e70ae783346bcd368ed6042eca,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3405877021931340492, guid: 0dcdd7e70ae783346bcd368ed6042eca,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3405877021931340492, guid: 0dcdd7e70ae783346bcd368ed6042eca,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3212489686568421808, guid: 0dcdd7e70ae783346bcd368ed6042eca,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3212489686568421808, guid: 0dcdd7e70ae783346bcd368ed6042eca,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2144368185198930972, guid: 0dcdd7e70ae783346bcd368ed6042eca,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2144368185198930972, guid: 0dcdd7e70ae783346bcd368ed6042eca,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1252782009379784656, guid: 0dcdd7e70ae783346bcd368ed6042eca,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1252782009379784656, guid: 0dcdd7e70ae783346bcd368ed6042eca,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1935732664070216733, guid: 0dcdd7e70ae783346bcd368ed6042eca,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1935732664070216733, guid: 0dcdd7e70ae783346bcd368ed6042eca,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0dcdd7e70ae783346bcd368ed6042eca, type: 3}
 --- !u!1 &1404786166 stripped
@@ -4916,7 +4988,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1423013888}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.5200012, y: -2.2400017, z: -10}
+  m_LocalPosition: {x: 3.5200014, y: -2.2400017, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 593235651}
@@ -5247,6 +5319,7 @@ MonoBehaviour:
   moveSpeed: 2
   shouldPause: 0
   pauseTime: 1
+  timeSlowedDown: 3
 --- !u!61 &1591000961
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5355,6 +5428,7 @@ MonoBehaviour:
   moveSpeed: 2.5
   shouldPause: 0
   pauseTime: 1
+  timeSlowedDown: 3
 --- !u!61 &1658973226
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6629,7 +6703,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1977370750}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.5200012, y: -2.2400017, z: -10}
+  m_LocalPosition: {x: 3.5200014, y: -2.2400017, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 657669305}
@@ -7106,7 +7180,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2068486940}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 34.78, y: 15.94, z: 0}
+  m_LocalPosition: {x: 34.506, y: 15.126, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1811146167}

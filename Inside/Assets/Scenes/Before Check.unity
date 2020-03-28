@@ -1960,6 +1960,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Navigation
       objectReference: {fileID: 0}
+    - target: {fileID: 4324165969009440899, guid: 54526cc91e8cd9b4ba73aa6211ac6f59,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4324165969009440899, guid: 54526cc91e8cd9b4ba73aa6211ac6f59,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7088083812556798804, guid: 54526cc91e8cd9b4ba73aa6211ac6f59,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2070,16 +2080,6 @@ PrefabInstance:
       propertyPath: day
       value: 
       objectReference: {fileID: 522164715}
-    - target: {fileID: 4324165969009440899, guid: 54526cc91e8cd9b4ba73aa6211ac6f59,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4324165969009440899, guid: 54526cc91e8cd9b4ba73aa6211ac6f59,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4324165967963006177, guid: 54526cc91e8cd9b4ba73aa6211ac6f59,
         type: 3}
       propertyPath: m_havePropertiesChanged

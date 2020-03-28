@@ -77,7 +77,8 @@ public class CalendarManager : MonoBehaviour
         dM = FindObjectOfType<DateManagement>();
         vM = FindObjectOfType<ValueManagement>();
 
-        points = vM.GetPoints();
+        points = 20;
+        //points = vM.GetPoints();
         FillUpCalendars();
         timeToWait = FindObjectOfType<SceneLoader>().GetTimeToLoad();
         currentDayIndex = dM.GetCurrentDayIndex();
@@ -107,7 +108,7 @@ public class CalendarManager : MonoBehaviour
             minusCheckpointDay.gameObject.GetComponent<Button>().enabled = true;
         }
 
-        if (checkpointsBought == 3)
+        if (checkpointsBought == 3 || points - checkpointPrice < 0)
         {
             plusCheckpointDay.color = Colors.incompleteColor;
             plusCheckpointDay.gameObject.GetComponent<Button>().enabled = false;
@@ -123,7 +124,7 @@ public class CalendarManager : MonoBehaviour
 
     public void AddCheckpoint()
     {
-        if (points - checkpointsBought >= 0 && checkpointsBought < 3)
+        if (points - checkpointPrice >= 0 && checkpointsBought < 3)
         {
             ++checkpointsBought;
             points -= checkpointPrice;

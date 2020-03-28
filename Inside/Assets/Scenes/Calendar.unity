@@ -7838,6 +7838,8 @@ MonoBehaviour:
   journalDayText: {fileID: 1138444416}
   pointsNumberDay: {fileID: 2006823404}
   checkpointNumberDay: {fileID: 235374798}
+  plusCheckpointDay: {fileID: 2016581928}
+  minusCheckpointDay: {fileID: 3705822}
   weeklyInWeek: {fileID: 1766441179}
   journalWeekText: {fileID: 190345497}
   checkpointPrice: 5

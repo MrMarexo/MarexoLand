@@ -98,8 +98,8 @@ public class PlayerMovement : MonoBehaviour
     {
         isGrounded = CollideTest(Vector2.down);
         Jump();
-        Shoot();
-        ShootingFlip();
+        //Shoot();
+        //ShootingFlip();
     }
 
     public void SaveCheckpointLocation()

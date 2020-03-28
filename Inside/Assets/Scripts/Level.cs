@@ -9,6 +9,7 @@ public class Level : MonoBehaviour
     PlayerMovement mov;
     SceneLoader sL;
     Player pl;
+    ValueManagement vM;
 
     [SerializeField] TextMeshProUGUI keyText;
     [SerializeField] TextMeshProUGUI checkpointText;
@@ -21,20 +22,23 @@ public class Level : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI dayNumber;
 
-    int checkpointAllowed = 1;
+    int checkpointAllowed = 0;
     int checkpointCount = 0;
 
 
     private void Start()
     {
+        mov = FindObjectOfType<PlayerMovement>();
+        sL = FindObjectOfType<SceneLoader>();
+        pl = FindObjectOfType<Player>();
+        vM = FindObjectOfType<ValueManagement>();
+
+        checkpointAllowed = vM.GetBoughtCheckpoints();
         checkpointCount = PlayerPrefs.GetInt("checkpointCount", 0);
         keyText.color = keyText.color = Colors.semiTransparentColor;
         ShouldShowCheckpoint();
         ShouldShowLoadCheckpoint();
         UpdateCheckSlots();
-        mov = FindObjectOfType<PlayerMovement>();
-        sL = FindObjectOfType<SceneLoader>();
-        pl = FindObjectOfType<Player>();
         dayNumber.text = sL.GetCurrentSceneName();
     }
 

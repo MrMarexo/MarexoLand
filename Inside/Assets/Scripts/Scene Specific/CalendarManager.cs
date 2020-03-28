@@ -44,6 +44,8 @@ public class CalendarManager : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI pointsNumberDay;
     [SerializeField] TextMeshProUGUI checkpointNumberDay;
+    [SerializeField] TextMeshProUGUI plusCheckpointDay;
+    [SerializeField] TextMeshProUGUI minusCheckpointDay;
 
     //week popup elements
     [SerializeField] TextMeshProUGUI weeklyInWeek;
@@ -65,7 +67,7 @@ public class CalendarManager : MonoBehaviour
     [SerializeField] int checkpointPrice = 5;
 
     //will be taken from value management
-    int points = 20;
+    int points;
 
     ValueManagement vM;
     DateManagement dM;
@@ -75,6 +77,7 @@ public class CalendarManager : MonoBehaviour
         dM = FindObjectOfType<DateManagement>();
         vM = FindObjectOfType<ValueManagement>();
 
+        points = vM.GetPoints();
         FillUpCalendars();
         timeToWait = FindObjectOfType<SceneLoader>().GetTimeToLoad();
         currentDayIndex = dM.GetCurrentDayIndex();
@@ -93,6 +96,27 @@ public class CalendarManager : MonoBehaviour
 
     void UpdatePointsAndSkills()
     {
+        if (checkpointsBought == 0)
+        {
+            minusCheckpointDay.color = Colors.incompleteColor;
+            minusCheckpointDay.gameObject.GetComponent<Button>().enabled = false;
+        }
+        else
+        {
+            minusCheckpointDay.color = Colors.completeColor;
+            minusCheckpointDay.gameObject.GetComponent<Button>().enabled = true;
+        }
+
+        if (checkpointsBought == 3)
+        {
+            plusCheckpointDay.color = Colors.incompleteColor;
+            plusCheckpointDay.gameObject.GetComponent<Button>().enabled = false;
+        }
+        else
+        {
+            plusCheckpointDay.color = Colors.completeColor;
+            plusCheckpointDay.gameObject.GetComponent<Button>().enabled = true;
+        }
         checkpointNumberDay.text = checkpointsBought.ToString();
         pointsNumberDay.text = points.ToString();
     }
@@ -270,6 +294,8 @@ public class CalendarManager : MonoBehaviour
 
     public void StartLevel()
     {
+        vM.SaveBoughtCheckpointsForLevel(checkpointsBought);
+        vM.SavePoints(points);
         FindObjectOfType<SceneLoader>().LoadSceneByName("Day " + playLevelNumber.ToString());
     }
 

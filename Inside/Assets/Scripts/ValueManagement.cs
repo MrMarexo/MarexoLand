@@ -317,4 +317,27 @@ public class ValueManagement : MonoBehaviour
         PlayerPrefs.DeleteKey("checkpointPosY");
         PlayerPrefs.DeleteKey("checkpointPosZ");
     }
+
+    //cache for the level
+    public void SaveBoughtCheckpointsForLevel(int number)
+    {
+        PlayerPrefs.SetInt("checkpointsBought", number);
+    }
+
+    public int GetBoughtCheckpoints()
+    {
+        return PlayerPrefs.GetInt("checkpointsBought");
+    }
+
+
+    //points
+    public void SavePoints(int  number)
+    {
+        PlayerPrefs.SetInt("points", number);
+    }
+
+    public int GetPoints()
+    {
+        return PlayerPrefs.GetInt("points");
+    }
 }

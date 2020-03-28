@@ -6832,7 +6832,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -13, y: 484}
+  m_AnchoredPosition: {x: 0, y: 484}
   m_SizeDelta: {x: 467.2, y: 83.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1138444416
@@ -7835,7 +7835,6 @@ MonoBehaviour:
   first: {fileID: 321833714}
   second: {fileID: 873301202}
   secondText: {fileID: 1992422771}
-  journalDayText: {fileID: 1138444416}
   pointsNumberDay: {fileID: 2006823404}
   checkpointNumberDay: {fileID: 235374798}
   plusCheckpointDay: {fileID: 2016581928}
@@ -10414,7 +10413,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 1476395007
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3

@@ -11,7 +11,7 @@ public class PlatformShadow : MonoBehaviour
         var srs = FindObjectsOfType<SpriteRenderer>();
         foreach (SpriteRenderer sr in srs)
         {
-            if (sr.gameObject.layer == LayerMask.NameToLayer("Walls") || sr.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            if (sr.gameObject.layer == LayerMask.NameToLayer("Walls") || (sr.gameObject.layer == LayerMask.NameToLayer("Enemy") && sr.gameObject.name != "Death"))
             {
                 var parent = sr.transform.parent;
                 var oPos = sr.transform.position;
@@ -19,6 +19,7 @@ public class PlatformShadow : MonoBehaviour
                 var clone = Instantiate(sr, newPos, sr.transform.rotation, parent);
                 clone.color = Colors.semiTransparentColor;
                 clone.sortingOrder = -1;
+                clone.GetComponent<BoxCollider2D>().enabled = false;
             }
         }
     }

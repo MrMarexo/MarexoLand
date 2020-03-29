@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 30096256}
   - component: {fileID: 30096255}
   - component: {fileID: 30096257}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -793,7 +793,7 @@ GameObject:
   - component: {fileID: 525405823}
   - component: {fileID: 525405822}
   - component: {fileID: 525405821}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Platform (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1348,8 +1348,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4281808695
+  m_fontColor: {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1528,7 +1528,7 @@ GameObject:
   - component: {fileID: 1054191270}
   - component: {fileID: 1054191272}
   - component: {fileID: 1054191271}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Platform (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1634,7 +1634,7 @@ GameObject:
   - component: {fileID: 1082324482}
   - component: {fileID: 1082324481}
   - component: {fileID: 1082324480}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Platform (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1798,8 +1798,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4281808695
+  m_fontColor: {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2103,7 +2103,7 @@ GameObject:
   - component: {fileID: 1144450706}
   - component: {fileID: 1144450708}
   - component: {fileID: 1144450707}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Platform (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2312,7 +2312,7 @@ GameObject:
   - component: {fileID: 1217984328}
   - component: {fileID: 1217984330}
   - component: {fileID: 1217984329}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Platform (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2418,7 +2418,7 @@ GameObject:
   - component: {fileID: 1245665161}
   - component: {fileID: 1245665163}
   - component: {fileID: 1245665162}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Platform (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2524,7 +2524,7 @@ GameObject:
   - component: {fileID: 1283935609}
   - component: {fileID: 1283935611}
   - component: {fileID: 1283935610}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Platform (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3461,7 +3461,7 @@ GameObject:
   - component: {fileID: 1562169723}
   - component: {fileID: 1562169722}
   - component: {fileID: 1562169724}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3959,8 +3959,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4281808695
+  m_fontColor: {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4109,7 +4109,7 @@ GameObject:
   - component: {fileID: 1975177466}
   - component: {fileID: 1975177465}
   - component: {fileID: 1975177464}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Platform (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4331,8 +4331,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4281808695
+  m_fontColor: {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4481,7 +4481,7 @@ GameObject:
   - component: {fileID: 2040413803}
   - component: {fileID: 2040413802}
   - component: {fileID: 2040413801}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Platform (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4693,7 +4693,7 @@ GameObject:
   - component: {fileID: 2053311726}
   - component: {fileID: 2053311728}
   - component: {fileID: 2053311727}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Platform (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4799,7 +4799,7 @@ GameObject:
   - component: {fileID: 2069985795}
   - component: {fileID: 2069985794}
   - component: {fileID: 2069985793}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Platform (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4905,7 +4905,7 @@ GameObject:
   - component: {fileID: 2091004009}
   - component: {fileID: 2091004011}
   - component: {fileID: 2091004010}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Platform (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

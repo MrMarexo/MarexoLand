@@ -202,7 +202,6 @@ public class PlayerMovement : MonoBehaviour
         {
             groundedTimer += Time.deltaTime;
         }
-        Debug.Log(groundedTimer);
         bool kindaGrounded = groundedTimer <= jumpTimeLimit;
 
         if (verticalInputUpwards && kindaGrounded && canJump)

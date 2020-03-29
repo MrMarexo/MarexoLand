@@ -72,6 +72,7 @@ public class Player : MonoBehaviour
             {
                 gameEnded = true;
                 mov.Die();
+                Destroy(gameObject);
                 FindObjectOfType<PopupManagement>().EnableGameCanvas(loseCanvas);
             }
         }

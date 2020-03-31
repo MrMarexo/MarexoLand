@@ -247,7 +247,7 @@ public class CalendarManager : MonoBehaviour
         }
         else if (values[weekIndex] == OptionCodes.options[1])
         {
-            correctWeekObject.color = Colors.failedColor;
+            correctWeekObject.color = Colors.toggleGrayColor;
         }
     }
 
@@ -329,7 +329,7 @@ public class CalendarManager : MonoBehaviour
             Color32 incompleteColor = Colors.incompleteColor;
             Color32 invisibleColor = Colors.invisibleColor;
             Color32 completeColor = Colors.completeColor;
-            Color32 failedColor = Colors.failedColor;
+            Color32 failedColor = Colors.toggleGrayColor;
 
             var cur = weekToShow[i];
             var curButton = cur.GetComponent<Button>();

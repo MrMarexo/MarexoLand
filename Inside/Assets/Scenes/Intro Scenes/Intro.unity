@@ -1010,8 +1010,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1506,8 +1506,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2187,41 +2187,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Restriction Calendar Popup
       objectReference: {fileID: 0}
-    - target: {fileID: 658148460943942497, guid: 2d50975663fe2fc4cabac0bebc056bce,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 658148461492460683, guid: 2d50975663fe2fc4cabac0bebc056bce,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 658148461492460683, guid: 2d50975663fe2fc4cabac0bebc056bce,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 658148461492460684, guid: 2d50975663fe2fc4cabac0bebc056bce,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 8123887247847380324}
-    - target: {fileID: 658148461492460684, guid: 2d50975663fe2fc4cabac0bebc056bce,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ClosePopup
-      objectReference: {fileID: 0}
-    - target: {fileID: 658148461770475320, guid: 2d50975663fe2fc4cabac0bebc056bce,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 658148461770475320, guid: 2d50975663fe2fc4cabac0bebc056bce,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d50975663fe2fc4cabac0bebc056bce, type: 3}
 --- !u!1 &2660018262538746081
@@ -2570,11 +2540,80 @@ PrefabInstance:
       propertyPath: m_Name
       value: Write Popup
       objectReference: {fileID: 0}
+    - target: {fileID: 3497171492611033305, guid: 9a3c80af1c5f88646b69974181a00ff2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3497171492866632832, guid: 9a3c80af1c5f88646b69974181a00ff2,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 31de7df0f71238649b1922348ff82b8e,
+        type: 2}
+    - target: {fileID: 3497171492866632832, guid: 9a3c80af1c5f88646b69974181a00ff2,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -5608230635789507814, guid: 31de7df0f71238649b1922348ff82b8e,
+        type: 2}
+    - target: {fileID: 3497171492866632832, guid: 9a3c80af1c5f88646b69974181a00ff2,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 33
+      objectReference: {fileID: 0}
+    - target: {fileID: 3497171492866632832, guid: 9a3c80af1c5f88646b69974181a00ff2,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3497171492866632832, guid: 9a3c80af1c5f88646b69974181a00ff2,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3497171492866632832, guid: 9a3c80af1c5f88646b69974181a00ff2,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3497171492866632832, guid: 9a3c80af1c5f88646b69974181a00ff2,
+        type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3497171493136561971, guid: 9a3c80af1c5f88646b69974181a00ff2,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 31de7df0f71238649b1922348ff82b8e,
+        type: 2}
+    - target: {fileID: 3497171493136561971, guid: 9a3c80af1c5f88646b69974181a00ff2,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -5608230635789507814, guid: 31de7df0f71238649b1922348ff82b8e,
+        type: 2}
+    - target: {fileID: 3497171493136561971, guid: 9a3c80af1c5f88646b69974181a00ff2,
+        type: 3}
+      propertyPath: m_fontStyle
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 3497171493136561971, guid: 9a3c80af1c5f88646b69974181a00ff2,
+        type: 3}
+      propertyPath: m_textAlignment
+      value: 514
+      objectReference: {fileID: 0}
     - target: {fileID: 3497171493136561972, guid: 9a3c80af1c5f88646b69974181a00ff2,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1574772677}
+    - target: {fileID: 3497171493136561973, guid: 9a3c80af1c5f88646b69974181a00ff2,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a3c80af1c5f88646b69974181a00ff2, type: 3}
 --- !u!222 &3497171492526157728
@@ -3198,8 +3237,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 80
-  m_fontSizeBase: 80
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3371,8 +3410,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 80
-  m_fontSizeBase: 80
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3620,8 +3659,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 80
-  m_fontSizeBase: 80
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

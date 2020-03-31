@@ -11,6 +11,8 @@ public class Colors
     public static Color32 invisibleColor = new Color32(0, 0, 0, 0);
     public static Color32 greyColor = new Color32(144, 144, 144, 255);
 
+    public static Color32 toggleGrayColor = new Color32(43, 43, 43, 255);
+
     public static Color32 semiTransparentColor = new Color32(0, 0, 0, 90);
     //public static Color32 shadowColor = new Color32(0, 0, 0, 90);
 }

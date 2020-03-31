@@ -10,7 +10,7 @@ public class Toggle : MonoBehaviour
     void ToggleTwo(int activeIndex, GameObject parentButton)
     {
         int inactiveIndex = Mathf.Abs(activeIndex - 1);
-        parentButton.GetComponentsInChildren<TextMeshProUGUI>()[inactiveIndex].color = Colors.failedColor;
+        parentButton.GetComponentsInChildren<TextMeshProUGUI>()[inactiveIndex].color = Colors.toggleGrayColor;
         parentButton.GetComponentsInChildren<TextMeshProUGUI>()[activeIndex].color = Colors.completeColor;
     }
 

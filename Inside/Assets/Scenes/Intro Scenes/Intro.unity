@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -703,8 +703,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 35
-  m_fontSizeBase: 35
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -991,8 +991,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4281019179
+  m_fontColor: {r: 0.16981131, g: 0.16740832, b: 0.16740832, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1265,8 +1265,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 35
-  m_fontSizeBase: 35
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2247,7 +2247,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 152, y: -431}
+  m_AnchoredPosition: {x: 2, y: -477}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3497171492269077531
@@ -2324,8 +2324,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Ok
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 905a90e82c3b4064baec18f5f4b738d6, type: 2}
-  m_sharedMaterial: {fileID: 21924175382024996, guid: 905a90e82c3b4064baec18f5f4b738d6,
+  m_fontAsset: {fileID: 11400000, guid: 31de7df0f71238649b1922348ff82b8e, type: 2}
+  m_sharedMaterial: {fileID: -5608230635789507814, guid: 31de7df0f71238649b1922348ff82b8e,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2357,8 +2357,8 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_textAlignment: 516
+  m_fontStyle: 17
+  m_textAlignment: 514
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -2658,7 +2658,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -294}
+  m_AnchoredPosition: {x: 0, y: -302}
   m_SizeDelta: {x: 467.2, y: 139.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3497171492526157743
@@ -2681,8 +2681,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: I will really call you John if you don't fill out your name!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 905a90e82c3b4064baec18f5f4b738d6, type: 2}
-  m_sharedMaterial: {fileID: 21924175382024996, guid: 905a90e82c3b4064baec18f5f4b738d6,
+  m_fontAsset: {fileID: 11400000, guid: 31de7df0f71238649b1922348ff82b8e, type: 2}
+  m_sharedMaterial: {fileID: -5608230635789507814, guid: 31de7df0f71238649b1922348ff82b8e,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2714,7 +2714,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_textAlignment: 514
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -2725,7 +2725,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 35
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -2754,7 +2754,7 @@ MonoBehaviour:
     spaceCount: 12
     wordCount: 13
     linkCount: 0
-    lineCount: 2
+    lineCount: 4
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -2850,7 +2850,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3497171492815293431
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2944,8 +2944,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -344.99994}
-  m_SizeDelta: {x: -184.5, y: -1151.4}
+  m_AnchoredPosition: {x: 0, y: -355.4}
+  m_SizeDelta: {x: -184.5, y: -1065.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4324165967633894720
 MonoBehaviour:
@@ -3885,8 +3885,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -344.99994}
-  m_SizeDelta: {x: -208.1, y: -1172.3}
+  m_AnchoredPosition: {x: 0, y: -355.4}
+  m_SizeDelta: {x: -208.1, y: -1093.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &6984454566138474189
 PrefabInstance:

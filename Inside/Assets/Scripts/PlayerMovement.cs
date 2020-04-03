@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -40,7 +41,8 @@ public class PlayerMovement : MonoBehaviour
     Vector3 startingPos;
 
     float groundedTimer = 0f;
-    [SerializeField] float jumpTimeLimit = 0.2f; 
+    [SerializeField] float jumpTimeLimit = 0.2f;
+
 
 
     private void Awake()
@@ -81,6 +83,8 @@ public class PlayerMovement : MonoBehaviour
         col = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
         capCol = GetComponent<CapsuleCollider2D>();
+
+
         col.enabled = true;
         capCol.enabled = false;
         regularGravity = rb.gravityScale;
@@ -190,7 +194,7 @@ public class PlayerMovement : MonoBehaviour
     //movement
     private void Jump()
     {
-        bool verticalInputUpwards = Input.GetButtonDown("Jump");
+        bool verticalInputUpwards = CrossPlatformInputManager.GetButtonDown("Jump");
 
         if (isGrounded)
         {
@@ -215,7 +219,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Run()
     {
-        var input = Input.GetAxis("Horizontal");
+        var input = CrossPlatformInputManager.GetAxis("Horizontal");
         bool runInputPositive = Mathf.Abs(input) > 0;
         if (canRun)
         {
@@ -234,7 +238,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Flip()
     {
-        var input = Input.GetAxis("Horizontal");
+        var input = CrossPlatformInputManager.GetAxis("Horizontal");
         bool playerHasSpeed = Mathf.Abs(input) > 0 && Mathf.Abs(rb.velocity.x) > 0;
         if (playerHasSpeed)
         {
@@ -242,46 +246,46 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     
-    private void Shoot()
-    {
-        if (Input.GetMouseButtonDown(0) && alive)
-        {
-            anim.SetBool("shotgun", true);
-            rb.velocity = new Vector2(0f, 0f);
-            canJump = false;
-            canRun = false;
-            shooting = true;
-        }
-        else if (Input.GetMouseButtonUp(0) && rb.velocity.x == 0f && rb.velocity.y == 0f)
-        {
-            anim.SetBool("shotgunShoot", true);
-        }
+    //private void Shoot()
+    //{
+    //    if (Input.GetMouseButtonDown(0) && alive)
+    //    {
+    //        anim.SetBool("shotgun", true);
+    //        rb.velocity = new Vector2(0f, 0f);
+    //        canJump = false;
+    //        canRun = false;
+    //        shooting = true;
+    //    }
+    //    else if (Input.GetMouseButtonUp(0) && rb.velocity.x == 0f && rb.velocity.y == 0f)
+    //    {
+    //        anim.SetBool("shotgunShoot", true);
+    //    }
         
-    }
+    //}
 
-    public void HideShotgun()
-    {
-        anim.SetBool("shotgun", false);
-        anim.SetBool("shotgunShoot", false);
-        canRun = true;
-        canJump = true;
-        shooting = false;
-    }
+    //public void HideShotgun()
+    //{
+    //    anim.SetBool("shotgun", false);
+    //    anim.SetBool("shotgunShoot", false);
+    //    canRun = true;
+    //    canJump = true;
+    //    shooting = false;
+    //}
 
-    void ShootingFlip()
-    {
-        if (shooting)
-        {
-            if (Input.GetAxis("Horizontal") > 0)
-            {
-                transform.localScale = new Vector2(1, 1);
-            }
-            else if (Input.GetAxis("Horizontal") < 0)
-            {
-                transform.localScale = new Vector2(-1, 1);
-            }
-        }
-    }
+    //void ShootingFlip()
+    //{
+    //    if (shooting)
+    //    {
+    //        if (Input.GetAxis("Horizontal") > 0)
+    //        {
+    //            transform.localScale = new Vector2(1, 1);
+    //        }
+    //        else if (Input.GetAxis("Horizontal") < 0)
+    //        {
+    //            transform.localScale = new Vector2(-1, 1);
+    //        }
+    //    }
+    //}
 
     public void StartTeleportAnim(Vector3 location)
     {

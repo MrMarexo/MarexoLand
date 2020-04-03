@@ -28,6 +28,8 @@ public class Level : MonoBehaviour
     int checkpointAllowed = 0;
     int checkpointCount = 0;
 
+    bool insteadWorks = false;
+
 
     private void Start()
     {
@@ -36,6 +38,7 @@ public class Level : MonoBehaviour
         pl = FindObjectOfType<Player>();
         vM = FindObjectOfType<ValueManagement>();
 
+        ShowUI();
         checkpointAllowed = vM.GetBoughtCheckpoints();
         checkpointCount = PlayerPrefs.GetInt("checkpointCount", 0);
         keyText.color = keyText.color = Colors.semiTransparentColor;
@@ -43,6 +46,27 @@ public class Level : MonoBehaviour
         ShouldShowLoadCheckpoint();
         UpdateCheckSlots();
         dayNumber.text = sL.GetCurrentSceneName();
+    }
+
+    void ShowUI()
+    {
+        var canvases = Resources.FindObjectsOfTypeAll<Canvas>();
+        foreach (Canvas canvas in canvases)
+        {
+            if (canvas.gameObject.name == "GameCanvas")
+            {
+                canvas.gameObject.SetActive(true);
+            }
+        }
+    }
+
+    private void Update()
+    {
+        if (insteadWorks)
+        {
+            Instead();
+        }
+        
     }
 
     public void SlowDownAbility()
@@ -53,7 +77,12 @@ public class Level : MonoBehaviour
         {
             pm.SlowDown(timeSlowedDown, slowDownRatio);
         }
-        FindObjectOfType<Death>().SlowDown(timeSlowedDown, slowDownRatio);
+        var death = FindObjectOfType<Death>();
+        if (death)
+        {
+            death.SlowDown(timeSlowedDown, slowDownRatio);
+        }
+        
     } 
 
     void UpdateCheckSlots()
@@ -192,6 +221,38 @@ public class Level : MonoBehaviour
             checkLoad.color = Colors.semiTransparentColor;
             checkLoad.gameObject.GetComponent<Button>().enabled = false;
         }
+    }
+
+    public void ClickInstead()
+    {
+        insteadWorks = true;
+    }
+
+    void Instead()
+    {
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            Vector2 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
+            LayerMask enemyLayer = LayerMask.NameToLayer("Enemy");
+            LayerMask wallsLayer = LayerMask.NameToLayer("Walls");
+            RaycastHit2D hit = Physics2D.Raycast(touchPos, -Vector2.zero);
+            if (hit)
+            {
+                if (hit.transform.gameObject.layer == enemyLayer)
+                {
+                    var go = hit.transform.gameObject;
+                    go.GetComponent<SpriteRenderer>().color = Colors.completeColor;
+                    go.layer = wallsLayer;
+                    Debug.Log("name: " + hit.transform.name);
+                    
+
+                    insteadWorks = false;
+                }
+            }
+            
+        }
+
     }
 
 

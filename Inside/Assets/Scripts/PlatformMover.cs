@@ -123,5 +123,6 @@ public class PlatformMover : MonoBehaviour
         nextPos = nextPosition;
         waitOngoing = false;
     }
+    
 
 }

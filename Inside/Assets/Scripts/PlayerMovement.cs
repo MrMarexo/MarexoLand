@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        startingPos = transform.position;
+        startingPos = GameObject.FindGameObjectWithTag("StartingPos").transform.position;
         StartFromCheckpoint();
 
     }
@@ -146,18 +146,7 @@ public class PlayerMovement : MonoBehaviour
         PlayerPrefs.DeleteKey("checkpointPosY");
         PlayerPrefs.DeleteKey("checkpointPosZ");
     }
-
-    public Vector3 GetPosition()
-    {
-        return transform.position;
-    }
-
-    public Vector3 GetStartingPosition()
-    {
-        return startingPos;
-    }
-
-
+    
     public void Die()
     {
         canJump = false;

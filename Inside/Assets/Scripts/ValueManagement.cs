@@ -43,7 +43,7 @@ public class ValueManagement : MonoBehaviour
     private void Awake()
     {
         ///////////////////////for testing purposes ---deletes all prefs for all scripts
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
         ///////////////////////
 
         DeleteGamePrefs();
@@ -104,27 +104,27 @@ public class ValueManagement : MonoBehaviour
 
         //////////////////////////////////////////////////////
         //just for testing ---- fills up the calendar with successful previous days
-        int currentDayIndex = GetComponent<DateManagement>().GetCurrentDayIndex();
+        //int currentDayIndex = GetComponent<DateManagement>().GetCurrentDayIndex();
 
-        int currentWeekIndex = GetComponent<DateManagement>().GetCurrentWeek();
+        //int currentWeekIndex = GetComponent<DateManagement>().GetCurrentWeek();
 
-        for (int i = 0; i < currentDayIndex - 1; i++)
-        {
-            firstDailyCheck[i] = OptionCodes.options[0];
-            habitDailyCheck[i] = OptionCodes.options[0];
-            habitDailyName[i] = "lala";
-            firstDailyName[i] = "lala";
-        }
-        weeklyCheck[0] = OptionCodes.options[0];
-        //weeklyCheck[1] = OptionCodes.options[1];
+        //for (int i = 0; i < currentDayIndex - 1; i++)
+        //{
+        //    firstDailyCheck[i] = OptionCodes.options[0];
+        //    habitDailyCheck[i] = OptionCodes.options[0];
+        //    habitDailyName[i] = "lala";
+        //    firstDailyName[i] = "lala";
+        //}
+        //weeklyCheck[0] = OptionCodes.options[0];
+        ////weeklyCheck[1] = OptionCodes.options[1];
 
-        weeklyName[0] = "lala";
-        //weeklyName[1] = "lala";
+        //weeklyName[0] = "lala";
+        ////weeklyName[1] = "lala";
 
-        playerName = "lala";
-        //badHabitName = "lala";
-        firstCheckName = "lala";
-        weeklyCheckName = "lala";
+        //playerName = "lala";
+        ////badHabitName = "lala";
+        //firstCheckName = "lala";
+        //weeklyCheckName = "lala";
         //secondCheckName = "lala";
 
         //////////////////////////////////////////////////////

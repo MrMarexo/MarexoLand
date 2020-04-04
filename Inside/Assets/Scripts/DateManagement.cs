@@ -48,7 +48,7 @@ public class DateManagement : MonoBehaviour
 
 
         //for testing (zero based)
-        savedLaunchDate = savedLaunchDate.AddDays(-14);
+        //savedLaunchDate = savedLaunchDate.AddDays(-14);
 
         curDateIndex = (curDate - savedLaunchDate).Days;
 

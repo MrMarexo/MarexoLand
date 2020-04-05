@@ -14,6 +14,7 @@ TagManager:
   - Portal
   - MovingPlatform
   - StartingPos
+  - DevLight
   layers:
   - Default
   - TransparentFX

@@ -11,6 +11,9 @@ public class Level : MonoBehaviour
     Player pl;
     ValueManagement vM;
 
+    [SerializeField] GameObject winCanvas;
+    [SerializeField] GameObject loseCanvas;
+
     [SerializeField] TextMeshProUGUI keyText;
     [SerializeField] TextMeshProUGUI checkpointText;
 
@@ -38,14 +41,27 @@ public class Level : MonoBehaviour
         pl = FindObjectOfType<Player>();
         vM = FindObjectOfType<ValueManagement>();
 
+
+        TurnOffDev();
         ShowUI();
-        checkpointAllowed = vM.GetBoughtCheckpoints();
+        //for testing
+        //checkpointAllowed = vM.GetBoughtCheckpoints();
+        checkpointAllowed = 3;
         checkpointCount = PlayerPrefs.GetInt("checkpointCount", 0);
         keyText.color = keyText.color = Colors.semiTransparentColor;
         ShouldShowCheckpoint();
         ShouldShowLoadCheckpoint();
         UpdateCheckSlots();
         dayNumber.text = sL.GetCurrentSceneName();
+    }
+
+    void TurnOffDev()
+    {
+        var devLight = GameObject.FindGameObjectWithTag("DevLight");
+        if (devLight)
+        {
+            devLight.SetActive(false);
+        }
     }
 
     void ShowUI()
@@ -58,6 +74,16 @@ public class Level : MonoBehaviour
                 canvas.gameObject.SetActive(true);
             }
         }
+    }
+
+    public void ShowWinCanvas()
+    {
+        FindObjectOfType<PopupManagement>().EnableGameCanvas(winCanvas);
+    }
+
+    public void ShowLoseCanvas()
+    {
+        FindObjectOfType<PopupManagement>().EnableGameCanvas(loseCanvas);
     }
 
     private void Update()

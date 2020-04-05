@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c6e291f577165498cd990055dbec22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 150
+  runSpeed: 130
   jumpForce: 14
   placementOffset: 0.6
   alive: 1
@@ -327,8 +327,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af83fee628cb8e945a5902d5bb06808b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winCanvas: {fileID: 0}
-  loseCanvas: {fileID: 0}
   key: {fileID: 0}
 --- !u!61 &1588076994606023969
 BoxCollider2D:

@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] GameObject winCanvas;
-    [SerializeField] GameObject loseCanvas;
+    
 
     [SerializeField] GameObject key;
 
 
     PlayerMovement mov;
+    Level lvl;
 
     bool gotKey = false;
     bool gameEnded = false;
@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
         }
         FindObjectOfType<Level>().UpdateKeyText(gotKey);
         mov = GetComponent<PlayerMovement>();
+        lvl = FindObjectOfType<Level>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -36,7 +37,7 @@ public class Player : MonoBehaviour
                 {
                     gameEnded = true;
                     mov.Die();
-                    FindObjectOfType<PopupManagement>().EnableGameCanvas(loseCanvas);
+                    lvl.ShowLoseCanvas();
                 }
             }    
         }
@@ -63,7 +64,7 @@ public class Player : MonoBehaviour
                 gameEnded = true;
                 mov.Win();
                 Destroy(collision.gameObject);
-                FindObjectOfType<PopupManagement>().EnableGameCanvas(winCanvas);
+                lvl.ShowWinCanvas();
             }
         }
         if (collision.gameObject.tag == "Border")
@@ -73,7 +74,7 @@ public class Player : MonoBehaviour
                 gameEnded = true;
                 mov.Die();
                 Destroy(gameObject);
-                FindObjectOfType<PopupManagement>().EnableGameCanvas(loseCanvas);
+                lvl.ShowLoseCanvas();
             }
         }
         if (collision.gameObject.tag == "Portal")

@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
         {
             key.SetActive(false);
         }
-        FindObjectOfType<Level>().UpdateKeyText(gotKey);
+        FindObjectOfType<Level>().UpdateKeyImage(gotKey);
         mov = GetComponent<PlayerMovement>();
         lvl = FindObjectOfType<Level>();
     }
@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
         {
             gotKey = true;
             Destroy(collision.gameObject);
-            FindObjectOfType<Level>().UpdateKeyText(gotKey);
+            FindObjectOfType<Level>().UpdateKeyImage(gotKey);
         }
         if (collision.gameObject.tag == "Finish")
         {

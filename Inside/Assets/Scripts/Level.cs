@@ -25,6 +25,8 @@ public class Level : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI dayNumber;
 
+    [SerializeField] Image keyImage;
+
     [SerializeField] float timeSlowedDown = 3f;
     [SerializeField] float slowDownRatio = 2.5f;
 
@@ -48,7 +50,7 @@ public class Level : MonoBehaviour
         //checkpointAllowed = vM.GetBoughtCheckpoints();
         checkpointAllowed = 3;
         checkpointCount = PlayerPrefs.GetInt("checkpointCount", 0);
-        keyText.color = keyText.color = Colors.semiTransparentColor;
+        keyImage.color = Colors.toggleGrayColor;
         ShouldShowCheckpoint();
         ShouldShowLoadCheckpoint();
         UpdateCheckSlots();
@@ -193,15 +195,15 @@ public class Level : MonoBehaviour
         sL.LoadSceneByName("Calendar");
     }
 
-    public void UpdateKeyText(bool gotKey)
+    public void UpdateKeyImage(bool gotKey)
     {
         if (gotKey)
         {
-            keyText.color = Colors.completeColor;
+            keyImage.color = Colors.completeColor;
         }
         else
         {
-            keyText.color = keyText.color = Colors.semiTransparentColor;
+            keyImage.color = Colors.toggleGrayColor;
         }
          
     }

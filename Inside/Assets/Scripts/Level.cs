@@ -14,8 +14,8 @@ public class Level : MonoBehaviour
     [SerializeField] GameObject winCanvas;
     [SerializeField] GameObject loseCanvas;
 
-    [SerializeField] TextMeshProUGUI keyText;
     [SerializeField] TextMeshProUGUI checkpointText;
+    
 
     [SerializeField] TextMeshProUGUI checkLoad;
 
@@ -213,12 +213,10 @@ public class Level : MonoBehaviour
         if (IsCheckpointAllowed())
         {
             checkpointText.color = Colors.completeColor;
-            checkpointText.gameObject.GetComponent<Button>().enabled = true;
         }
         else
         {
-            checkpointText.color = Colors.semiTransparentColor;
-            checkpointText.gameObject.GetComponent<Button>().enabled = false;
+            checkpointText.color = Colors.toggleGrayColor;
         }
     }
 

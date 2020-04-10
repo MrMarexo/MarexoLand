@@ -15,13 +15,22 @@ public class Level : MonoBehaviour
     [SerializeField] GameObject loseCanvas;
 
     [SerializeField] TextMeshProUGUI checkpointText;
-    
+    [SerializeField] TextMeshProUGUI insteadText;
+    [SerializeField] TextMeshProUGUI slowdownText;
 
     [SerializeField] TextMeshProUGUI checkLoad;
 
     [SerializeField] TextMeshProUGUI checkSlot1;
     [SerializeField] TextMeshProUGUI checkSlot2;
     [SerializeField] TextMeshProUGUI checkSlot3;
+
+    [SerializeField] TextMeshProUGUI insteadSlot1;
+    [SerializeField] TextMeshProUGUI insteadSlot2;
+    [SerializeField] TextMeshProUGUI insteadSlot3;
+
+    [SerializeField] TextMeshProUGUI slowSlot1;
+    [SerializeField] TextMeshProUGUI slowSlot2;
+    [SerializeField] TextMeshProUGUI slowSlot3;
 
     [SerializeField] TextMeshProUGUI dayNumber;
 
@@ -32,6 +41,12 @@ public class Level : MonoBehaviour
 
     int checkpointAllowed = 0;
     int checkpointCount = 0;
+
+    int slowAllowed = 0;
+    int slowCount = 0;
+
+    int insteadAllowed = 0;
+    int insteadCount = 0;
 
     bool insteadWorks = false;
 
@@ -49,11 +64,22 @@ public class Level : MonoBehaviour
         //for testing
         //checkpointAllowed = vM.GetBoughtCheckpoints();
         checkpointAllowed = 3;
+        slowAllowed = 3;
+        insteadAllowed = 3;
+        ///////////////////////
         checkpointCount = PlayerPrefs.GetInt("checkpointCount", 0);
         keyImage.color = Colors.toggleGrayColor;
-        ShouldShowCheckpoint();
+
+        ShouldShowInsteadText();
+        UpdateInsteadSlots();
+
+        ShouldShowSlowdownText();
+        UpdateSlowSlots();
+
+        ShouldShowCheckpointText();
         ShouldShowLoadCheckpoint();
         UpdateCheckSlots();
+
         dayNumber.text = sL.GetCurrentSceneName();
     }
 
@@ -110,8 +136,80 @@ public class Level : MonoBehaviour
         {
             death.SlowDown(timeSlowedDown, slowDownRatio);
         }
-        
-    } 
+
+        ++slowCount;
+        SaveSkillsCount();
+
+        ShouldShowSlowdownText();
+        UpdateSlowSlots();
+
+    }
+
+    void UpdateSlowSlots()
+    {
+        int actualSlowdownSum = slowAllowed - slowCount;
+        if (actualSlowdownSum == 3)
+        {
+            slowSlot1.color = Colors.completeColor;
+            slowSlot2.color = Colors.completeColor;
+            slowSlot3.color = Colors.completeColor;
+        }
+        else if (actualSlowdownSum == 2)
+        {
+            slowSlot1.color = Colors.completeColor;
+            slowSlot2.color = Colors.completeColor;
+            slowSlot3.color = Colors.failedColor;
+        }
+        else if (actualSlowdownSum == 1)
+        {
+            slowSlot1.color = Colors.completeColor;
+            slowSlot2.color = Colors.failedColor;
+            slowSlot3.color = Colors.failedColor;
+        }
+        else if (actualSlowdownSum == 0)
+        {
+            slowSlot1.color = Colors.failedColor;
+            slowSlot2.color = Colors.failedColor;
+            slowSlot3.color = Colors.failedColor;
+        }
+        else
+        {
+            Debug.LogError("invalid number of slowdowns: " + actualSlowdownSum);
+        }
+    }
+
+    void UpdateInsteadSlots()
+    {
+        int actualInsteadSum = insteadAllowed - insteadCount;
+        if (actualInsteadSum == 3)
+        {
+            insteadSlot1.color = Colors.completeColor;
+            insteadSlot2.color = Colors.completeColor;
+            insteadSlot3.color = Colors.completeColor;
+        }
+        else if (actualInsteadSum == 2)
+        {
+            insteadSlot1.color = Colors.completeColor;
+            insteadSlot2.color = Colors.completeColor;
+            insteadSlot3.color = Colors.failedColor;
+        }
+        else if (actualInsteadSum == 1)
+        {
+            insteadSlot1.color = Colors.completeColor;
+            insteadSlot2.color = Colors.failedColor;
+            insteadSlot3.color = Colors.failedColor;
+        }
+        else if (actualInsteadSum == 0)
+        {
+            insteadSlot1.color = Colors.failedColor;
+            insteadSlot2.color = Colors.failedColor;
+            insteadSlot3.color = Colors.failedColor;
+        }
+        else
+        {
+            Debug.LogError("invalid number of insteads: " + actualInsteadSum);
+        }
+    }
 
     void UpdateCheckSlots()
     {
@@ -170,9 +268,9 @@ public class Level : MonoBehaviour
         pl.SaveKey();
 
         ++checkpointCount;
-        SaveCheckpointCount();
+        SaveSkillsCount();
 
-        ShouldShowCheckpoint();
+        ShouldShowCheckpointText();
         ShouldShowLoadCheckpoint();
         UpdateCheckSlots();
     }
@@ -208,7 +306,7 @@ public class Level : MonoBehaviour
          
     }
 
-    void ShouldShowCheckpoint()
+    void ShouldShowCheckpointText()
     {
         if (IsCheckpointAllowed())
         {
@@ -220,19 +318,57 @@ public class Level : MonoBehaviour
         }
     }
 
+    void ShouldShowSlowdownText()
+    {
+        if (IsSlowAllowed())
+        {
+            slowdownText.color = Colors.completeColor;
+        }
+        else
+        {
+            slowdownText.color = Colors.toggleGrayColor;
+        }
+    }
+
+    void ShouldShowInsteadText()
+    {
+        if (IsInsteadAllowed())
+        {
+            insteadText.color = Colors.completeColor;
+        }
+        else
+        {
+            insteadText.color = Colors.toggleGrayColor;
+        }
+    }
+
     bool IsCheckpointAllowed()
     {
         return checkpointCount < checkpointAllowed;
     }
 
-    void SaveCheckpointCount()
+    bool IsSlowAllowed()
+    {
+        return slowCount < slowAllowed;
+    }
+
+    bool IsInsteadAllowed()
+    {
+        return insteadCount < insteadAllowed;
+    }
+
+    void SaveSkillsCount()
     {
         PlayerPrefs.SetInt("checkpointCount", checkpointCount);
+        PlayerPrefs.SetInt("slowCount", slowCount);
+        PlayerPrefs.SetInt("insteadCount", insteadCount);
     }
 
     void DeletePrefCount()
     {
         PlayerPrefs.DeleteKey("checkpointCount");
+        PlayerPrefs.DeleteKey("slowCount");
+        PlayerPrefs.DeleteKey("insteadCount");
     }
 
     void ShouldShowLoadCheckpoint()
@@ -252,6 +388,14 @@ public class Level : MonoBehaviour
     public void ClickInstead()
     {
         insteadWorks = true;
+        //add stoppage of everything else
+
+        ++insteadCount;
+        SaveSkillsCount();
+
+        ShouldShowInsteadText();
+        UpdateInsteadSlots();
+
     }
 
     void Instead()

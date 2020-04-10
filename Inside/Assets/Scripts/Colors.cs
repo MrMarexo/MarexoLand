@@ -14,5 +14,9 @@ public class Colors
     public static Color32 toggleGrayColor = new Color32(43, 43, 43, 255);
 
     public static Color32 semiTransparentColor = new Color32(0, 0, 0, 90);
+
+    public static Color32 buttonTransparentWhite = new Color32(255, 255, 255, 142);
+    public static Color32 buttonTransparentGrey = new Color32(183, 183, 183, 63);
+
     //public static Color32 shadowColor = new Color32(0, 0, 0, 90);
 }

@@ -3524,6 +3524,9 @@ MonoBehaviour:
   checkpointText: {fileID: 484749499805153397}
   insteadText: {fileID: 236022800581566986}
   slowdownText: {fileID: 7923506681194612547}
+  checkpointButton: {fileID: 5722688158765410247}
+  insteadButton: {fileID: 1107773118521574959}
+  slowdownButton: {fileID: 2449867691559898221}
   checkLoad: {fileID: 911045881}
   checkSlot1: {fileID: 3405877021931340492}
   checkSlot2: {fileID: 3212489686568421808}

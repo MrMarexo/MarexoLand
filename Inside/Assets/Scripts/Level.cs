@@ -18,6 +18,10 @@ public class Level : MonoBehaviour
     [SerializeField] TextMeshProUGUI insteadText;
     [SerializeField] TextMeshProUGUI slowdownText;
 
+    [SerializeField] Image checkpointButton;
+    [SerializeField] Image insteadButton;
+    [SerializeField] Image slowdownButton;
+
     [SerializeField] TextMeshProUGUI checkLoad;
 
     [SerializeField] TextMeshProUGUI checkSlot1;
@@ -68,15 +72,18 @@ public class Level : MonoBehaviour
         insteadAllowed = 3;
         ///////////////////////
         checkpointCount = PlayerPrefs.GetInt("checkpointCount", 0);
+        slowCount = PlayerPrefs.GetInt("slowCount", 0);
+        insteadCount = PlayerPrefs.GetInt("insteadCount", 0);
+
         keyImage.color = Colors.toggleGrayColor;
 
-        ShouldShowInsteadText();
+        ShouldShowInsteadUI();
         UpdateInsteadSlots();
 
-        ShouldShowSlowdownText();
+        ShouldShowSlowdownUI();
         UpdateSlowSlots();
 
-        ShouldShowCheckpointText();
+        ShouldShowCheckpointUI();
         ShouldShowLoadCheckpoint();
         UpdateCheckSlots();
 
@@ -138,9 +145,9 @@ public class Level : MonoBehaviour
         }
 
         ++slowCount;
-        SaveSkillsCount();
+        SaveOtherSkillsCount();
 
-        ShouldShowSlowdownText();
+        ShouldShowSlowdownUI();
         UpdateSlowSlots();
 
     }
@@ -158,19 +165,19 @@ public class Level : MonoBehaviour
         {
             slowSlot1.color = Colors.completeColor;
             slowSlot2.color = Colors.completeColor;
-            slowSlot3.color = Colors.failedColor;
+            slowSlot3.color = Colors.invisibleColor;
         }
         else if (actualSlowdownSum == 1)
         {
             slowSlot1.color = Colors.completeColor;
-            slowSlot2.color = Colors.failedColor;
-            slowSlot3.color = Colors.failedColor;
+            slowSlot2.color = Colors.invisibleColor;
+            slowSlot3.color = Colors.invisibleColor;
         }
         else if (actualSlowdownSum == 0)
         {
-            slowSlot1.color = Colors.failedColor;
-            slowSlot2.color = Colors.failedColor;
-            slowSlot3.color = Colors.failedColor;
+            slowSlot1.color = Colors.invisibleColor;
+            slowSlot2.color = Colors.invisibleColor;
+            slowSlot3.color = Colors.invisibleColor;
         }
         else
         {
@@ -191,19 +198,19 @@ public class Level : MonoBehaviour
         {
             insteadSlot1.color = Colors.completeColor;
             insteadSlot2.color = Colors.completeColor;
-            insteadSlot3.color = Colors.failedColor;
+            insteadSlot3.color = Colors.invisibleColor;
         }
         else if (actualInsteadSum == 1)
         {
             insteadSlot1.color = Colors.completeColor;
-            insteadSlot2.color = Colors.failedColor;
-            insteadSlot3.color = Colors.failedColor;
+            insteadSlot2.color = Colors.invisibleColor;
+            insteadSlot3.color = Colors.invisibleColor;
         }
         else if (actualInsteadSum == 0)
         {
-            insteadSlot1.color = Colors.failedColor;
-            insteadSlot2.color = Colors.failedColor;
-            insteadSlot3.color = Colors.failedColor;
+            insteadSlot1.color = Colors.invisibleColor;
+            insteadSlot2.color = Colors.invisibleColor;
+            insteadSlot3.color = Colors.invisibleColor;
         }
         else
         {
@@ -224,19 +231,19 @@ public class Level : MonoBehaviour
         {
             checkSlot1.color = Colors.completeColor;
             checkSlot2.color = Colors.completeColor;
-            checkSlot3.color = Colors.failedColor;
+            checkSlot3.color = Colors.invisibleColor;
         }
         else if (actualCheckpointSum == 1)
         {
             checkSlot1.color = Colors.completeColor;
-            checkSlot2.color = Colors.failedColor;
-            checkSlot3.color = Colors.failedColor;
+            checkSlot2.color = Colors.invisibleColor;
+            checkSlot3.color = Colors.invisibleColor;
         }
         else if (actualCheckpointSum == 0)
         {
-            checkSlot1.color = Colors.failedColor;
-            checkSlot2.color = Colors.failedColor;
-            checkSlot3.color = Colors.failedColor;
+            checkSlot1.color = Colors.invisibleColor;
+            checkSlot2.color = Colors.invisibleColor;
+            checkSlot3.color = Colors.invisibleColor;
         }
         else
         {
@@ -268,11 +275,21 @@ public class Level : MonoBehaviour
         pl.SaveKey();
 
         ++checkpointCount;
-        SaveSkillsCount();
+        SaveCheckpointCount();
 
-        ShouldShowCheckpointText();
+        ShouldShowCheckpointUI();
         ShouldShowLoadCheckpoint();
         UpdateCheckSlots();
+    }
+
+    void SaveInsteadCount()
+    {
+        PlayerPrefs.SetInt("insteadCount", insteadCount);
+    }
+
+    void SaveSlowCount()
+    {
+        PlayerPrefs.SetInt("slowCount", slowCount);
     }
 
     public void LoadFromCheckpoint()
@@ -301,47 +318,59 @@ public class Level : MonoBehaviour
         }
         else
         {
-            keyImage.color = Colors.toggleGrayColor;
+            keyImage.color = Colors.buttonTransparentGrey;
         }
          
     }
 
-    void ShouldShowCheckpointText()
+    void ShouldShowCheckpointUI()
     {
         if (IsCheckpointAllowed())
         {
             checkpointText.color = Colors.completeColor;
+            checkpointButton.color = Colors.buttonTransparentWhite;
+            checkpointButton.GetComponent<Button>().enabled = true;
         }
         else
         {
-            checkpointText.color = Colors.toggleGrayColor;
+            checkpointText.color = Colors.buttonTransparentGrey;
+            checkpointButton.color = Colors.buttonTransparentGrey;
+            checkpointButton.GetComponent<Button>().enabled = false;
         }
     }
 
-    void ShouldShowSlowdownText()
+    void ShouldShowSlowdownUI()
     {
         if (IsSlowAllowed())
         {
             slowdownText.color = Colors.completeColor;
+            slowdownButton.color = Colors.buttonTransparentWhite;
+            slowdownButton.GetComponent<Button>().enabled = true;
         }
         else
         {
-            slowdownText.color = Colors.toggleGrayColor;
+            slowdownText.color = Colors.buttonTransparentGrey;
+            slowdownButton.color = Colors.buttonTransparentGrey;
+            slowdownButton.GetComponent<Button>().enabled = false;
         }
     }
 
-    void ShouldShowInsteadText()
+    void ShouldShowInsteadUI()
     {
         if (IsInsteadAllowed())
         {
             insteadText.color = Colors.completeColor;
+            insteadButton.color = Colors.buttonTransparentWhite;
+            insteadButton.GetComponent<Button>().enabled = true;
         }
         else
         {
-            insteadText.color = Colors.toggleGrayColor;
+            insteadText.color = Colors.buttonTransparentGrey;
+            insteadButton.color = Colors.buttonTransparentGrey;
+            insteadButton.GetComponent<Button>().enabled = false;
         }
     }
-
+    
     bool IsCheckpointAllowed()
     {
         return checkpointCount < checkpointAllowed;
@@ -357,11 +386,15 @@ public class Level : MonoBehaviour
         return insteadCount < insteadAllowed;
     }
 
-    void SaveSkillsCount()
+    void SaveOtherSkillsCount()
     {
-        PlayerPrefs.SetInt("checkpointCount", checkpointCount);
         PlayerPrefs.SetInt("slowCount", slowCount);
         PlayerPrefs.SetInt("insteadCount", insteadCount);
+    }
+
+    void SaveCheckpointCount()
+    {
+        PlayerPrefs.SetInt("checkpointCount", checkpointCount);
     }
 
     void DeletePrefCount()
@@ -391,10 +424,11 @@ public class Level : MonoBehaviour
         //add stoppage of everything else
 
         ++insteadCount;
-        SaveSkillsCount();
+        SaveOtherSkillsCount();
 
-        ShouldShowInsteadText();
+        ShouldShowInsteadUI();
         UpdateInsteadSlots();
+        
 
     }
 

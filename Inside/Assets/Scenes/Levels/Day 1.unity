@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1185,6 +1185,43 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &808517093 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5709886027155550592, guid: 6792d346e467c164dbdd15bc2246f2e6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1987949783}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &808517094
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808517093}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4265569577502a54395b7260a7e5edfe, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &808517097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808517093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d317e6bcdc16f9b4c812a0f1bd16bd37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &835373646
 GameObject:
   m_ObjectHideFlags: 0
@@ -4541,6 +4578,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Background
+      objectReference: {fileID: 0}
+    - target: {fileID: 5709886027155550593, guid: 6792d346e467c164dbdd15bc2246f2e6,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.4528302
+      objectReference: {fileID: 0}
+    - target: {fileID: 5709886027155550593, guid: 6792d346e467c164dbdd15bc2246f2e6,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.23709506
+      objectReference: {fileID: 0}
+    - target: {fileID: 5709886027155550593, guid: 6792d346e467c164dbdd15bc2246f2e6,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.23709506
+      objectReference: {fileID: 0}
+    - target: {fileID: 5709886027155550593, guid: 6792d346e467c164dbdd15bc2246f2e6,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5709886027155550606, guid: 6792d346e467c164dbdd15bc2246f2e6,
         type: 3}

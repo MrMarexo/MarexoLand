@@ -10,6 +10,8 @@ public class Level : MonoBehaviour
     SceneLoader sL;
     Player pl;
     ValueManagement vM;
+    Background bg;
+
 
     [SerializeField] GameObject winCanvas;
     [SerializeField] GameObject loseCanvas;
@@ -61,12 +63,15 @@ public class Level : MonoBehaviour
         sL = FindObjectOfType<SceneLoader>();
         pl = FindObjectOfType<Player>();
         vM = FindObjectOfType<ValueManagement>();
+        bg = FindObjectOfType<Background>();
 
 
         TurnOffDev();
         ShowUI();
         //for testing
         //checkpointAllowed = vM.GetBoughtCheckpoints();
+        //slowAllowed = vM.GetBoughtSlowdowns();
+        //insteadAllowed = vM.GetBoughtInsteads();
         checkpointAllowed = 3;
         slowAllowed = 3;
         insteadAllowed = 3;
@@ -132,7 +137,7 @@ public class Level : MonoBehaviour
 
     public void SlowDownAbility()
     {
-
+        ShouldShowSlowdownUI();
         var pms = FindObjectsOfType<PlatformMover>();
         foreach (PlatformMover pm in pms)
         {
@@ -143,13 +148,27 @@ public class Level : MonoBehaviour
         {
             death.SlowDown(timeSlowedDown, slowDownRatio);
         }
-
+        StartCoroutine(Slowdown());
         ++slowCount;
         SaveOtherSkillsCount();
 
-        ShouldShowSlowdownUI();
+        
         UpdateSlowSlots();
 
+    }
+
+    IEnumerator Slowdown()
+    {
+        bg.PlayToGrey();
+        SlowButtonsDisabled();
+
+        yield return new WaitForSecondsRealtime(timeSlowedDown);
+
+        bg.PlayGreyToRed();
+        if (IsSlowAllowed())
+        {
+            SlowButtonsEnabled();
+        }
     }
 
     void UpdateSlowSlots()
@@ -344,16 +363,30 @@ public class Level : MonoBehaviour
         if (IsSlowAllowed())
         {
             slowdownText.color = Colors.completeColor;
-            slowdownButton.color = Colors.buttonTransparentWhite;
-            slowdownButton.GetComponent<Button>().enabled = true;
+            SlowButtonsEnabled();
         }
         else
         {
             slowdownText.color = Colors.buttonTransparentGrey;
-            slowdownButton.color = Colors.buttonTransparentGrey;
-            slowdownButton.GetComponent<Button>().enabled = false;
+            SlowButtonsDisabled();
         }
     }
+
+    void SlowButtonsEnabled()
+    {
+        slowdownButton.color = Colors.buttonTransparentWhite;
+        slowdownButton.GetComponent<Button>().enabled = true;
+    }
+
+    void SlowButtonsDisabled()
+    {
+        Debug.Log("disabled");
+        slowdownButton.color = Colors.buttonTransparentGrey;
+        slowdownButton.GetComponent<Button>().enabled = false;
+    }
+
+
+
 
     void ShouldShowInsteadUI()
     {
@@ -421,6 +454,21 @@ public class Level : MonoBehaviour
     public void ClickInstead()
     {
         insteadWorks = true;
+
+        ////////
+        bg.PlayToBrightRed();
+        var death = FindObjectOfType<Death>();
+        if (death)
+        {
+            death.Pause();
+        }
+        var pms = FindObjectsOfType<PlatformMover>();
+        foreach (PlatformMover pm in pms)
+        {
+            pm.Pause();
+        }
+
+
         //add stoppage of everything else
 
         ++insteadCount;
@@ -448,9 +496,19 @@ public class Level : MonoBehaviour
                     var go = hit.transform.gameObject;
                     go.GetComponent<SpriteRenderer>().color = Colors.completeColor;
                     go.layer = wallsLayer;
-                    Debug.Log("name: " + hit.transform.name);
-                    
 
+                    var death = FindObjectOfType<Death>();
+                    if (death)
+                    {
+                        death.BackFromPause();
+                    }
+                    var pms = FindObjectsOfType<PlatformMover>();
+                    foreach (PlatformMover pm in pms)
+                    {
+                        pm.BackFromPause();
+                    }
+
+                    bg.PlayBrightRedToRed();
                     insteadWorks = false;
                 }
             }
@@ -458,6 +516,8 @@ public class Level : MonoBehaviour
         }
 
     }
+
+    
 
 
 

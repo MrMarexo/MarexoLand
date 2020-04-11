@@ -123,6 +123,15 @@ public class PlatformMover : MonoBehaviour
         nextPos = nextPosition;
         waitOngoing = false;
     }
-    
 
+    public void Pause()
+    {
+        moveSpeed = 0f;
+    }
+
+    public void BackFromPause()
+    {
+        moveSpeed = regularMoveSpeed;
+    }
+    
 }

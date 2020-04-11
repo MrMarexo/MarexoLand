@@ -79,4 +79,15 @@ public class Death : MonoBehaviour
         }
     }
 
+    public void Pause()
+    {
+        speed = 0f;
+    }
+
+    public void BackFromPause()
+    {
+        speed = regularSpeed;
+    }
+    
+
 }

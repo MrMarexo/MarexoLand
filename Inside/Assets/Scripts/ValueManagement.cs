@@ -43,7 +43,7 @@ public class ValueManagement : MonoBehaviour
     private void Awake()
     {
         ///////////////////////for testing purposes ---deletes all prefs for all scripts
-        //PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteAll();
         ///////////////////////
 
         DeleteGamePrefs();
@@ -328,6 +328,28 @@ public class ValueManagement : MonoBehaviour
     {
         return PlayerPrefs.GetInt("checkpointsBought");
     }
+
+    public void SaveBoughtInsteadsForLevel(int number)
+    {
+        PlayerPrefs.SetInt("insteadsBought", number);
+    }
+
+    public int GetBoughtInsteads()
+    {
+        return PlayerPrefs.GetInt("insteadsBought");
+    }
+
+    public void SaveBoughtSlowdownsForLevel(int number)
+    {
+        PlayerPrefs.SetInt("slowdownsBought", number);
+    }
+
+    public int GetBoughtSlowdowns()
+    {
+        return PlayerPrefs.GetInt("slowdownsBought");
+    }
+
+
 
 
     //points

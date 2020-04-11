@@ -765,7 +765,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1287184062}
-        m_MethodName: SubtractCheckpoint
+        m_MethodName: SubtractSlowdownd
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2538,7 +2538,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1287184062}
-        m_MethodName: AddCheckpoint
+        m_MethodName: AddSlowdown
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8663,9 +8663,17 @@ MonoBehaviour:
   checkpointNumberDay: {fileID: 235374798}
   plusCheckpointDay: {fileID: 2016581928}
   minusCheckpointDay: {fileID: 3705822}
+  slowdownNumberDay: {fileID: 1043245422}
+  plusSlowdownDay: {fileID: 326034288}
+  minusSlowdownDay: {fileID: 30001784}
+  insteadNumberDay: {fileID: 1220168774}
+  plusInsteadDay: {fileID: 1707240967}
+  minusInsteadDay: {fileID: 1540135331}
   weeklyInWeek: {fileID: 1766441179}
   journalWeekText: {fileID: 190345497}
   checkpointPrice: 5
+  slowdownPrice: 5
+  insteadPrice: 5
 --- !u!4 &1287184063
 Transform:
   m_ObjectHideFlags: 0
@@ -10542,7 +10550,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1287184062}
-        m_MethodName: SubtractCheckpoint
+        m_MethodName: SubtractInstead
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11432,7 +11440,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1287184062}
-        m_MethodName: AddCheckpoint
+        m_MethodName: AddInstead
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -42,9 +42,18 @@ public class CalendarManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI secondText;
 
     [SerializeField] TextMeshProUGUI pointsNumberDay;
+
     [SerializeField] TextMeshProUGUI checkpointNumberDay;
     [SerializeField] TextMeshProUGUI plusCheckpointDay;
     [SerializeField] TextMeshProUGUI minusCheckpointDay;
+
+    [SerializeField] TextMeshProUGUI slowdownNumberDay;
+    [SerializeField] TextMeshProUGUI plusSlowdownDay;
+    [SerializeField] TextMeshProUGUI minusSlowdownDay;
+
+    [SerializeField] TextMeshProUGUI insteadNumberDay;
+    [SerializeField] TextMeshProUGUI plusInsteadDay;
+    [SerializeField] TextMeshProUGUI minusInsteadDay;
 
     //week popup elements
     [SerializeField] TextMeshProUGUI weeklyInWeek;
@@ -61,9 +70,13 @@ public class CalendarManager : MonoBehaviour
     float timeToWait;
 
     int checkpointsBought = 0;
+    int slowdownsBought = 0;
+    int insteadsBought = 0;
 
     //prices
     [SerializeField] int checkpointPrice = 5;
+    [SerializeField] int slowdownPrice = 5;
+    [SerializeField] int insteadPrice = 5;
 
     //will be taken from value management
     int points;
@@ -76,7 +89,7 @@ public class CalendarManager : MonoBehaviour
         dM = FindObjectOfType<DateManagement>();
         vM = FindObjectOfType<ValueManagement>();
 
-        points = 20;
+        points = 40;
         //points = vM.GetPoints();
         FillUpCalendars();
         timeToWait = FindObjectOfType<SceneLoader>().GetTimeToLoad();
@@ -86,7 +99,9 @@ public class CalendarManager : MonoBehaviour
         weekIndex = currentWeekIndex;
         InstantlyCreateCalendar();
 
-        UpdatePointsAndSkills();
+        UpdateCheckpoints();
+        UpdateSlowdowns();
+        UpdateInsteads();
     }
 
     void UpdateWeekNumberText()
@@ -94,7 +109,12 @@ public class CalendarManager : MonoBehaviour
         weekNumberText.text = "Week " + (weekIndex + 1).ToString();
     }
 
-    void UpdatePointsAndSkills()
+    void UpdatePoints()
+    {
+        pointsNumberDay.text = points.ToString();
+    }
+
+    void UpdateCheckpoints()
     {
         if (checkpointsBought == 0)
         {
@@ -118,8 +138,9 @@ public class CalendarManager : MonoBehaviour
             plusCheckpointDay.gameObject.GetComponent<Button>().enabled = true;
         }
         checkpointNumberDay.text = checkpointsBought.ToString();
-        pointsNumberDay.text = points.ToString();
+        UpdatePoints(); 
     }
+    
 
     public void AddCheckpoint()
     {
@@ -127,7 +148,7 @@ public class CalendarManager : MonoBehaviour
         {
             ++checkpointsBought;
             points -= checkpointPrice;
-            UpdatePointsAndSkills();
+            UpdateCheckpoints();
         }
         
     }
@@ -138,10 +159,113 @@ public class CalendarManager : MonoBehaviour
         {
             --checkpointsBought;
             points += checkpointPrice;
-            UpdatePointsAndSkills();
+            UpdateCheckpoints();
         }
         
     }
+
+
+    void UpdateInsteads()
+    {
+        if (insteadsBought == 0)
+        {
+            minusInsteadDay.color = Colors.incompleteColor;
+            minusInsteadDay.gameObject.GetComponent<Button>().enabled = false;
+        }
+        else
+        {
+            minusInsteadDay.color = Colors.completeColor;
+            minusInsteadDay.gameObject.GetComponent<Button>().enabled = true;
+        }
+
+        if (insteadsBought == 3 || points - insteadPrice < 0)
+        {
+            plusInsteadDay.color = Colors.incompleteColor;
+            plusInsteadDay.gameObject.GetComponent<Button>().enabled = false;
+        }
+        else
+        {
+            plusInsteadDay.color = Colors.completeColor;
+            plusInsteadDay.gameObject.GetComponent<Button>().enabled = true;
+        }
+        insteadNumberDay.text = insteadsBought.ToString();
+        UpdatePoints();
+    }
+
+
+    public void AddInstead()
+    {
+        if (points - insteadPrice >= 0 && insteadsBought < 3)
+        {
+            ++insteadsBought;
+            points -= insteadPrice;
+            UpdateInsteads();
+        }
+
+    }
+
+    public void SubtractInstead()
+    {
+        if (insteadsBought > 0)
+        {
+            --insteadsBought;
+            points += insteadPrice;
+            UpdateInsteads();
+        }
+
+    }
+
+
+    void UpdateSlowdowns()
+    {
+        if (slowdownsBought == 0)
+        {
+            minusSlowdownDay.color = Colors.incompleteColor;
+            minusSlowdownDay.gameObject.GetComponent<Button>().enabled = false;
+        }
+        else
+        {
+            minusSlowdownDay.color = Colors.completeColor;
+            minusSlowdownDay.gameObject.GetComponent<Button>().enabled = true;
+        }
+
+        if (slowdownsBought == 3 || points - slowdownPrice < 0)
+        {
+            plusSlowdownDay.color = Colors.incompleteColor;
+            plusSlowdownDay.gameObject.GetComponent<Button>().enabled = false;
+        }
+        else
+        {
+            plusSlowdownDay.color = Colors.completeColor;
+            plusSlowdownDay.gameObject.GetComponent<Button>().enabled = true;
+        }
+        slowdownNumberDay.text = slowdownsBought.ToString();
+        UpdatePoints();
+    }
+
+
+    public void AddSlowdown()
+    {
+        if (points - slowdownPrice >= 0 && slowdownsBought < 3)
+        {
+            ++slowdownsBought;
+            points -= slowdownPrice;
+            UpdateSlowdowns();
+        }
+
+    }
+
+    public void SubtractSlowdownd()
+    {
+        if (slowdownsBought > 0)
+        {
+            --slowdownsBought;
+            points += slowdownPrice;
+            UpdateSlowdowns();
+        }
+
+    }
+
 
     //enables and disables the browse calendar buttons
     void ButtonsEnableDisable()
@@ -294,6 +418,8 @@ public class CalendarManager : MonoBehaviour
     public void StartLevel()
     {
         vM.SaveBoughtCheckpointsForLevel(checkpointsBought);
+        vM.SaveBoughtInsteadsForLevel(insteadsBought);
+        vM.SaveBoughtSlowdownsForLevel(slowdownsBought);
         vM.SavePoints(points);
         FindObjectOfType<SceneLoader>().LoadSceneByName("Day " + playLevelNumber.ToString());
     }

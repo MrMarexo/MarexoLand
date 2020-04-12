@@ -22,6 +22,8 @@ public class PlatformMover : MonoBehaviour
     bool timerOn = false;
     float timeSlowedDown;
 
+    bool posSavedFromCheckpoint = false;
+
     List<Rigidbody2D> rbs = new List<Rigidbody2D>();
 
     bool waitOngoing;
@@ -30,8 +32,11 @@ public class PlatformMover : MonoBehaviour
     {
         regularMoveSpeed = moveSpeed;
         regularPauseTime = pauseTime;
-        pos1P = pos1.position;
-        pos2P = pos2.position;
+        if (!posSavedFromCheckpoint)
+        {
+            pos1P = pos1.position;
+            pos2P = pos2.position;
+        }
         nextPos = pos2P;
     }
 
@@ -132,6 +137,19 @@ public class PlatformMover : MonoBehaviour
     public void BackFromPause()
     {
         moveSpeed = regularMoveSpeed;
+    }
+
+    public Vector3 GetPlatformPosition()
+    {
+        return transform.position;
+    }
+
+    public void LoadWithPos(Vector3 pos)
+    {
+        posSavedFromCheckpoint = true;
+        pos1P = pos1.position;
+        pos2P = pos2.position;
+        transform.position = pos;
     }
     
 }

@@ -33,6 +33,12 @@ public class Background : MonoBehaviour
         GetComponent<Animator>().Play("BrightRedToRed");
     }
 
+    public void PlayFlash()
+    {
+        GetComponent<Animator>().Play("Flash");
+        
+    }
+
 
     public void ChangeToGrey()
     {
@@ -47,5 +53,10 @@ public class Background : MonoBehaviour
     public void ChangeToBrightRed()
     {
         GetComponent<SpriteRenderer>().color = Colors.bkgBrightRed;
+    }
+
+    public void PlayDefault()
+    {
+        GetComponent<Animator>().Play("Red");
     }
 }

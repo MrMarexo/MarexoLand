@@ -61,15 +61,19 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             string name = PlayerPrefs.GetString("mpName");
+            Vector3[] platformsPos = PlayerPrefsX.GetVector3Array("platformsPosArray");
             GameObject correctPM = null;
             var pms = FindObjectsOfType<PlatformMover>();
-            foreach (PlatformMover pm in pms)
+            for (int i = 0; i < pms.Length; i++)
             {
+                var pm = pms[i];
+                pm.LoadWithPos(platformsPos[i]);
                 if (pm.name == name)
                 {
                     correctPM = pm.gameObject;
                 }
             }
+            
             //gameObject.transform.SetParent(correctPM.transform);
             var pos = new Vector2(correctPM.transform.position.x, correctPM.transform.position.y + placementOffset);
             transform.position = pos;
@@ -113,10 +117,23 @@ public class PlayerMovement : MonoBehaviour
         {
             string name = transform.parent.name;
             PlayerPrefs.SetString("mpName", name);
+            //var platformPos = transform.parent.gameObject.GetComponent<PlatformMover>().GetPlatformPosition();
+            //PlayerPrefsX.SetVector3("mpPosition", platformPos);
+            var platformsArray = Resources.FindObjectsOfTypeAll<PlatformMover>();
+            var platformsPosArray = new Vector3[platformsArray.Length];
+            for (int i = 0; i < platformsArray.Length; i++)
+            {
+                var pm = platformsArray[i];
+                var pos = pm.GetPlatformPosition();
+                platformsPosArray[i] = pos;
+            }
+            PlayerPrefsX.SetVector3Array("platformsPosArray", platformsPosArray);
+
         }
         else
         {
             PlayerPrefs.DeleteKey("mpName");
+            PlayerPrefs.DeleteKey("platformsPosArray");
             SavePositionToPrefs();
         }
     } 
@@ -126,7 +143,6 @@ public class PlayerMovement : MonoBehaviour
         PlayerPrefs.SetFloat("checkpointPosX", transform.position.x);
         PlayerPrefs.SetFloat("checkpointPosY", transform.position.y);
         PlayerPrefs.SetFloat("checkpointPosZ", transform.position.z);
-        Debug.Log(PlayerPrefs.GetFloat("checkpointPosX") + "" + PlayerPrefs.GetFloat("checkpointPosX"));
     }
 
     Vector3 LoadPositionFromPrefs()
@@ -141,6 +157,7 @@ public class PlayerMovement : MonoBehaviour
     public void ResetPrefs()
     {
         PlayerPrefs.DeleteKey("mpName");
+        PlayerPrefs.DeleteKey("platformsPosArray");
 
         PlayerPrefs.DeleteKey("checkpointPosX");
         PlayerPrefs.DeleteKey("checkpointPosY");
@@ -301,6 +318,16 @@ public class PlayerMovement : MonoBehaviour
         canJump = true;
         canRun = true;
         rb.gravityScale = regularGravity;
+    }
+
+    public void PauseAnim()
+    {
+        anim.speed = 0f;
+    }
+
+    public void UnpauseAnim()
+    {
+        anim.speed = 1f;
     }
 
 

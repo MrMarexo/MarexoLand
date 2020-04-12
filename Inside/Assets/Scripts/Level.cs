@@ -24,6 +24,16 @@ public class Level : MonoBehaviour
     [SerializeField] Image insteadButton;
     [SerializeField] Image slowdownButton;
 
+    [SerializeField] TextMeshProUGUI cancelInsteadButton;
+
+    [SerializeField] Image leftButton;
+    [SerializeField] Image rightButton;
+    [SerializeField] Image jumpButton;
+
+    [SerializeField] Image fakeLeftButton;
+    [SerializeField] Image fakeRightButton;
+    [SerializeField] Image fakeJumpButton;
+
     [SerializeField] TextMeshProUGUI checkLoad;
 
     [SerializeField] TextMeshProUGUI checkSlot1;
@@ -67,6 +77,11 @@ public class Level : MonoBehaviour
 
 
         TurnOffDev();
+        fakeLeftButton.gameObject.SetActive(false);
+        fakeRightButton.gameObject.SetActive(false);
+        fakeJumpButton.gameObject.SetActive(false);
+        cancelInsteadButton.gameObject.SetActive(false);
+
         ShowUI();
         //for testing
         //checkpointAllowed = vM.GetBoughtCheckpoints();
@@ -154,21 +169,20 @@ public class Level : MonoBehaviour
 
         
         UpdateSlowSlots();
+        
+
 
     }
 
     IEnumerator Slowdown()
     {
         bg.PlayToGrey();
-        SlowButtonsDisabled();
+        SkillsDisabled();
 
         yield return new WaitForSecondsRealtime(timeSlowedDown);
 
         bg.PlayGreyToRed();
-        if (IsSlowAllowed())
-        {
-            SlowButtonsEnabled();
-        }
+        SkillsEnabled();
     }
 
     void UpdateSlowSlots()
@@ -293,6 +307,8 @@ public class Level : MonoBehaviour
         mov.SaveCheckpointLocation();
         pl.SaveKey();
 
+        bg.PlayFlash();
+
         ++checkpointCount;
         SaveCheckpointCount();
 
@@ -347,15 +363,25 @@ public class Level : MonoBehaviour
         if (IsCheckpointAllowed())
         {
             checkpointText.color = Colors.completeColor;
-            checkpointButton.color = Colors.buttonTransparentWhite;
-            checkpointButton.GetComponent<Button>().enabled = true;
+            CheckpointButtonsEnabled();
         }
         else
         {
             checkpointText.color = Colors.buttonTransparentGrey;
-            checkpointButton.color = Colors.buttonTransparentGrey;
-            checkpointButton.GetComponent<Button>().enabled = false;
+            CheckpointButtonsDisabled();
         }
+    }
+
+    void CheckpointButtonsEnabled()
+    {
+        checkpointButton.color = Colors.buttonTransparentWhite;
+        checkpointButton.GetComponent<Button>().enabled = true;
+    }
+
+    void CheckpointButtonsDisabled()
+    {
+        checkpointButton.color = Colors.buttonTransparentGrey;
+        checkpointButton.GetComponent<Button>().enabled = false;
     }
 
     void ShouldShowSlowdownUI()
@@ -380,12 +406,11 @@ public class Level : MonoBehaviour
 
     void SlowButtonsDisabled()
     {
-        Debug.Log("disabled");
         slowdownButton.color = Colors.buttonTransparentGrey;
         slowdownButton.GetComponent<Button>().enabled = false;
     }
 
-
+    
 
 
     void ShouldShowInsteadUI()
@@ -393,17 +418,74 @@ public class Level : MonoBehaviour
         if (IsInsteadAllowed())
         {
             insteadText.color = Colors.completeColor;
-            insteadButton.color = Colors.buttonTransparentWhite;
-            insteadButton.GetComponent<Button>().enabled = true;
+            InsteadButtonsEnabled();
         }
         else
         {
             insteadText.color = Colors.buttonTransparentGrey;
-            insteadButton.color = Colors.buttonTransparentGrey;
-            insteadButton.GetComponent<Button>().enabled = false;
+            InsteadButtonsDisabled();
         }
     }
-    
+
+    void InsteadButtonsEnabled()
+    {
+        insteadButton.color = Colors.buttonTransparentWhite;
+        insteadButton.GetComponent<Button>().enabled = true;
+    }
+
+    void InsteadButtonsDisabled()
+    {
+        insteadButton.color = Colors.buttonTransparentGrey;
+        insteadButton.GetComponent<Button>().enabled = false;
+    }
+
+    void SkillsEnabled()
+    {
+        if (IsInsteadAllowed())
+        {
+            InsteadButtonsEnabled();
+        }
+        if (IsCheckpointAllowed())
+        {
+            CheckpointButtonsEnabled();
+        }
+        if (IsSlowAllowed())
+        {
+            SlowButtonsEnabled();
+        }
+    }
+
+    void SkillsDisabled()
+    {
+        InsteadButtonsDisabled();
+        SlowButtonsDisabled();
+        CheckpointButtonsDisabled();
+    }
+
+    void MovementButtonsEnabled()
+    {
+        leftButton.gameObject.SetActive(true);
+        fakeLeftButton.gameObject.SetActive(false);
+
+        rightButton.gameObject.SetActive(true);
+        fakeRightButton.gameObject.SetActive(false);
+
+        jumpButton.gameObject.SetActive(true);
+        fakeJumpButton.gameObject.SetActive(false);
+    }
+
+    void MovementButtonsDisabled()
+    {
+        fakeLeftButton.gameObject.SetActive(true);
+        leftButton.gameObject.SetActive(false);
+
+        fakeRightButton.gameObject.SetActive(true);
+        rightButton.gameObject.SetActive(false);
+
+        fakeJumpButton.gameObject.SetActive(true);
+        jumpButton.gameObject.SetActive(false);
+    }
+
     bool IsCheckpointAllowed()
     {
         return checkpointCount < checkpointAllowed;
@@ -467,14 +549,19 @@ public class Level : MonoBehaviour
         {
             pm.Pause();
         }
+        ++insteadCount;
+        ShouldShowInsteadUI();
+        SkillsDisabled();
+        MovementButtonsDisabled();
+        cancelInsteadButton.gameObject.SetActive(true);
 
-
+        mov.PauseAnim();
         //add stoppage of everything else
 
-        ++insteadCount;
+        
         SaveOtherSkillsCount();
 
-        ShouldShowInsteadUI();
+        
         UpdateInsteadSlots();
         
 
@@ -497,24 +584,40 @@ public class Level : MonoBehaviour
                     go.GetComponent<SpriteRenderer>().color = Colors.completeColor;
                     go.layer = wallsLayer;
 
-                    var death = FindObjectOfType<Death>();
-                    if (death)
-                    {
-                        death.BackFromPause();
-                    }
-                    var pms = FindObjectsOfType<PlatformMover>();
-                    foreach (PlatformMover pm in pms)
-                    {
-                        pm.BackFromPause();
-                    }
-
-                    bg.PlayBrightRedToRed();
-                    insteadWorks = false;
+                    BackFromInstead();
+                    
                 }
             }
             
         }
 
+    }
+
+    void BackFromInstead()
+    {
+        var death = FindObjectOfType<Death>();
+        if (death)
+        {
+            death.BackFromPause();
+        }
+        var pms = FindObjectsOfType<PlatformMover>();
+        foreach (PlatformMover pm in pms)
+        {
+            pm.BackFromPause();
+        }
+
+        bg.PlayBrightRedToRed();
+        MovementButtonsEnabled();
+        SkillsEnabled();
+        cancelInsteadButton.gameObject.SetActive(false);
+        insteadWorks = false;
+
+        mov.UnpauseAnim();
+    }
+
+    public void CancelInstead()
+    {
+        BackFromInstead();
     }
 
     

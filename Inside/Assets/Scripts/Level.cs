@@ -153,6 +153,7 @@ public class Level : MonoBehaviour
     public void SlowDownAbility()
     {
         ShouldShowSlowdownUI();
+        StartCoroutine(Slowdown());
         var pms = FindObjectsOfType<PlatformMover>();
         foreach (PlatformMover pm in pms)
         {
@@ -163,7 +164,7 @@ public class Level : MonoBehaviour
         {
             death.SlowDown(timeSlowedDown, slowDownRatio);
         }
-        StartCoroutine(Slowdown());
+        
         ++slowCount;
         SaveOtherSkillsCount();
 

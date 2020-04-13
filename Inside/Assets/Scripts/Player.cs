@@ -5,10 +5,6 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     
-
-    [SerializeField] GameObject key;
-
-
     PlayerMovement mov;
     Level lvl;
 
@@ -20,7 +16,7 @@ public class Player : MonoBehaviour
         gotKey = PlayerPrefsX.GetBool("gotKeyCheckpoint", false);
         if (gotKey)
         {
-            key.SetActive(false);
+            GameObject.FindGameObjectWithTag("Key").SetActive(false);
         }
         FindObjectOfType<Level>().UpdateKeyImage(gotKey);
         mov = GetComponent<PlayerMovement>();

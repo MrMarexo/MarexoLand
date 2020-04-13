@@ -3770,7 +3770,7 @@ MonoBehaviour:
   dayNumber: {fileID: 6590697671015932505}
   keyImage: {fileID: 831585949920582521}
   timeSlowedDown: 4
-  slowDownRatio: 3
+  slowDownRatio: 5
 --- !u!1 &5129974335664567101
 GameObject:
   m_ObjectHideFlags: 0

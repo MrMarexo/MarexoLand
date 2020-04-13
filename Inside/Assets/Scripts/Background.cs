@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Background : MonoBehaviour
 {
+    Level lvl;
 
-
-    // Start is called before the first frame update
     void Start()
     {
         //GetComponent<SpriteRenderer>().color = Colors.bkgRed;
-        
+        lvl = FindObjectOfType<Level>();
+
     }
 
     public void PlayToGrey()
@@ -39,7 +39,7 @@ public class Background : MonoBehaviour
         
     }
 
-
+    //animation events
     public void ChangeToGrey()
     {
         GetComponent<SpriteRenderer>().color = Colors.bkgGrey;
@@ -59,4 +59,15 @@ public class Background : MonoBehaviour
     {
         GetComponent<Animator>().Play("Red");
     }
+
+    public void InitiateSlowdown()
+    {
+        StartCoroutine(lvl.Slowdown());
+    }
+
+    public void AfterSlowdown()
+    {
+        lvl.SkillsEnabled();
+    }
+    //////////////////////////////////////////
 }

@@ -7,9 +7,6 @@ public class Death : MonoBehaviour
     [SerializeField] float speed = 0.5f;
 
     float regularSpeed;
-    float slowDownTimer = 0f;
-    bool timerOn = false;
-    float timeSlowedDown;
 
     Vector3 startingPos;
 
@@ -26,7 +23,6 @@ public class Death : MonoBehaviour
 
     void Update()
     {
-        Timer();
         transform.Translate(Vector3.up * Time.deltaTime * speed);
     }
 
@@ -53,30 +49,14 @@ public class Death : MonoBehaviour
         PlayerPrefs.DeleteKey("deathPosZ");
     }
 
-    public void SlowDown(float time, float ratio)
+    public void SlowDown(float ratio)
     {
-        slowDownTimer = 0f;
-        timeSlowedDown = time;
         speed = speed / ratio;
-        timerOn = true;
     }
 
-    void SlowUp()
+    public void SlowUp()
     {
         speed = regularSpeed;
-        timerOn = false;
-    }
-
-    void Timer()
-    {
-        if (timerOn)
-        {
-            slowDownTimer += Time.deltaTime;
-            if (slowDownTimer >= timeSlowedDown)
-            {
-                SlowUp();
-            }
-        }
     }
 
     public void Pause()

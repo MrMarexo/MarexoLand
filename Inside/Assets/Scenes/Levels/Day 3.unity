@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -476,7 +476,7 @@ GameObject:
   - component: {fileID: 38062159}
   - component: {fileID: 38062158}
   m_Layer: 8
-  m_Name: Trap (1)
+  m_Name: Trap (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -713,7 +713,7 @@ GameObject:
   - component: {fileID: 83440272}
   - component: {fileID: 83440271}
   m_Layer: 8
-  m_Name: Trap (1)
+  m_Name: Trap (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -821,7 +821,7 @@ GameObject:
   - component: {fileID: 107268188}
   - component: {fileID: 107268187}
   m_Layer: 8
-  m_Name: Trap (1)
+  m_Name: Trap (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2215,7 +2215,7 @@ GameObject:
   - component: {fileID: 592309601}
   - component: {fileID: 592309600}
   m_Layer: 8
-  m_Name: Trap (1)
+  m_Name: Trap (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3359,7 +3359,7 @@ GameObject:
   - component: {fileID: 816674806}
   - component: {fileID: 816674805}
   m_Layer: 8
-  m_Name: Trap (1)
+  m_Name: Trap (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4887,7 +4887,7 @@ GameObject:
   - component: {fileID: 1126971997}
   - component: {fileID: 1126971996}
   m_Layer: 8
-  m_Name: Trap (1)
+  m_Name: Trap (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7214,7 +7214,7 @@ GameObject:
   - component: {fileID: 1661550620}
   - component: {fileID: 1661550619}
   m_Layer: 8
-  m_Name: Trap (1)
+  m_Name: Trap (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

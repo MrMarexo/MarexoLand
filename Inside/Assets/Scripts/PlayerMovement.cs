@@ -49,6 +49,9 @@ public class PlayerMovement : MonoBehaviour
     {
         startingPos = GameObject.FindGameObjectWithTag("StartingPos").transform.position;
         StartFromCheckpoint();
+        ////////
+        //ResetPrefs();
+        /////////
 
     }
 

@@ -12,6 +12,8 @@ public class Level : MonoBehaviour
     ValueManagement vM;
     Background bg;
 
+    LayerMask enemyLayer;
+    LayerMask wallsLayer;
 
     [SerializeField] GameObject winCanvas;
     [SerializeField] GameObject loseCanvas;
@@ -55,6 +57,8 @@ public class Level : MonoBehaviour
     [SerializeField] float timeSlowedDown = 3f;
     [SerializeField] float slowDownRatio = 2.5f;
 
+    List<string> insteadNames = new List<string>();
+
     int checkpointAllowed = 0;
     int checkpointCount = 0;
 
@@ -66,6 +70,45 @@ public class Level : MonoBehaviour
 
     bool insteadWorks = false;
 
+    private void Awake()
+    {
+        enemyLayer = LayerMask.NameToLayer("Enemy");
+        wallsLayer = LayerMask.NameToLayer("Walls");
+        LoadChangedPlatforms();
+    }
+
+    void LoadChangedPlatforms()
+    {
+        var names = PlayerPrefsX.GetStringArray("insteadNamesArray");
+        if (names.Length == 0)
+        {
+            return;
+        }
+        else
+        {
+            var sprites = FindObjectsOfType<SpriteRenderer>();
+            var enemies = new List<GameObject>();
+            foreach (SpriteRenderer sprite in sprites)
+            {
+                if (sprite.gameObject.layer == enemyLayer)
+                {
+                    enemies.Add(sprite.gameObject);
+                }
+            }
+            foreach(GameObject enemy in enemies)
+            {
+                foreach (string name in names)
+                {
+                    if (enemy.name == name)
+                    {
+                        enemy.GetComponent<SpriteRenderer>().color = Colors.completeColor;
+                        enemy.layer = wallsLayer;
+                    }
+                }
+            }
+        }
+
+    }
 
     private void Start()
     {
@@ -96,14 +139,14 @@ public class Level : MonoBehaviour
         insteadCount = PlayerPrefs.GetInt("insteadCount", 0);
 
         keyImage.color = Colors.toggleGrayColor;
-
-        ShouldShowInsteadUI();
+        SkillsEnabled();
+        ShouldShowInsteadText();
         UpdateInsteadSlots();
 
-        ShouldShowSlowdownUI();
+        ShouldShowSlowdownText();
         UpdateSlowSlots();
 
-        ShouldShowCheckpointUI();
+        ShouldShowCheckpointUIAndText();
         ShouldShowLoadCheckpoint();
         UpdateCheckSlots();
 
@@ -150,40 +193,46 @@ public class Level : MonoBehaviour
         
     }
 
+    //called by a button
     public void SlowDownAbility()
     {
-        ShouldShowSlowdownUI();
-        StartCoroutine(Slowdown());
+        bg.PlayToGrey();
+        ++slowCount;
+        ShouldShowSlowdownText();
+        SaveOtherSkillsCount();
+        UpdateSlowSlots();
+    }
+
+    //called in animation
+    public IEnumerator Slowdown()
+    {
+        //the actual slowdown of stuff
         var pms = FindObjectsOfType<PlatformMover>();
         foreach (PlatformMover pm in pms)
         {
-            pm.SlowDown(timeSlowedDown, slowDownRatio);
+            pm.SlowDown(slowDownRatio);
         }
         var death = FindObjectOfType<Death>();
         if (death)
         {
-            death.SlowDown(timeSlowedDown, slowDownRatio);
+            death.SlowDown(slowDownRatio);
         }
-        
-        ++slowCount;
-        SaveOtherSkillsCount();
-
-        
-        UpdateSlowSlots();
-        
-
-
-    }
-
-    IEnumerator Slowdown()
-    {
-        bg.PlayToGrey();
+        ///////////////////////
         SkillsDisabled();
 
         yield return new WaitForSecondsRealtime(timeSlowedDown);
 
+        foreach (PlatformMover pm in pms)
+        {
+            pm.SlowUp();
+        }
+        if (death)
+        {
+            death.SlowUp();
+        }
+
         bg.PlayGreyToRed();
-        SkillsEnabled();
+        
     }
 
     void UpdateSlowSlots()
@@ -294,12 +343,13 @@ public class Level : MonoBehaviour
         }
         mov.ResetPrefs();
         pl.DeleteKey();
-        DeletePrefCount();
+        DeletePrefs();
         sL.ReloadCurrentScene();
     }
 
     public void SaveCheckpoint()
     {
+        bg.PlayFlash();
         var death = FindObjectOfType<Death>();
         if (death)
         {
@@ -307,15 +357,24 @@ public class Level : MonoBehaviour
         }
         mov.SaveCheckpointLocation();
         pl.SaveKey();
-
-        bg.PlayFlash();
-
+        SaveInsteadIDs();
         ++checkpointCount;
         SaveCheckpointCount();
-
-        ShouldShowCheckpointUI();
+        ShouldShowCheckpointUIAndText();
         ShouldShowLoadCheckpoint();
         UpdateCheckSlots();
+    }
+
+    void SaveInsteadIDs()
+    {
+        var prevNamesArray = PlayerPrefsX.GetStringArray("insteadNamesArray");
+        insteadNames.AddRange(prevNamesArray);
+        var insteadNamesArray = new string[insteadNames.Count];
+        for (int i = 0; i < insteadNamesArray.Length; i++)
+        {
+            insteadNamesArray[i] = insteadNames[i];
+        }
+        PlayerPrefsX.SetStringArray("insteadNamesArray", insteadNamesArray);
     }
 
     void SaveInsteadCount()
@@ -342,7 +401,7 @@ public class Level : MonoBehaviour
         }
         mov.ResetPrefs();
         pl.DeleteKey();
-        DeletePrefCount();
+        DeletePrefs();
         sL.LoadSceneByName("Calendar");
     }
 
@@ -359,7 +418,7 @@ public class Level : MonoBehaviour
          
     }
 
-    void ShouldShowCheckpointUI()
+    void ShouldShowCheckpointUIAndText()
     {
         if (IsCheckpointAllowed())
         {
@@ -385,19 +444,32 @@ public class Level : MonoBehaviour
         checkpointButton.GetComponent<Button>().enabled = false;
     }
 
-    void ShouldShowSlowdownUI()
+    //void ShouldShowSlowdownUI()
+    //{
+    //    if (IsSlowAllowed())
+    //    {
+    //        slowdownText.color = Colors.completeColor;
+    //        SlowButtonsEnabled();
+    //    }
+    //    else
+    //    {
+    //        slowdownText.color = Colors.buttonTransparentGrey;
+    //        SlowButtonsDisabled();
+    //    }
+    //}
+
+    void ShouldShowSlowdownText()
     {
         if (IsSlowAllowed())
         {
             slowdownText.color = Colors.completeColor;
-            SlowButtonsEnabled();
         }
         else
         {
             slowdownText.color = Colors.buttonTransparentGrey;
-            SlowButtonsDisabled();
         }
     }
+
 
     void SlowButtonsEnabled()
     {
@@ -414,17 +486,15 @@ public class Level : MonoBehaviour
     
 
 
-    void ShouldShowInsteadUI()
+    void ShouldShowInsteadText()
     {
         if (IsInsteadAllowed())
         {
             insteadText.color = Colors.completeColor;
-            InsteadButtonsEnabled();
         }
         else
         {
             insteadText.color = Colors.buttonTransparentGrey;
-            InsteadButtonsDisabled();
         }
     }
 
@@ -440,7 +510,7 @@ public class Level : MonoBehaviour
         insteadButton.GetComponent<Button>().enabled = false;
     }
 
-    void SkillsEnabled()
+    public void SkillsEnabled()
     {
         if (IsInsteadAllowed())
         {
@@ -513,11 +583,12 @@ public class Level : MonoBehaviour
         PlayerPrefs.SetInt("checkpointCount", checkpointCount);
     }
 
-    void DeletePrefCount()
+    void DeletePrefs()
     {
         PlayerPrefs.DeleteKey("checkpointCount");
         PlayerPrefs.DeleteKey("slowCount");
         PlayerPrefs.DeleteKey("insteadCount");
+        PlayerPrefs.DeleteKey("insteadNamesArray");
     }
 
     void ShouldShowLoadCheckpoint()
@@ -536,10 +607,11 @@ public class Level : MonoBehaviour
 
     public void ClickInstead()
     {
-        insteadWorks = true;
-
-        ////////
         bg.PlayToBrightRed();
+        mov.PauseAnim();
+        insteadWorks = true;
+        ++insteadCount;
+        SaveOtherSkillsCount();
         var death = FindObjectOfType<Death>();
         if (death)
         {
@@ -550,22 +622,12 @@ public class Level : MonoBehaviour
         {
             pm.Pause();
         }
-        ++insteadCount;
-        ShouldShowInsteadUI();
+
+        ShouldShowInsteadText();
         SkillsDisabled();
         MovementButtonsDisabled();
         cancelInsteadButton.gameObject.SetActive(true);
-
-        mov.PauseAnim();
-        //add stoppage of everything else
-
-        
-        SaveOtherSkillsCount();
-
-        
         UpdateInsteadSlots();
-        
-
     }
 
     void Instead()
@@ -574,8 +636,6 @@ public class Level : MonoBehaviour
         {
             Touch touch = Input.GetTouch(0);
             Vector2 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
-            LayerMask enemyLayer = LayerMask.NameToLayer("Enemy");
-            LayerMask wallsLayer = LayerMask.NameToLayer("Walls");
             RaycastHit2D hit = Physics2D.Raycast(touchPos, -Vector2.zero);
             if (hit)
             {
@@ -584,7 +644,8 @@ public class Level : MonoBehaviour
                     var go = hit.transform.gameObject;
                     go.GetComponent<SpriteRenderer>().color = Colors.completeColor;
                     go.layer = wallsLayer;
-
+                    var name = go.name;
+                    insteadNames.Add(name);
                     BackFromInstead();
                     
                 }

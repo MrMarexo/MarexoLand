@@ -302,6 +302,11 @@ public class ValueManagement : MonoBehaviour
         return weekLength;
     }
 
+    public int GetCurrentRunIndex()
+    {
+        return curRunIndex;
+    }
+
     //for game 
     void DeleteGamePrefs() 
     {

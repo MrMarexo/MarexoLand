@@ -197,7 +197,11 @@ public class BeforeCheckManager : MonoBehaviour
             {
                 scenetoLoad = sceneNames[4];
             }
-            
+            else
+            {
+                scenetoLoad = sceneNames[0];
+            }
+
             if (currentDayIndex > 1)
             {
                 string[] beforeValues = vM.GetValuesOfIndex(currentDayIndex - 2); //0 is first, 1 is second, 2 is habit

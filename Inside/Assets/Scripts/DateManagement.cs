@@ -5,6 +5,9 @@ using System;
 
 public class DateManagement : MonoBehaviour
 {
+    SceneLoader sL;
+    ValueManagement vM;
+
     //current date
     DateTime curDate;
 
@@ -16,12 +19,45 @@ public class DateManagement : MonoBehaviour
 
     //how many days from launch date, launch date being 0 ---zero based
     int curDateIndex;
-    
+
     //index of the current week, can change to browse the calendar
     int currentWeekIndex;
 
     int curRunIndex = 0;
 
+    float timeElapsed = 0;
+
+    private void Start()
+    {
+        sL = GetComponent<SceneLoader>();
+        vM = GetComponent<ValueManagement>();
+    }
+
+    private void Update()
+    {
+        Timer();
+    }
+
+    void Timer()
+    {
+        timeElapsed += Time.deltaTime;
+        if (Convert.ToInt32(timeElapsed) == 30f)
+        {
+            UpdateCurDay();
+        }
+    }
+
+    void UpdateCurDay()
+    {
+        int curI = sL.GetCurrentSceneIndex();
+        string curN = sL.GetCurrentSceneName();
+        if (curN == "Calendar" || curN == "Menu")
+        {
+            Debug.Log("curDay updated");
+            LoadDateOrSetDate(vM.GetCurrentRunIndex());
+            timeElapsed = 0;
+        }
+    }
 
     //used to define the launch date and current date and save/get from PlayerPrefs
     public void LoadDateOrSetDate(int index)

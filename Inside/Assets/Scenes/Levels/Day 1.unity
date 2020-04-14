@@ -314,6 +314,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1326724355631260180, guid: 166e6de2a219fa046b00b704c1a3ee38,
+        type: 3}
+      propertyPath: willpower
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4242754128498715346, guid: 166e6de2a219fa046b00b704c1a3ee38,
         type: 3}
       propertyPath: m_Name
@@ -1515,6 +1520,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DevLight
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809458525278413160, guid: a547eb6a5e2b2a24fbb62428ab34ac90,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7809458525278413162, guid: a547eb6a5e2b2a24fbb62428ab34ac90,
         type: 3}
@@ -2866,20 +2876,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1588076994606023970, guid: 865648b83d4b3174eb86280bc44da440,
-        type: 3}
-      propertyPath: winCanvas
-      value: 
+    - target: {fileID: 1541816054, guid: 865648b83d4b3174eb86280bc44da440, type: 3}
+      propertyPath: m_FalloffIntensity
+      value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 1588076994606023970, guid: 865648b83d4b3174eb86280bc44da440,
-        type: 3}
-      propertyPath: loseCanvas
-      value: 
-      objectReference: {fileID: 5101541923701042905}
-    - target: {fileID: 1588076994606023970, guid: 865648b83d4b3174eb86280bc44da440,
-        type: 3}
-      propertyPath: key
-      value: 
+    - target: {fileID: 1541816054, guid: 865648b83d4b3174eb86280bc44da440, type: 3}
+      propertyPath: m_Intensity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2074743560, guid: 865648b83d4b3174eb86280bc44da440, type: 3}
+      propertyPath: outerRadius
+      value: 3.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 2074743560, guid: 865648b83d4b3174eb86280bc44da440, type: 3}
+      propertyPath: flickerOn
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2074743560, guid: 865648b83d4b3174eb86280bc44da440, type: 3}
+      propertyPath: radius
+      value: 3.76
       objectReference: {fileID: 0}
     - target: {fileID: 1588076994606023992, guid: 865648b83d4b3174eb86280bc44da440,
         type: 3}
@@ -5202,12 +5217,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0dcdd7e70ae783346bcd368ed6042eca, type: 3}
---- !u!1 &5101541923701042905 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7776409901084728565, guid: 0dcdd7e70ae783346bcd368ed6042eca,
-    type: 3}
-  m_PrefabInstance: {fileID: 5101541923701042904}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6637036612637748576
 PrefabInstance:
   m_ObjectHideFlags: 0

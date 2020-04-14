@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4242754128498715374}
   - component: {fileID: 4242754128498715375}
   - component: {fileID: 8522827884644537804}
+  - component: {fileID: 1326724355631260180}
   m_Layer: 0
   m_Name: Management
   m_TagString: Untagged
@@ -83,3 +84,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToLoadScene: 0.1
+--- !u!114 &1326724355631260180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4242754128498715346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08587c883be41044ea1c268e10f6cabd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

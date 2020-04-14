@@ -11,6 +11,7 @@ public class SceneLoader : MonoBehaviour
     int pastSceneId = 0;
     int savedSceneID;
 
+    
     IEnumerator LoadScene(int index)
     {
         pastSceneId = SceneManager.GetActiveScene().buildIndex;

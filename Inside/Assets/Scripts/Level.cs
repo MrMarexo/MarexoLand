@@ -11,6 +11,8 @@ public class Level : MonoBehaviour
     Player pl;
     ValueManagement vM;
     Background bg;
+    PlayerLight pLight;
+    
 
     LayerMask enemyLayer;
     LayerMask wallsLayer;
@@ -117,6 +119,7 @@ public class Level : MonoBehaviour
         pl = FindObjectOfType<Player>();
         vM = FindObjectOfType<ValueManagement>();
         bg = FindObjectOfType<Background>();
+        pLight = FindObjectOfType<PlayerLight>();
 
 
         TurnOffDev();
@@ -609,6 +612,7 @@ public class Level : MonoBehaviour
     {
         bg.PlayToBrightRed();
         mov.PauseAnim();
+        pLight.PauseFlicker();
         insteadWorks = true;
         ++insteadCount;
         SaveOtherSkillsCount();
@@ -675,6 +679,7 @@ public class Level : MonoBehaviour
         insteadWorks = false;
 
         mov.UnpauseAnim();
+        pLight.ChooseLightMode();
     }
 
     public void CancelInstead()

@@ -11,6 +11,9 @@ public class PlayerLight : MonoBehaviour
     float regOuterRadius;
     float regInnerRadius;
     float regLightIntensity;
+    float unchangedOuterRadius;
+    float unchangedInnerRadius;
+    float unchangedIntensity;
 
     [SerializeField] float radius = 3.76f;
 
@@ -34,7 +37,10 @@ public class PlayerLight : MonoBehaviour
         regOuterRadius = plLight.pointLightOuterRadius;
         regInnerRadius = plLight.pointLightInnerRadius;
         regLightIntensity = plLight.intensity;
-        ChooseLightType();
+        unchangedOuterRadius = regOuterRadius;
+        unchangedInnerRadius = regInnerRadius;
+        unchangedIntensity = regLightIntensity;
+        ChooseLightMode();
     }
 
     void Update()
@@ -60,8 +66,12 @@ public class PlayerLight : MonoBehaviour
         }
     }
 
-    void ChooseLightType()
+    public void ChooseLightMode()
     {
+        regOuterRadius = unchangedOuterRadius;
+        regInnerRadius = unchangedInnerRadius;
+        regLightIntensity = unchangedIntensity;
+
         int willState = will.GetWillpowerState();
         Debug.Log(willState);
         regOuterRadius -= willState * 0.5f;
@@ -75,6 +85,14 @@ public class PlayerLight : MonoBehaviour
         plLight.pointLightOuterRadius = regOuterRadius;
         plLight.pointLightInnerRadius = regOuterRadius / innerOuterOffset;
         plLight.intensity = regLightIntensity;
+    }
+
+    public void PauseFlicker()
+    {
+        if (flickerOn)
+        {
+            flickerOn = false;
+        }
     }
 
 

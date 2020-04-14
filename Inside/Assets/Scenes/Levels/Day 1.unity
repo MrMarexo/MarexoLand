@@ -317,7 +317,7 @@ PrefabInstance:
     - target: {fileID: 1326724355631260180, guid: 166e6de2a219fa046b00b704c1a3ee38,
         type: 3}
       propertyPath: willpower
-      value: 100
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4242754128498715346, guid: 166e6de2a219fa046b00b704c1a3ee38,
         type: 3}

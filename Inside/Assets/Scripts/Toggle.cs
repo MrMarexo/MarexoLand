@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Toggle : MonoBehaviour
 {
@@ -10,8 +11,10 @@ public class Toggle : MonoBehaviour
     void ToggleTwo(int activeIndex, GameObject parentButton)
     {
         int inactiveIndex = Mathf.Abs(activeIndex - 1);
-        parentButton.GetComponentsInChildren<TextMeshProUGUI>()[inactiveIndex].color = Colors.toggleGrayColor;
-        parentButton.GetComponentsInChildren<TextMeshProUGUI>()[activeIndex].color = Colors.completeColor;
+        parentButton.GetComponentsInChildren<Image>()[inactiveIndex].color = Colors.toggleGrayColor;
+        parentButton.GetComponentsInChildren<Image>()[inactiveIndex].transform.localScale = new Vector3(0.8f, 0.8f, 1f);
+        parentButton.GetComponentsInChildren<Image>()[activeIndex].color = Colors.completeColor;
+        parentButton.GetComponentsInChildren<Image>()[activeIndex].transform.localScale = new Vector3(1.2f, 1.2f, 1f);
     }
 
     public void FirstButton()

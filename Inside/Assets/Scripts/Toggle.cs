@@ -11,10 +11,24 @@ public class Toggle : MonoBehaviour
     void ToggleTwo(int activeIndex, GameObject parentButton)
     {
         int inactiveIndex = Mathf.Abs(activeIndex - 1);
-        parentButton.GetComponentsInChildren<Image>()[inactiveIndex].color = Colors.toggleGrayColor;
-        parentButton.GetComponentsInChildren<Image>()[inactiveIndex].transform.localScale = new Vector3(0.8f, 0.8f, 1f);
-        parentButton.GetComponentsInChildren<Image>()[activeIndex].color = Colors.completeColor;
-        parentButton.GetComponentsInChildren<Image>()[activeIndex].transform.localScale = new Vector3(1.2f, 1.2f, 1f);
+        var image = parentButton.GetComponentInChildren<Image>();
+        var images = parentButton.GetComponentsInChildren<Image>();
+        var texts = parentButton.GetComponentsInChildren<TextMeshProUGUI>();
+        if (image)
+        {
+            images[inactiveIndex].color = Colors.toggleGrayColor;
+            images[inactiveIndex].transform.localScale = new Vector3(0.8f, 0.8f, 1f);
+            images[activeIndex].color = Colors.completeColor;
+            images[activeIndex].transform.localScale = new Vector3(1.2f, 1.2f, 1f);
+        }
+        else
+        {
+            texts[inactiveIndex].color = Colors.toggleGrayColor;
+            texts[inactiveIndex].transform.localScale = new Vector3(0.8f, 0.8f, 1f);
+            texts[activeIndex].color = Colors.completeColor;
+            texts[activeIndex].transform.localScale = new Vector3(1.2f, 1.2f, 1f);
+        }
+        
     }
 
     public void FirstButton()

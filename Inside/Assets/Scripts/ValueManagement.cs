@@ -136,17 +136,21 @@ public class ValueManagement : MonoBehaviour
     {
         firstDailyCheck[index] = firstResult;
         habitDailyCheck[index] = habitResult;
-
+        
         PlayerPrefsX.SetStringArray("firstDailyCheck" + curRunIndex.ToString(), firstDailyCheck);
         PlayerPrefsX.SetStringArray("habitDailyCheck" + curRunIndex.ToString(), habitDailyCheck);
+    }
 
+    public void SaveDailyNamesForTomorrow(int todayIndex)
+    {
         //saving the names as well
-        habitDailyName[index] = badHabitName;
-        firstDailyName[index] = firstCheckName;
+        habitDailyName[todayIndex + 1] = badHabitName;
+        firstDailyName[todayIndex + 1] = firstCheckName;
+        secondDailyName[todayIndex + 1] = secondCheckName;
 
         PlayerPrefsX.SetStringArray("habitDailyName" + curRunIndex.ToString(), habitDailyName);
         PlayerPrefsX.SetStringArray("firstDailyName" + curRunIndex.ToString(), firstDailyName);
-
+        PlayerPrefsX.SetStringArray("secondDailyName" + curRunIndex.ToString(), secondDailyName);
     }
 
     //called by the checkup scene script to set the chosen values to prefs
@@ -163,11 +167,6 @@ public class ValueManagement : MonoBehaviour
         secondDailyCheck[index] = result;
 
         PlayerPrefsX.SetStringArray("secondDailyCheck" + curRunIndex.ToString(), secondDailyCheck);
-
-        //saving the name of the check as well
-        secondDailyName[index] = secondCheckName;
-
-        PlayerPrefsX.SetStringArray("secondDailyName" + curRunIndex.ToString(), secondDailyName);
     }
 
     public void SaveDayJournal(string result, int dayIndex)
@@ -231,6 +230,16 @@ public class ValueManagement : MonoBehaviour
         PlayerPrefs.SetString("playerName", playerName);
         PlayerPrefs.SetString("gender", gender);
         PlayerPrefs.SetString("firstCheckName" + curRunIndex.ToString(), firstCheckName);
+
+        //save names into name arrays - 0 index
+        habitDailyName[0] = badHabitName;
+        firstDailyName[0] = firstCheckName;
+        secondDailyName[0] = secondCheckName;
+
+        PlayerPrefsX.SetStringArray("habitDailyName" + curRunIndex.ToString(), habitDailyName);
+        PlayerPrefsX.SetStringArray("firstDailyName" + curRunIndex.ToString(), firstDailyName);
+        PlayerPrefsX.SetStringArray("secondDailyName" + curRunIndex.ToString(), secondDailyName);
+
     }
 
     //by dM to save the date at the end of Intro scenes

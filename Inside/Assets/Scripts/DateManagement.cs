@@ -68,7 +68,7 @@ public class DateManagement : MonoBehaviour
 
         // try to get the launch date saved as a string:
         savedLaunchDateString = PlayerPrefs.GetString("savedLaunchDate" + curRunIndex.ToString(), "");
-        if (savedLaunchDateString == "")
+        if (string.IsNullOrEmpty(savedLaunchDateString))
         { // if not saved yet...
           // convert current date to string...
             savedLaunchDateString = curDate.ToString();

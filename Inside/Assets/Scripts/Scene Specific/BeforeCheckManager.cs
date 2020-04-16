@@ -144,7 +144,7 @@ public class BeforeCheckManager : MonoBehaviour
     //chooses the scene to load
     void LoadTheCorrectScene()
     {
-        string[] sceneNames = { "Calendar", "Today Check", "Yesterday Check", "Second Check Yesterday", "Second Check Today", "Second Task Manager", "New Week Name" };
+        string[] sceneNames = { "Calendar", "Check", "Yesterday Check", "Second Check Yesterday", "Second Check Today", "Second Task Manager", "New Week Name" };
         string scenetoLoad = sceneNames[0]; //calendar is default
         string[] todayValues = vM.GetValuesOfIndex(currentDayIndex); //0 is first, 1 is second, 2 is habit
 

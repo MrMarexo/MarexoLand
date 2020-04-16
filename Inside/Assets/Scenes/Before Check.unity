@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -320,6 +320,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Check Popup
+      objectReference: {fileID: 0}
+    - target: {fileID: 3497171492611033305, guid: d1fc0be4b1c22f246b8e38b227cc4313,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3497171492866632833, guid: d1fc0be4b1c22f246b8e38b227cc4313,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 9.5998535
       objectReference: {fileID: 0}
     - target: {fileID: 3497171493136561972, guid: d1fc0be4b1c22f246b8e38b227cc4313,
         type: 3}
@@ -741,7 +751,7 @@ PrefabInstance:
     - target: {fileID: 3324603728410036589, guid: 89ba80d3f9d722c43a13d3ebb1cb4a2e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -15.399994
+      value: -15.399963
       objectReference: {fileID: 0}
     - target: {fileID: 3324603728410036589, guid: 89ba80d3f9d722c43a13d3ebb1cb4a2e,
         type: 3}
@@ -1543,7 +1553,7 @@ PrefabInstance:
     - target: {fileID: 3324603728410036589, guid: 89ba80d3f9d722c43a13d3ebb1cb4a2e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -15.399994
+      value: -15.399963
       objectReference: {fileID: 0}
     - target: {fileID: 3324603728410036589, guid: 89ba80d3f9d722c43a13d3ebb1cb4a2e,
         type: 3}

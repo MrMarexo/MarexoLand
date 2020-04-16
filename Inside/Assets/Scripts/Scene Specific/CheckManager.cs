@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class CheckManager : MonoBehaviour
 {
+
     ValueManagement vM;
     PopupManagement pM;
     SceneLoader sL;
@@ -32,6 +33,7 @@ public class CheckManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI yesterdayFirstValueText;
     [SerializeField] TextMeshProUGUI yesterdaySecondValueText;
 
+    string[] arrayOfChanged = new string[6];
 
     int todayIndex;
     int yesterdayIndex = -1;
@@ -52,7 +54,7 @@ public class CheckManager : MonoBehaviour
 
     private void Start()
     {
-        
+
         vM = FindObjectOfType<ValueManagement>();
         pM = FindObjectOfType<PopupManagement>();
         todayIndex = FindObjectOfType<DateManagement>().GetCurrentDayIndex();
@@ -94,20 +96,23 @@ public class CheckManager : MonoBehaviour
     void ShouldShowBlocksForYesterday()
     {
         var values = vM.GetValuesOfIndex(yesterdayIndex);
-        
+
         if (!string.IsNullOrEmpty(values[0]))
         {
-            DiscolorBlock(yesterdayFirstBlock);
+            DiscolorBlock(yesterdayFirstBlock, values[0]);
+            firstDailyCheckYesterday = values[0];
         }
-        
+
         if (!string.IsNullOrEmpty(values[1]))
         {
-            DiscolorBlock(yesterdaySecondBlock);
+            DiscolorBlock(yesterdaySecondBlock, values[1]);
+            secondDailyCheckYesterday = values[1];
         }
-        
+
         if (!string.IsNullOrEmpty(values[2]))
         {
-            DiscolorBlock(yesterdayHabitBlock);
+            DiscolorBlock(yesterdayHabitBlock, values[2]);
+            habitDailyCheckYesterday = values[20];
         }
 
         if (!string.IsNullOrEmpty(values[0]) && !string.IsNullOrEmpty(values[1]) && !string.IsNullOrEmpty(values[2]))
@@ -141,26 +146,30 @@ public class CheckManager : MonoBehaviour
         var values = vM.GetValuesOfIndex(todayIndex);
         if (!string.IsNullOrEmpty(values[0]))
         {
-            DiscolorBlock(todayFirstBlock);
+            DiscolorBlock(todayFirstBlock, values[0]);
+            firstDailyCheckToday = values[0];
         }
 
         if (!string.IsNullOrEmpty(values[1]))
         {
-            DiscolorBlock(todaySecondBlock);
+            DiscolorBlock(todaySecondBlock, values[1]);
+            secondDailyCheckToday = values[1];
         }
-        
+
         if (!string.IsNullOrEmpty(values[2]))
         {
-            DiscolorBlock(todayHabitBlock);
+            DiscolorBlock(todayHabitBlock, values[2]);
+            habitDailyCheckToday = values[2];
         }
 
         if (!string.IsNullOrEmpty(values[0]) && !string.IsNullOrEmpty(values[1]) && !string.IsNullOrEmpty(values[2]))
         {
             todayTitle.color = Colors.disabledRedText;
         }
+
     }
 
-    void DiscolorBlock(GameObject[] block)
+    void DiscolorBlock(GameObject[] block, string result)
     {
         foreach (GameObject go in block)
         {
@@ -172,10 +181,29 @@ public class CheckManager : MonoBehaviour
             else
             {
                 var images = go.GetComponentsInChildren<Image>();
+                var chosenName = "";
+                if (result == OptionCodes.options[0])
+                {
+                    chosenName = "Yes";
+                }
+                else
+                {
+                    chosenName = "No";
+                }
                 foreach (Image image in images)
                 {
-                    image.color = Colors.disabledRedText;
                     image.gameObject.GetComponent<Button>().enabled = false;
+                    if (image.gameObject.name == chosenName)
+                    {
+                        image.color = Colors.completeColor;
+                        image.transform.localScale = new Vector3(0.8f, 0.8f, 1f);
+                    }
+                    else
+                    {
+                        image.color = Colors.disabledRedText;
+                        image.transform.localScale = new Vector3(0.8f, 0.8f, 1f);
+                    }
+
                 }
             }
         }
@@ -206,35 +234,42 @@ public class CheckManager : MonoBehaviour
 
     }
 
+
     //TODAY methods on buttons to set a check reply to vMs arrays
     public void TodayFirstCheckYes()
     {
         firstDailyCheckToday = OptionCodes.options[0];
+        arrayOfChanged[0] = firstDailyCheckToday;
     }
 
     public void TodayFirstCheckMaybe()
     {
         firstDailyCheckToday = OptionCodes.options[2];
+        arrayOfChanged[0] = firstDailyCheckToday;
     }
 
     public void TodaySecondCheckYes()
     {
         secondDailyCheckToday = OptionCodes.options[0];
+        arrayOfChanged[1] = secondDailyCheckToday;
     }
 
     public void TodaySecondCheckMaybe()
     {
         secondDailyCheckToday = OptionCodes.options[2];
+        arrayOfChanged[1] = secondDailyCheckToday;
     }
 
     public void TodayHabitCheckNo()
     {
         habitDailyCheckToday = OptionCodes.options[1];
+        arrayOfChanged[2] = habitDailyCheckToday;
     }
 
     public void TodayHabitCheckMaybe()
     {
         habitDailyCheckToday = OptionCodes.options[2];
+        arrayOfChanged[2] = habitDailyCheckToday;
     }
 
 
@@ -242,31 +277,37 @@ public class CheckManager : MonoBehaviour
     public void YesterdayFirstCheckYes()
     {
         firstDailyCheckYesterday = OptionCodes.options[0];
+        arrayOfChanged[4] = firstDailyCheckYesterday;
     }
 
     public void YesterdayFirstCheckNo()
     {
         firstDailyCheckYesterday = OptionCodes.options[1];
+        arrayOfChanged[4] = firstDailyCheckYesterday;
     }
 
     public void YesterdaySecondCheckYes()
     {
         secondDailyCheckYesterday = OptionCodes.options[0];
+        arrayOfChanged[5] = secondDailyCheckYesterday;
     }
 
     public void YesterdaySecondCheckNo()
     {
         secondDailyCheckYesterday = OptionCodes.options[1];
+        arrayOfChanged[5] = secondDailyCheckYesterday;
     }
 
     public void YesterdayHabitCheckNo()
     {
         habitDailyCheckYesterday = OptionCodes.options[1];
+        arrayOfChanged[6] = habitDailyCheckYesterday;
     }
 
     public void YesterdayHabitCheckYes()
     {
         habitDailyCheckYesterday = OptionCodes.options[0];
+        arrayOfChanged[6] = habitDailyCheckYesterday;
     }
 
     //if the answer is no on habit, opens the popup the first time to check if the answer was correctly input, then loads the next scene
@@ -274,13 +315,15 @@ public class CheckManager : MonoBehaviour
     {
         if (counter == 0)
         {
-            if (habitDailyCheckToday == OptionCodes.options[1] || habitDailyCheckYesterday == OptionCodes.options[1] || 
-                secondDailyCheckYesterday == OptionCodes.options[1] || firstDailyCheckYesterday == OptionCodes.options[1])
+            foreach (string el in arrayOfChanged)
             {
-                pM.EnablePopup(popupCheck);
-                counter++;
-                return;
-            }  
+                if (el == OptionCodes.options[1])
+                {
+                    pM.EnablePopup(popupCheck);
+                    counter++;
+                    return;
+                }
+            }
         }
         //saves values and loads the next scene
         SaveValuesAndLoad();
@@ -314,13 +357,15 @@ public class CheckManager : MonoBehaviour
         }
 
         //sets the results to playerprefs
-        vM.SaveHabitAndFirstCheck(habitDailyCheckToday, firstDailyCheckToday, todayIndex);
+        vM.SaveHabitCheck(habitDailyCheckToday, todayIndex);
+        vM.SaveFirstCheck(firstDailyCheckToday, todayIndex);
         vM.SaveSecondCheck(secondDailyCheckToday, todayIndex);
         vM.SaveDailyNamesForTomorrow(todayIndex);
 
         if (yesterdayIndex >= 0)
         {
-            vM.SaveHabitAndFirstCheck(habitDailyCheckYesterday, firstDailyCheckYesterday, yesterdayIndex);
+            vM.SaveHabitCheck(habitDailyCheckYesterday, yesterdayIndex);
+            vM.SaveFirstCheck(firstDailyCheckYesterday, yesterdayIndex);
             vM.SaveSecondCheck(secondDailyCheckYesterday, yesterdayIndex);
         }
 

@@ -692,7 +692,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 569937111}
+      - m_Target: {fileID: 0}
         m_MethodName: FirstCheckYes
         m_Mode: 1
         m_Arguments:
@@ -822,50 +822,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534208855}
   m_CullTransparentMesh: 0
---- !u!1 &569937110
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 569937112}
-  - component: {fileID: 569937111}
-  m_Layer: 0
-  m_Name: Yesterday Check Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &569937111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 569937110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06beb7b977e314849b5498f2e95b90ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  popupCheck: {fileID: 1108399980}
---- !u!4 &569937112
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 569937110}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &618932582
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1027,7 +983,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 569937111}
+      - m_Target: {fileID: 0}
         m_MethodName: HabitCheckYes
         m_Mode: 1
         m_Arguments:
@@ -1498,6 +1454,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1940993150}
     m_Modifications:
+    - target: {fileID: 1388181170, guid: 54526cc91e8cd9b4ba73aa6211ac6f59, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -118.70001
+      objectReference: {fileID: 0}
     - target: {fileID: 1447504542, guid: 54526cc91e8cd9b4ba73aa6211ac6f59, type: 3}
       propertyPath: m_textInfo.characterCount
       value: 0
@@ -1686,7 +1646,7 @@ PrefabInstance:
     - target: {fileID: 7088083812556798804, guid: 54526cc91e8cd9b4ba73aa6211ac6f59,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7088083812556798804, guid: 54526cc91e8cd9b4ba73aa6211ac6f59,
         type: 3}
@@ -1780,7 +1740,7 @@ PrefabInstance:
     - target: {fileID: 381114507, guid: d1fc0be4b1c22f246b8e38b227cc4313, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 569937111}
+      objectReference: {fileID: 0}
     - target: {fileID: 381114508, guid: d1fc0be4b1c22f246b8e38b227cc4313, type: 3}
       propertyPath: m_havePropertiesChanged
       value: 1
@@ -1986,7 +1946,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 569937111}
+      objectReference: {fileID: 0}
     - target: {fileID: 3497171493136561973, guid: d1fc0be4b1c22f246b8e38b227cc4313,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1999,12 +1959,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1fc0be4b1c22f246b8e38b227cc4313, type: 3}
---- !u!1 &1108399980 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3497171492611033305, guid: d1fc0be4b1c22f246b8e38b227cc4313,
-    type: 3}
-  m_PrefabInstance: {fileID: 1108399979}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1519628075
 GameObject:
   m_ObjectHideFlags: 0
@@ -2290,7 +2244,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 569937111}
+      - m_Target: {fileID: 0}
         m_MethodName: HabitCheckNo
         m_Mode: 1
         m_Arguments:
@@ -2456,8 +2410,8 @@ RectTransform:
   - {fileID: 1794294300}
   - {fileID: 1519628076}
   - {fileID: 932571387}
-  - {fileID: 997713387}
   - {fileID: 1072676536}
+  - {fileID: 997713387}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2618,7 +2572,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 569937111}
+      - m_Target: {fileID: 0}
         m_MethodName: FirstCheckNo
         m_Mode: 1
         m_Arguments:

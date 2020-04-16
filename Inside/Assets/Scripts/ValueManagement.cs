@@ -132,13 +132,22 @@ public class ValueManagement : MonoBehaviour
     }
 
     //called by the checkup scene script to set the chosen values to prefs
-    public void SaveHabitAndFirstCheck(string habitResult, string firstResult, int index)
+    public void SaveHabitCheck(string habitResult, int index)
+    {
+        habitDailyCheck[index] = habitResult;
+        PlayerPrefsX.SetStringArray("habitDailyCheck" + curRunIndex.ToString(), habitDailyCheck);
+    }
+
+    public void SaveFirstCheck(string firstResult, int index)
     {
         firstDailyCheck[index] = firstResult;
-        habitDailyCheck[index] = habitResult;
-        
         PlayerPrefsX.SetStringArray("firstDailyCheck" + curRunIndex.ToString(), firstDailyCheck);
-        PlayerPrefsX.SetStringArray("habitDailyCheck" + curRunIndex.ToString(), habitDailyCheck);
+    }
+
+    public void SaveSecondCheck(string result, int index)
+    {
+        secondDailyCheck[index] = result;
+        PlayerPrefsX.SetStringArray("secondDailyCheck" + curRunIndex.ToString(), secondDailyCheck);
     }
 
     public void SaveDailyNamesForTomorrow(int todayIndex)
@@ -160,14 +169,7 @@ public class ValueManagement : MonoBehaviour
 
         PlayerPrefsX.SetStringArray("weeklyCheck" + curRunIndex.ToString(), weeklyCheck);
     }
-
-    //called by secondcheckmanager to save the check results
-    public void SaveSecondCheck(string result, int index)
-    {
-        secondDailyCheck[index] = result;
-
-        PlayerPrefsX.SetStringArray("secondDailyCheck" + curRunIndex.ToString(), secondDailyCheck);
-    }
+    
 
     public void SaveDayJournal(string result, int dayIndex)
     {

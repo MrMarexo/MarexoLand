@@ -22,7 +22,7 @@ public class Colors : MonoBehaviour
     [SerializeField] public static Color32 bkgGrey = new Color32(154, 154, 154, 255);
     [SerializeField] public static Color32 bkgBrightRed = new Color32(115, 60, 60, 255);
 
-    [SerializeField] public static Color32 disabledRedText = new Color32(70, 54, 54, 60);
+    [SerializeField] public static Color32 disabledRedText = new Color32(55, 54, 54, 255);
 
     //public static Color32 shadowColor = new Color32(0, 0, 0, 90);
 }

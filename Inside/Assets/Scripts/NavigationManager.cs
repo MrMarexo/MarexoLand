@@ -35,15 +35,6 @@ public class NavigationManager : MonoBehaviour
         sL.LoadSceneByName("Journal");
     }
 
-    public void GoToCalendar()
-    {
-        if (sL.GetCurrentSceneIndex() < 4)
-        {
-            return;
-        }
-        sL.LoadSceneByName("Calendar");
-    }
-
     public void GoToMenu()
     {
         sL.LoadSceneByName("Menu");

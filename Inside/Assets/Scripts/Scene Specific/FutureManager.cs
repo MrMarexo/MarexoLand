@@ -3,12 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class BadHabitManager : MonoBehaviour
+public class FutureManager : MonoBehaviour
 {
     [SerializeField] TMP_InputField inputField;
 
     [SerializeField] GameObject writePopup;
 
+    DateManagement dM;
+    ValueManagement vM;
+    SceneLoader sL;
+
+    int curWeekIndex;
+
+    private void Start()
+    {
+        dM = FindObjectOfType<DateManagement>();
+        vM = FindObjectOfType<ValueManagement>();
+        sL = FindObjectOfType<SceneLoader>();
+
+        curWeekIndex = dM.GetCurrentWeek();
+    }
 
     public void SaveAndLoadNextIf()
     {
@@ -22,8 +36,16 @@ public class BadHabitManager : MonoBehaviour
         }
         else
         {
-            FindObjectOfType<ValueManagement>().SaveBadHabit(input);
-            FindObjectOfType<SceneLoader>().LoadNextScene();
+            if (sL.GetCurrentSceneName() == "Good Future")
+            {
+                vM.SaveGoodFuture(input);
+                sL.LoadNextScene();
+            }
+            else
+            {
+                vM.SaveBadFuture(input);
+                sL.LoadSceneByName("Check");
+            }
         }
     }
 
@@ -31,4 +53,5 @@ public class BadHabitManager : MonoBehaviour
     {
         FindObjectOfType<PopupManagement>().DisablePopup();
     }
+    
 }

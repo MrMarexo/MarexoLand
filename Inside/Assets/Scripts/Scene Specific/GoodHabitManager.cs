@@ -14,7 +14,7 @@ public class GoodHabitManager : MonoBehaviour
     {
         string input = inputField.text;
         //check if text is not ""
-        if (input == "")
+        if (string.IsNullOrEmpty(input))
         {
             //enable a pop-up canvas that prompts the user to input sth and return
             FindObjectOfType<PopupManagement>().EnablePopup(writePopup);

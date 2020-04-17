@@ -30,7 +30,7 @@ public class IntroManager : MonoBehaviour
     {
         playerName = nameInput.text;
         //check if text is not ""
-        if (playerName == "" && counter == 0)
+        if (string.IsNullOrEmpty(playerName) && counter == 0)
         {
             //enable a pop-up canvas that prompts the user to input sth and return
             FindObjectOfType<PopupManagement>().EnablePopup(namePopup);

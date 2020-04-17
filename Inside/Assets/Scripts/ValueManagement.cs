@@ -27,7 +27,7 @@ public class ValueManagement : MonoBehaviour
 
     string[] dayJournal = new string[30];
     string[] weekJournal = new string[5];
-
+    
     //in case you'll wanna change the name of the task later --not configured yet
     string[] firstDailyName = new string[30];
     string[] secondDailyName = new string[30];
@@ -39,6 +39,9 @@ public class ValueManagement : MonoBehaviour
     string firstCheckName;
     string secondCheckName;
     string weeklyCheckName;
+
+    string goodFuture;
+    string badFuture;
 
     private void Awake()
     {
@@ -81,6 +84,8 @@ public class ValueManagement : MonoBehaviour
         //getting all the prefs at the berginning of the game
         playerName = PlayerPrefs.GetString("playerName", "");
         gender = PlayerPrefs.GetString("gender", "");
+        goodFuture = PlayerPrefs.GetString("goodFuture", "");
+        badFuture = PlayerPrefs.GetString("badFuture", "");
 
         badHabitName = PlayerPrefs.GetString("badHabitName" + curRunIndex.ToString(), "");
         firstCheckName = PlayerPrefs.GetString("firstCheckName" + curRunIndex.ToString(), "");
@@ -259,6 +264,18 @@ public class ValueManagement : MonoBehaviour
 
         weeklyName[weekIndex] = weeklyCheckName;
         PlayerPrefsX.SetStringArray("weeklyName" + curRunIndex.ToString(), weeklyName);
+    }
+
+    public void SaveGoodFuture(string input)
+    {
+        goodFuture = input;
+        PlayerPrefs.SetString("goodFuture", goodFuture);
+    }
+
+    public void SaveBadFuture(string input)
+    {
+        badFuture = input;
+        PlayerPrefs.SetString("badFuture", badFuture);
     }
 
     public string[] GetValuesOfIndex(int index)

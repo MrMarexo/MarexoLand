@@ -211,7 +211,16 @@ public class ValueManagement : MonoBehaviour
         firstCheckName = input;
     }
 
-    
+    public void SaveGoodFuture(string input)
+    {
+        goodFuture = input;
+    }
+
+    public void SaveBadFuture(string input)
+    {
+        badFuture = input;
+    }
+
 
     //triggered in the last Intro scene to set up the normal game process
     public void SaveIntroValues()
@@ -220,6 +229,8 @@ public class ValueManagement : MonoBehaviour
         string badHabitCache = badHabitName;
         string playerNameCache = playerName;
         string firstCheckCache = firstCheckName;
+        string goodFutureCache = goodFuture;
+        string badFutureCache = badFuture;
 
         //introduce and fill up all the arrays and other variables with empty values
         LoadCurrentValuesFromPrefs(curRunIndex);
@@ -228,12 +239,18 @@ public class ValueManagement : MonoBehaviour
         badHabitName = badHabitCache;
         playerName = playerNameCache;
         firstCheckName = firstCheckCache;
+        goodFuture = goodFutureCache;
+        badFuture = badFutureCache;
 
         //save intro values to playerprefs
+
         PlayerPrefs.SetString("badHabitName" + curRunIndex.ToString(), badHabitName);
         PlayerPrefs.SetString("playerName", playerName);
         PlayerPrefs.SetString("gender", gender);
         PlayerPrefs.SetString("firstCheckName" + curRunIndex.ToString(), firstCheckName);
+        PlayerPrefs.SetString("goodFuture", goodFuture);
+        PlayerPrefs.SetString("badFuture", badFuture);
+    
 
         //save names into name arrays - 0 index
         habitDailyName[0] = badHabitName;
@@ -263,22 +280,16 @@ public class ValueManagement : MonoBehaviour
         PlayerPrefsX.SetStringArray("weeklyName" + curRunIndex.ToString(), weeklyName);
     }
 
-    public void SaveGoodFuture(string input)
-    {
-        goodFuture = input;
-        PlayerPrefs.SetString("goodFuture", goodFuture);
-    }
-
-    public void SaveBadFuture(string input)
-    {
-        badFuture = input;
-        PlayerPrefs.SetString("badFuture", badFuture);
-    }
+    
 
     public void SaveSecondName(string input)
     {
         secondCheckName = input;
         PlayerPrefs.SetString("secondCheckName" + curRunIndex.ToString(), secondCheckName);
+
+        secondDailyName[14] = secondCheckName;
+        PlayerPrefsX.GetStringArray("secondDailyName" + curRunIndex.ToString(), "", 30);
+
     }
 
     public string[] GetValuesOfIndex(int index)

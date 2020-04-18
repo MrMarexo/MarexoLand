@@ -370,7 +370,15 @@ public class CheckManager : MonoBehaviour
         }
 
         //loads the next scene
-        FindObjectOfType<SceneLoader>().LoadSceneByName("Calendar");
+        if (todayIndex == 13)
+        {
+            FindObjectOfType<SceneLoader>().LoadSceneByName("Second Task");
+        }
+        else
+        {
+            FindObjectOfType<SceneLoader>().LoadSceneByName("Calendar");
+        }
+        
 
     }
 

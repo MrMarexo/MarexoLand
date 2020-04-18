@@ -51,7 +51,7 @@ public class DateManagement : MonoBehaviour
     {
         int curI = sL.GetCurrentSceneIndex();
         string curN = sL.GetCurrentSceneName();
-        if (curN == "Calendar" || curN == "Menu")
+        if (curN == "Calendar")
         {
             Debug.Log("curDay updated");
             LoadDateOrSetDate(vM.GetCurrentRunIndex());

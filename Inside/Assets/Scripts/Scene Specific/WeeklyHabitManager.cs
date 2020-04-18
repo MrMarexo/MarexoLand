@@ -34,8 +34,6 @@ public class WeeklyHabitManager : MonoBehaviour
         }
         else
         {
-            vM.SaveIntroValues();
-            dM.SaveLaunchDateIntro();
             vM.SaveWeeklyName(input, curWeekIndex);
             FindObjectOfType<SceneLoader>().LoadNextScene();
         }

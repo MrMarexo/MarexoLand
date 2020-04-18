@@ -9,27 +9,12 @@ public class SecondTaskManager : MonoBehaviour
 
     [SerializeField] GameObject writePopup;
 
-    string secondDailyCheck = "";
-
-    //methods on buttons to set a check reply to vMs arrays
-    public void SecondCheckYes()
-    {
-        secondDailyCheck = OptionCodes.options[0];
-    }
-
-    public void SecondCheckMaybe()
-    {
-        secondDailyCheck = OptionCodes.options[2];
-    }
-
-
-
-
+    
     public void SaveAndLoadNextIf()
     {
         string input = inputField.text;
         //check if text is not ""
-        if (input == "")
+        if (string.IsNullOrEmpty(input))
         {
             //enable a pop-up canvas that prompts the user to input sth and return
             FindObjectOfType<PopupManagement>().EnablePopup(writePopup);
@@ -40,8 +25,6 @@ public class SecondTaskManager : MonoBehaviour
             var vM = FindObjectOfType<ValueManagement>();
             //sets the results to playerprefs
             vM.SaveSecondName(input);
-            vM.SaveSecondCheck(secondDailyCheck, FindObjectOfType<DateManagement>().GetCurrentDayIndex());
-
             FindObjectOfType<SceneLoader>().LoadSceneByName("Calendar");
         }
     }

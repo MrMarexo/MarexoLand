@@ -211,10 +211,7 @@ public class ValueManagement : MonoBehaviour
         firstCheckName = input;
     }
 
-    public void SaveSecondName(string input)
-    {
-        secondCheckName = input;
-    }
+    
 
     //triggered in the last Intro scene to set up the normal game process
     public void SaveIntroValues()
@@ -276,6 +273,12 @@ public class ValueManagement : MonoBehaviour
     {
         badFuture = input;
         PlayerPrefs.SetString("badFuture", badFuture);
+    }
+
+    public void SaveSecondName(string input)
+    {
+        secondCheckName = input;
+        PlayerPrefs.SetString("secondCheckName" + curRunIndex.ToString(), secondCheckName);
     }
 
     public string[] GetValuesOfIndex(int index)

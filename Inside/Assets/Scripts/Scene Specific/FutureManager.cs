@@ -44,6 +44,8 @@ public class FutureManager : MonoBehaviour
             else
             {
                 vM.SaveBadFuture(input);
+                vM.SaveIntroValues();
+                dM.SaveLaunchDateIntro();
                 sL.LoadSceneByName("Check");
             }
         }

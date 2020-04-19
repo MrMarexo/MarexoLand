@@ -86,17 +86,25 @@ public class DateManagement : MonoBehaviour
         //for testing (zero based)
         //savedLaunchDate = savedLaunchDate.AddDays(-14);
 
-        curDateIndex = (curDate - savedLaunchDate).Days;
+        curDateIndex = (curDate - savedLaunchDate).Days - 1;
 
-        currentWeekIndex = curDateIndex / 7;       //floored number after division
+        if (curDateIndex == -1)
+        {
+            currentWeekIndex = -1;
+        }
+        else
+        {
+            currentWeekIndex = curDateIndex / 7;       //floored number after division
+        }
+        
     }
 
     //set by the run manager for the Intro scenes --then after the Intro section finalizes the LoadDateOrSet will be run
     public void SetIndexes(int index)
     {
         curRunIndex = index;
-        curDateIndex = 0;
-        currentWeekIndex = 0;
+        curDateIndex = -1;
+        currentWeekIndex = -1;
     }
 
     //triggered by the last Intro scene

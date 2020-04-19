@@ -256,10 +256,12 @@ public class ValueManagement : MonoBehaviour
         habitDailyName[0] = badHabitName;
         firstDailyName[0] = firstCheckName;
         secondDailyName[0] = secondCheckName;
+        weeklyName[0] = weeklyCheckName;
 
         PlayerPrefsX.SetStringArray("habitDailyName" + curRunIndex.ToString(), habitDailyName);
         PlayerPrefsX.SetStringArray("firstDailyName" + curRunIndex.ToString(), firstDailyName);
         PlayerPrefsX.SetStringArray("secondDailyName" + curRunIndex.ToString(), secondDailyName);
+        PlayerPrefsX.SetStringArray("weeklyName" + curRunIndex.ToString(), weeklyName);
 
     }
 
@@ -271,13 +273,16 @@ public class ValueManagement : MonoBehaviour
     }
 
     //this is a special intro method because its also used outside of intro
-    public void SaveWeeklyName(string input, int weekIndex)
+    public void SaveWeeklyName(string input, int weekIndex, bool isIntro)
     {
         weeklyCheckName = input;
         PlayerPrefs.SetString("weeklyCheckName" + curRunIndex.ToString(), input);
 
-        weeklyName[weekIndex] = weeklyCheckName;
-        PlayerPrefsX.SetStringArray("weeklyName" + curRunIndex.ToString(), weeklyName);
+        if (!isIntro)
+        {
+            weeklyName[weekIndex] = weeklyCheckName;
+            PlayerPrefsX.SetStringArray("weeklyName" + curRunIndex.ToString(), weeklyName);
+        }
     }
 
     

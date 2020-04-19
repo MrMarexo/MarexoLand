@@ -86,12 +86,12 @@ GameObject:
   - component: {fileID: 3497171492611033286}
   - component: {fileID: 3497171492611033287}
   m_Layer: 5
-  m_Name: Write Popup
+  m_Name: Old Write Popup
   m_TagString: Popup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3497171492611033304
 RectTransform:
   m_ObjectHideFlags: 0

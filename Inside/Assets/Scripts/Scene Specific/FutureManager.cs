@@ -13,15 +13,11 @@ public class FutureManager : MonoBehaviour
     ValueManagement vM;
     SceneLoader sL;
 
-    int curWeekIndex;
-
     private void Start()
     {
-        dM = FindObjectOfType<DateManagement>();
         vM = FindObjectOfType<ValueManagement>();
         sL = FindObjectOfType<SceneLoader>();
-
-        curWeekIndex = dM.GetCurrentWeek();
+        dM = FindObjectOfType<DateManagement>();
     }
 
     public void SaveAndLoadNextIf()
@@ -46,7 +42,7 @@ public class FutureManager : MonoBehaviour
                 vM.SaveBadFuture(input);
                 vM.SaveIntroValues();
                 dM.SaveLaunchDateIntro();
-                sL.LoadSceneByName("Check");
+                sL.LoadSceneByName("Calendar Intro");
             }
         }
     }

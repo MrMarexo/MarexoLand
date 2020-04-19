@@ -12,14 +12,9 @@ public class WeeklyHabitManager : MonoBehaviour
     DateManagement dM;
     ValueManagement vM;
 
-    int curWeekIndex;
-
     private void Start()
     {
-        dM = FindObjectOfType<DateManagement>();
         vM = FindObjectOfType<ValueManagement>();
-
-        curWeekIndex = dM.GetCurrentWeek();
     }
 
     public void SaveAndLoadNextIf()
@@ -34,7 +29,7 @@ public class WeeklyHabitManager : MonoBehaviour
         }
         else
         {
-            vM.SaveWeeklyName(input, curWeekIndex);
+            vM.SaveWeeklyName(input, 0, true);
             FindObjectOfType<SceneLoader>().LoadNextScene();
         }
     }

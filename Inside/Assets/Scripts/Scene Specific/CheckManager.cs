@@ -124,7 +124,8 @@ public class CheckManager : MonoBehaviour
     void ShouldSecondToday()
     {
         bool shouldShow = false;
-        if (todayIndex > 14)
+        string nameSaved = vM.GetNamesOfDayIndex(todayIndex)[1];
+        if (string.IsNullOrEmpty(nameSaved))
         {
             shouldShow = true;
         }
@@ -134,7 +135,8 @@ public class CheckManager : MonoBehaviour
     void ShouldSecondYesterday()
     {
         bool shouldShow = false;
-        if (yesterdayIndex > 14)
+        string nameSaved = vM.GetNamesOfDayIndex(yesterdayIndex)[1];
+        if (string.IsNullOrEmpty(nameSaved))
         {
             shouldShow = true;
         }
@@ -370,7 +372,7 @@ public class CheckManager : MonoBehaviour
         }
 
         //loads the next scene
-        if (todayIndex == 13)
+        if (todayIndex >= 13 && string.IsNullOrEmpty(vM.GetNamesOfDayIndex(todayIndex)[1]))
         {
             FindObjectOfType<SceneLoader>().LoadSceneByName("Second Task");
         }

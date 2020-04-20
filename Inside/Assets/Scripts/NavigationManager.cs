@@ -40,4 +40,9 @@ public class NavigationManager : MonoBehaviour
         sL.LoadSceneByName("Menu");
     }
 
+    public void NextScene()
+    {
+        sL.LoadNextScene();
+    }
+
 }

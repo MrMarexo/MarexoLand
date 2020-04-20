@@ -874,22 +874,27 @@ PrefabInstance:
     - target: {fileID: 2454004475032252645, guid: f02b8d4547d5b964aa70555964cd64f5,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2454004475032252645, guid: f02b8d4547d5b964aa70555964cd64f5,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2454004475032252645, guid: f02b8d4547d5b964aa70555964cd64f5,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2454004475032252645, guid: f02b8d4547d5b964aa70555964cd64f5,
         type: 3}
       propertyPath: m_textInfo.pageCount
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2454004475032252645, guid: f02b8d4547d5b964aa70555964cd64f5,
+        type: 3}
+      propertyPath: m_text
+      value: Daily
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f02b8d4547d5b964aa70555964cd64f5, type: 3}

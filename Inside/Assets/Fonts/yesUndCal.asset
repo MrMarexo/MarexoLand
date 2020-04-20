@@ -123,8 +123,8 @@ Material:
     - _TextureHeight: 512
     - _TextureWidth: 512
     - _UnderlayDilate: 1
-    - _UnderlayOffsetX: 0.31
-    - _UnderlayOffsetY: -1
+    - _UnderlayOffsetX: 0.87
+    - _UnderlayOffsetY: 1
     - _UnderlaySoftness: 0
     - _VertexOffsetX: 0
     - _VertexOffsetY: 0
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: yesUnderlay
+  m_Name: yesUndCal
   m_EditorClassIdentifier: 
   hashCode: 986498803
   material: {fileID: -5952275747632683990}

@@ -405,7 +405,15 @@ public class Level : MonoBehaviour
         mov.ResetPrefs();
         pl.DeleteKey();
         DeletePrefs();
-        sL.LoadSceneByName("Calendar");
+        if (dayNumber.text == "Day 0")
+        {
+            sL.LoadSceneByName("Calendar Intro");
+        }
+        else
+        {
+            sL.LoadSceneByName("Calendar");
+        }
+        
     }
 
     public void UpdateKeyImage(bool gotKey)

@@ -42,7 +42,7 @@ public class FutureManager : MonoBehaviour
                 vM.SaveBadFuture(input);
                 vM.SaveIntroValues();
                 dM.SaveLaunchDateIntro();
-                sL.LoadSceneByName("Calendar Intro");
+                sL.LoadNextScene();
             }
         }
     }

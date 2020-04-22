@@ -26,6 +26,8 @@ public class JournalManager : MonoBehaviour
     [SerializeField] GameObject thisWeekPanel;
     [SerializeField] GameObject lastWeekPanel;
 
+    
+
     //input fields
     [SerializeField] TMP_InputField todayField;
     [SerializeField] TMP_InputField yesterdayField;
@@ -66,6 +68,9 @@ public class JournalManager : MonoBehaviour
         DisableAllExcept(generalPanel);
         HideOrShowLastWeek();
         HideOrShowYesterday();
+
+        
+
     }
 
     private void Update()
@@ -234,6 +239,46 @@ public class JournalManager : MonoBehaviour
     public void ClosePopup()
     {
         FindObjectOfType<PopupManagement>().DisablePopup();
+    }
+
+    public void SaveActivePanelText()
+    {
+        GameObject[] journalPanels = new GameObject[4];
+        journalPanels[0] = todayPanel;
+        journalPanels[1] = yesterdayPanel;
+        journalPanels[2] = thisWeekPanel;
+        journalPanels[3] = lastWeekPanel;
+
+        foreach (GameObject panel in journalPanels)
+        {
+            if (panel.activeSelf == true)
+            {
+                if (panel.name == "Today")
+                {
+                    SaveToday();
+                    ClosePopup();
+                    DisableCurrent();
+                }
+                else if (panel.name == "Yesterday")
+                {
+                    SaveYesterday();
+                    ClosePopup();
+                    DisableCurrent();
+                }
+                else if (panel.name == "This Week")
+                {
+                    SaveThisWeek();
+                    ClosePopup();
+                    DisableCurrent();
+                }
+                else if (panel.name == "Last Week")
+                {
+                    SaveLastWeek();
+                    ClosePopup();
+                    DisableCurrent();
+                }
+            }
+        }
     }
 
 

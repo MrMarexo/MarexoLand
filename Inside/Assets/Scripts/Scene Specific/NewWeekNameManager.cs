@@ -31,8 +31,8 @@ public class NewWeekNameManager : MonoBehaviour
         }
         else
         {
-            FindObjectOfType<ValueManagement>().SaveWeeklyName(input, curWeekIndex, false);
-            FindObjectOfType<SceneLoader>().LoadSceneByName("Yesterday Check");
+            FindObjectOfType<ValueManagement>().SaveWeeklyName(input, curWeekIndex, true);
+            FindObjectOfType<SceneLoader>().LoadSceneByName("Check");
         }
     }
 

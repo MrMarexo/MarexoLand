@@ -142,7 +142,15 @@ public class BeforeCheckManager : MonoBehaviour
         //sets the results to playerprefs
         vM.SaveWeeklyCheck(weeklyCheck, currentWeekIndex - ShouldSaveToPreviousWeek());
 
-        FindObjectOfType<SceneLoader>().LoadSceneByName("Check");
+        if (ShouldSaveToPreviousWeek() == 1)
+        {
+            FindObjectOfType<SceneLoader>().LoadNextScene();
+        }
+        else
+        {
+            FindObjectOfType<SceneLoader>().LoadSceneByName("Check");
+        }
+        
     }
     
 

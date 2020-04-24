@@ -37,6 +37,7 @@ public class CalendarManager : MonoBehaviour
     //day popup text elements
     [SerializeField] TextMeshProUGUI day;
     [SerializeField] TextMeshProUGUI weekly;
+    [SerializeField] TextMeshProUGUI habit;
     [SerializeField] TextMeshProUGUI first;
     [SerializeField] TextMeshProUGUI second;
     [SerializeField] TextMeshProUGUI secondText;
@@ -391,6 +392,7 @@ public class CalendarManager : MonoBehaviour
         day.text = "Day " + (dayIndex + 1).ToString();
         weekly.text = vM.GetWeeklyName(weekIndex);
         first.text = vM.GetNamesOfDayIndex(dayIndex)[0];
+        habit.text = vM.GetNamesOfDayIndex(dayIndex)[2];
 
         //if there is no name for the second task dont show it in the info at all
         if (vM.GetNamesOfDayIndex(dayIndex)[1] == "")

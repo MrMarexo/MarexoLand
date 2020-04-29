@@ -51,7 +51,12 @@ public class Player : MonoBehaviour
         {
             gotKey = true;
             Destroy(collision.gameObject);
-            FindObjectOfType<Level>().UpdateKeyImage(gotKey);
+            lvl.UpdateKeyImage(gotKey);
+        }
+        if (collision.gameObject.tag == "Willpower")
+        {
+            Destroy(collision.gameObject);
+            lvl.TookWillpower();
         }
         if (collision.gameObject.tag == "Finish")
         {

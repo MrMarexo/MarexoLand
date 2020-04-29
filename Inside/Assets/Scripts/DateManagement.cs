@@ -7,6 +7,8 @@ public class DateManagement : MonoBehaviour
 {
     SceneLoader sL;
     ValueManagement vM;
+    Willpower willpower;
+
 
     //current date
     DateTime curDate;
@@ -31,6 +33,7 @@ public class DateManagement : MonoBehaviour
     {
         sL = GetComponent<SceneLoader>();
         vM = GetComponent<ValueManagement>();
+        willpower = GetComponent<Willpower>();
     }
 
     private void Update()
@@ -56,6 +59,21 @@ public class DateManagement : MonoBehaviour
             Debug.Log("curDay updated");
             LoadDateOrSetDate(vM.GetCurrentRunIndex());
             timeElapsed = 0;
+        }
+    }
+
+    void SameDayCheck()
+    {
+        var pref = PlayerPrefs.GetInt("currentDayIndex", 0);
+        if (pref < curDateIndex)
+        {
+            Debug.Log("day has changed");
+
+            // things to do if the day has changed
+            willpower.UpdateWillpowerDaily(curDateIndex - pref);
+            ////////////////////////////////////
+            
+            PlayerPrefs.SetInt("currentDayIndex", curDateIndex);
         }
     }
 
@@ -95,6 +113,7 @@ public class DateManagement : MonoBehaviour
         else
         {
             currentWeekIndex = curDateIndex / 7;       //floored number after division
+            SameDayCheck();
         }
         
     }

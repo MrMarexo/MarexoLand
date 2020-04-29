@@ -82,6 +82,7 @@ public class PlayerLight : MonoBehaviour
             blackChanceNumber -= willState * 5;
 
         }
+        else flickerOn = false;
         plLight.pointLightOuterRadius = regOuterRadius;
         plLight.pointLightInnerRadius = regOuterRadius / innerOuterOffset;
         plLight.intensity = regLightIntensity;

@@ -57,5 +57,10 @@ public class Willpower : MonoBehaviour
         return state;
     }
 
+    public void IncreaseWillpower(int amount)
+    {
+        willpower += amount;
+        if (willpower > 100) willpower = 100;
+    }
 
 }

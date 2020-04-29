@@ -12,6 +12,7 @@ public class Level : MonoBehaviour
     ValueManagement vM;
     Background bg;
     PlayerLight pLight;
+    Willpower willpower;
     
 
     LayerMask enemyLayer;
@@ -55,6 +56,9 @@ public class Level : MonoBehaviour
     [SerializeField] TextMeshProUGUI dayNumber;
 
     [SerializeField] Image keyImage;
+    [SerializeField] Image willpowerImage;
+
+    [SerializeField] Sprite[] willpowerImages; 
 
     [SerializeField] float timeSlowedDown = 3f;
     [SerializeField] float slowDownRatio = 2.5f;
@@ -120,6 +124,7 @@ public class Level : MonoBehaviour
         vM = FindObjectOfType<ValueManagement>();
         bg = FindObjectOfType<Background>();
         pLight = FindObjectOfType<PlayerLight>();
+        willpower = FindObjectOfType<Willpower>();
 
 
         TurnOffDev();
@@ -141,6 +146,7 @@ public class Level : MonoBehaviour
         slowCount = PlayerPrefs.GetInt("slowCount", 0);
         insteadCount = PlayerPrefs.GetInt("insteadCount", 0);
 
+        UpdateWillpower();
         keyImage.color = Colors.toggleGrayColor;
         SkillsEnabled();
         ShouldShowInsteadText();
@@ -694,6 +700,20 @@ public class Level : MonoBehaviour
     {
         BackFromInstead();
     }
+
+    void UpdateWillpower()
+    {
+        var willIndex = willpower.GetWillpowerState();
+        willpowerImage.sprite = willpowerImages[willIndex];
+    }
+
+    public void TookWillpower()
+    {
+        willpower.IncreaseWillpower(50);
+        pLight.ChooseLightMode();
+        UpdateWillpower();
+    }
+
 
     
 

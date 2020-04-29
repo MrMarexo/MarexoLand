@@ -15,6 +15,7 @@ TagManager:
   - MovingPlatform
   - StartingPos
   - DevLight
+  - Willpower
   layers:
   - Default
   - TransparentFX

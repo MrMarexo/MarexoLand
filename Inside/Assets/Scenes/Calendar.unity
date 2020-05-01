@@ -6681,7 +6681,7 @@ GameObject:
   - component: {fileID: 1131341489}
   - component: {fileID: 1131341488}
   m_Layer: 5
-  m_Name: points text
+  m_Name: willpower text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6703,8 +6703,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -268, y: 258}
-  m_SizeDelta: {x: 178.40002, y: 88.20001}
+  m_AnchoredPosition: {x: -203, y: 288}
+  m_SizeDelta: {x: 359, y: 88.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1131341488
 MonoBehaviour:
@@ -6724,7 +6724,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Points
+  m_text: Willpower
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 31de7df0f71238649b1922348ff82b8e, type: 2}
   m_sharedMaterial: {fileID: -5608230635789507814, guid: 31de7df0f71238649b1922348ff82b8e,
@@ -6753,8 +6753,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 35
-  m_fontSizeBase: 35
+  m_fontSize: 45
+  m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6794,7 +6794,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1131341488}
-    characterCount: 6
+    characterCount: 9
     spriteCount: 0
     spaceCount: 0
     wordCount: 1
@@ -8152,7 +8152,7 @@ MonoBehaviour:
   first: {fileID: 321833714}
   second: {fileID: 873301202}
   secondText: {fileID: 1992422771}
-  pointsNumberDay: {fileID: 2006823404}
+  powerNumberDay: {fileID: 2006823404}
   checkpointNumberDay: {fileID: 235374798}
   plusCheckpointDay: {fileID: 2016581928}
   minusCheckpointDay: {fileID: 3705822}
@@ -11566,8 +11566,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 255.9, y: 220.5}
-  m_SizeDelta: {x: 324.2, y: 173.29999}
+  m_AnchoredPosition: {x: 239.08, y: 240}
+  m_SizeDelta: {x: 357.84, y: 217.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1802055996
 MonoBehaviour:
@@ -11616,8 +11616,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 140
+  m_fontSizeBase: 140
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -12710,7 +12710,7 @@ GameObject:
   - component: {fileID: 2006823405}
   - component: {fileID: 2006823404}
   m_Layer: 5
-  m_Name: points
+  m_Name: power
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12732,7 +12732,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -267, y: 185}
+  m_AnchoredPosition: {x: -204, y: 197}
   m_SizeDelta: {x: 146.79999, y: 88.20001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2006823404
@@ -12782,8 +12782,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -13626,7 +13626,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &3530528448795673648
 MonoBehaviour:
   m_ObjectHideFlags: 0

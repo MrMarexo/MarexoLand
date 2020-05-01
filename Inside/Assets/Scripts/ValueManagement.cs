@@ -401,17 +401,4 @@ public class ValueManagement : MonoBehaviour
         return PlayerPrefs.GetInt("slowdownsBought");
     }
 
-
-
-
-    //points
-    public void SavePoints(int  number)
-    {
-        PlayerPrefs.SetInt("points", number);
-    }
-
-    public int GetPoints()
-    {
-        return PlayerPrefs.GetInt("points");
-    }
 }

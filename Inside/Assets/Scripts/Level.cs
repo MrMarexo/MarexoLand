@@ -57,6 +57,7 @@ public class Level : MonoBehaviour
 
     [SerializeField] Image keyImage;
     [SerializeField] Image willpowerImage;
+    [SerializeField] TextMeshProUGUI willpowerNumber;
 
     [SerializeField] Sprite[] willpowerImages; 
 
@@ -134,6 +135,7 @@ public class Level : MonoBehaviour
         cancelInsteadButton.gameObject.SetActive(false);
 
         ShowUI();
+        ShowWillpowerGOs();
         //for testing
         //checkpointAllowed = vM.GetBoughtCheckpoints();
         //slowAllowed = vM.GetBoughtSlowdowns();
@@ -703,15 +705,35 @@ public class Level : MonoBehaviour
 
     void UpdateWillpower()
     {
-        var willIndex = willpower.GetWillpowerState();
-        willpowerImage.sprite = willpowerImages[willIndex];
+        var willNumber = willpower.GetWillpower();
+        willpowerImage.sprite = willpowerImages[willpower.GetWillpowerState()];
+        willpowerNumber.text = willNumber.ToString();
+        if (willNumber <= 0) willpowerNumber.color = Colors.toggleGrayColor;
+        else willpowerNumber.color = Colors.completeColor;
     }
 
     public void TookWillpower()
     {
+        PlayerPrefsX.SetBool("willpowerDay" + sL.GetCurrentSceneName().ToString(), false);
         willpower.IncreaseWillpower(50);
         pLight.ChooseLightMode();
         UpdateWillpower();
+    }
+
+    void ShowWillpowerGOs()
+    {
+        var images = Resources.FindObjectsOfTypeAll<SpriteRenderer>();
+        if (images.Length > 0)
+        {
+            foreach (SpriteRenderer image in images)
+            {
+                if (image.tag == "Willpower")
+                {
+                    Debug.Log(image.name);
+                    image.gameObject.SetActive(PlayerPrefsX.GetBool("willpowerDay" + sL.GetCurrentSceneName().ToString(), true));
+                }
+            }
+        }
     }
 
 

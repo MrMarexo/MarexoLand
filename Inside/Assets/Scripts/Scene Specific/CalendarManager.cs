@@ -42,7 +42,7 @@ public class CalendarManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI second;
     [SerializeField] TextMeshProUGUI secondText;
 
-    [SerializeField] TextMeshProUGUI pointsNumberDay;
+    [SerializeField] TextMeshProUGUI powerNumberDay;
 
     [SerializeField] TextMeshProUGUI checkpointNumberDay;
     [SerializeField] TextMeshProUGUI plusCheckpointDay;
@@ -80,17 +80,19 @@ public class CalendarManager : MonoBehaviour
     [SerializeField] int insteadPrice = 5;
 
     //will be taken from value management
-    int points;
+    int power;
 
     ValueManagement vM;
     DateManagement dM;
+    Willpower will;
 
     void Start()
     {
         dM = FindObjectOfType<DateManagement>();
         vM = FindObjectOfType<ValueManagement>();
+        will = FindObjectOfType<Willpower>();
 
-        points = 40;
+        power = will.GetWillpower();
         //points = vM.GetPoints();
         FillUpCalendars();
         timeToWait = FindObjectOfType<SceneLoader>().GetTimeToLoad();
@@ -112,7 +114,7 @@ public class CalendarManager : MonoBehaviour
 
     void UpdatePoints()
     {
-        pointsNumberDay.text = points.ToString();
+        powerNumberDay.text = power.ToString();
     }
 
     void UpdateCheckpoints()
@@ -128,7 +130,7 @@ public class CalendarManager : MonoBehaviour
             minusCheckpointDay.gameObject.GetComponent<Button>().enabled = true;
         }
 
-        if (checkpointsBought == 3 || points - checkpointPrice < 0)
+        if (checkpointsBought == 3 || power - checkpointPrice < 0)
         {
             plusCheckpointDay.color = Colors.incompleteColor;
             plusCheckpointDay.gameObject.GetComponent<Button>().enabled = false;
@@ -145,10 +147,10 @@ public class CalendarManager : MonoBehaviour
 
     public void AddCheckpoint()
     {
-        if (points - checkpointPrice >= 0 && checkpointsBought < 3)
+        if (power - checkpointPrice >= 0 && checkpointsBought < 3)
         {
             ++checkpointsBought;
-            points -= checkpointPrice;
+            power -= checkpointPrice;
             UpdateCheckpoints();
         }
         
@@ -159,7 +161,7 @@ public class CalendarManager : MonoBehaviour
         if (checkpointsBought > 0)
         {
             --checkpointsBought;
-            points += checkpointPrice;
+            power += checkpointPrice;
             UpdateCheckpoints();
         }
         
@@ -179,7 +181,7 @@ public class CalendarManager : MonoBehaviour
             minusInsteadDay.gameObject.GetComponent<Button>().enabled = true;
         }
 
-        if (insteadsBought == 3 || points - insteadPrice < 0)
+        if (insteadsBought == 3 || power - insteadPrice < 0)
         {
             plusInsteadDay.color = Colors.incompleteColor;
             plusInsteadDay.gameObject.GetComponent<Button>().enabled = false;
@@ -196,10 +198,10 @@ public class CalendarManager : MonoBehaviour
 
     public void AddInstead()
     {
-        if (points - insteadPrice >= 0 && insteadsBought < 3)
+        if (power - insteadPrice >= 0 && insteadsBought < 3)
         {
             ++insteadsBought;
-            points -= insteadPrice;
+            power -= insteadPrice;
             UpdateInsteads();
         }
 
@@ -210,7 +212,7 @@ public class CalendarManager : MonoBehaviour
         if (insteadsBought > 0)
         {
             --insteadsBought;
-            points += insteadPrice;
+            power += insteadPrice;
             UpdateInsteads();
         }
 
@@ -230,7 +232,7 @@ public class CalendarManager : MonoBehaviour
             minusSlowdownDay.gameObject.GetComponent<Button>().enabled = true;
         }
 
-        if (slowdownsBought == 3 || points - slowdownPrice < 0)
+        if (slowdownsBought == 3 || power - slowdownPrice < 0)
         {
             plusSlowdownDay.color = Colors.incompleteColor;
             plusSlowdownDay.gameObject.GetComponent<Button>().enabled = false;
@@ -247,10 +249,10 @@ public class CalendarManager : MonoBehaviour
 
     public void AddSlowdown()
     {
-        if (points - slowdownPrice >= 0 && slowdownsBought < 3)
+        if (power - slowdownPrice >= 0 && slowdownsBought < 3)
         {
             ++slowdownsBought;
-            points -= slowdownPrice;
+            power -= slowdownPrice;
             UpdateSlowdowns();
         }
 
@@ -261,7 +263,7 @@ public class CalendarManager : MonoBehaviour
         if (slowdownsBought > 0)
         {
             --slowdownsBought;
-            points += slowdownPrice;
+            power += slowdownPrice;
             UpdateSlowdowns();
         }
 
@@ -422,7 +424,7 @@ public class CalendarManager : MonoBehaviour
         vM.SaveBoughtCheckpointsForLevel(checkpointsBought);
         vM.SaveBoughtInsteadsForLevel(insteadsBought);
         vM.SaveBoughtSlowdownsForLevel(slowdownsBought);
-        vM.SavePoints(points);
+        will.SetWillpower(power);
         FindObjectOfType<SceneLoader>().LoadSceneByName("Day " + playLevelNumber.ToString());
     }
 

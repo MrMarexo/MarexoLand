@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class Willpower : MonoBehaviour
 {
-    [SerializeField] int willpower = 100;
+    int willpower;
 
-    //int willpower;
     int state;
 
     private void Start()
     {
-        //willpower = PlayerPrefs.GetInt("willpower", 100);
+        willpower = PlayerPrefs.GetInt("willpower", 100);
         UpdateWillpowerState();
     }
 
-    void UpdateWillpowerDaily()
+    public void UpdateWillpowerDaily(int daysPassed)
     {
         int dailyOffset = Random.Range(13, 24);
-        willpower = -dailyOffset;
+        willpower = -dailyOffset * daysPassed;
+        if (willpower < 0) willpower = 0;
         UpdateWillpowerState();
     }
 
@@ -48,13 +48,25 @@ public class Willpower : MonoBehaviour
         {
             state = 0;
         }
+        SaveWillpower();
     }
-
+    
     public int GetWillpowerState()
     {
-        Debug.Log(willpower);
         UpdateWillpowerState();
         return state;
+    }
+
+    public int GetWillpower()
+    {
+        SaveWillpower();
+        return willpower;
+    }
+
+    public void SetWillpower(int power)
+    {
+        willpower = power;
+        SaveWillpower();
     }
 
     public void IncreaseWillpower(int amount)
@@ -62,5 +74,12 @@ public class Willpower : MonoBehaviour
         willpower += amount;
         if (willpower > 100) willpower = 100;
     }
+
+    void SaveWillpower()
+    {
+        PlayerPrefs.SetInt("willpower", willpower);
+    }
+
+
 
 }

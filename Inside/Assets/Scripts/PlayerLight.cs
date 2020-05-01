@@ -27,13 +27,13 @@ public class PlayerLight : MonoBehaviour
     private void Awake()
     {
         plLight = GetComponentInChildren<Light2D>();
-        will = FindObjectOfType<Willpower>();
         plLight.pointLightOuterRadius = radius;
         plLight.pointLightInnerRadius = radius / innerOuterOffset;
     }
 
     void Start()
     {
+        will = FindObjectOfType<Willpower>();
         regOuterRadius = plLight.pointLightOuterRadius;
         regInnerRadius = plLight.pointLightInnerRadius;
         regLightIntensity = plLight.intensity;
@@ -73,7 +73,6 @@ public class PlayerLight : MonoBehaviour
         regLightIntensity = unchangedIntensity;
 
         int willState = will.GetWillpowerState();
-        Debug.Log(willState);
         regOuterRadius -= willState * 0.5f;
         if (willState > 1)
         {

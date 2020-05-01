@@ -729,7 +729,6 @@ public class Level : MonoBehaviour
             {
                 if (image.tag == "Willpower")
                 {
-                    Debug.Log(image.name);
                     image.gameObject.SetActive(PlayerPrefsX.GetBool("willpowerDay" + sL.GetCurrentSceneName().ToString(), true));
                 }
             }

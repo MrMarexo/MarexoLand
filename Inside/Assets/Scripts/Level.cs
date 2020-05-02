@@ -161,7 +161,7 @@ public class Level : MonoBehaviour
         ShouldShowLoadCheckpoint();
         UpdateCheckSlots();
 
-        dayNumber.text = sL.GetCurrentSceneName();
+        dayNumber.text = "Day " + sL.GetCurrentSceneName();
     }
 
     void TurnOffDev()
@@ -187,7 +187,15 @@ public class Level : MonoBehaviour
 
     public void ShowWinCanvas()
     {
+        //will be later determined by other things
+        int result = 3;
         FindObjectOfType<PopupManagement>().EnableGameCanvas(winCanvas);
+        var levelResult = PlayerPrefs.GetInt("scoreDay" + sL.GetCurrentSceneName(), 0);
+        if (result != levelResult)
+        {
+            willpower.IncreaseWillpower(5 * result);
+        }
+        PlayerPrefs.SetInt("scoreDay" + sL.GetCurrentSceneName(), result);
     }
 
     public void ShowLoseCanvas()

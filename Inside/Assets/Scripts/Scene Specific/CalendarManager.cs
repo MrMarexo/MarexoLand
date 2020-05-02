@@ -547,6 +547,36 @@ public class CalendarManager : MonoBehaviour
                     arrayOfTMs[3].color = failedColor;
                 }
             }
+
+            //show score
+            Image[] stars = cur.GetComponentsInChildren<Image>();
+            var levelResult = PlayerPrefs.GetInt("scoreDay" + dayGlobal.ToString(), 0);
+            if (levelResult == 0)
+            {
+                foreach (Image star in stars)
+                {
+                    star.gameObject.SetActive(false);
+                }
+            } 
+            else if (levelResult == 1)
+            {
+                stars[0].gameObject.SetActive(true);
+                stars[1].gameObject.SetActive(false);
+                stars[2].gameObject.SetActive(false);
+            }
+            else if (levelResult == 2)
+            {
+                stars[0].gameObject.SetActive(true);
+                stars[1].gameObject.SetActive(true);
+                stars[2].gameObject.SetActive(false);
+            }
+            else if (levelResult == 3)
+            {
+                foreach (Image star in stars)
+                {
+                    star.gameObject.SetActive(true);
+                }
+            }
         }
     }
 }

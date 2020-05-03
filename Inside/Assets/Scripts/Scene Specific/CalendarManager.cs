@@ -42,18 +42,20 @@ public class CalendarManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI second;
     [SerializeField] TextMeshProUGUI secondText;
     [SerializeField] TextMeshProUGUI secondClosed;
-    [SerializeField] TextMeshProUGUI secondTextClosed;
 
     [SerializeField] TextMeshProUGUI powerNumberDay;
 
+    [SerializeField] TextMeshProUGUI checkpointTextDay;
     [SerializeField] TextMeshProUGUI checkpointNumberDay;
     [SerializeField] TextMeshProUGUI plusCheckpointDay;
     [SerializeField] TextMeshProUGUI minusCheckpointDay;
 
+    [SerializeField] TextMeshProUGUI slowdownTextDay;
     [SerializeField] TextMeshProUGUI slowdownNumberDay;
     [SerializeField] TextMeshProUGUI plusSlowdownDay;
     [SerializeField] TextMeshProUGUI minusSlowdownDay;
 
+    [SerializeField] TextMeshProUGUI insteadTextDay;
     [SerializeField] TextMeshProUGUI insteadNumberDay;
     [SerializeField] TextMeshProUGUI plusInsteadDay;
     [SerializeField] TextMeshProUGUI minusInsteadDay;
@@ -64,13 +66,8 @@ public class CalendarManager : MonoBehaviour
 
     //locked
     [SerializeField] TextMeshProUGUI checkpointLocked;
-    [SerializeField] TextMeshProUGUI checkpointNumberLocked;
-
     [SerializeField] TextMeshProUGUI slowdownLocked;
-    [SerializeField] TextMeshProUGUI slowdownNumberLocked;
-
     [SerializeField] TextMeshProUGUI insteadLocked;
-    [SerializeField] TextMeshProUGUI insteadNumberLocked;
 
 
     int currentWeekIndex;
@@ -91,6 +88,11 @@ public class CalendarManager : MonoBehaviour
     [SerializeField] int checkpointPrice = 5;
     [SerializeField] int slowdownPrice = 5;
     [SerializeField] int insteadPrice = 5;
+
+    //day limits for skills
+    [SerializeField] int checkpointLimit = 1;
+    [SerializeField] int slowdownLimit = 3;
+    [SerializeField] int insteadLimit = 5;
 
     //will be taken from value management
     int power;
@@ -118,6 +120,37 @@ public class CalendarManager : MonoBehaviour
         UpdateCheckpoints();
         UpdateSlowdowns();
         UpdateInsteads();
+
+        
+    }
+
+
+    void Locked(int dayIndex)
+    {
+        bool show = false;
+        if (dayIndex <= checkpointLimit) show = true;
+        else show = false;
+        checkpointLocked.gameObject.SetActive(show);
+        checkpointNumberDay.gameObject.SetActive(!show);
+        plusCheckpointDay.gameObject.SetActive(!show);
+        minusCheckpointDay.gameObject.SetActive(!show);
+        checkpointTextDay.gameObject.SetActive(!show);
+
+        if (dayIndex <= insteadLimit) show = true;
+        else show = false;
+        insteadLocked.gameObject.SetActive(show);
+        insteadNumberDay.gameObject.SetActive(!show);
+        plusInsteadDay.gameObject.SetActive(!show);
+        minusInsteadDay.gameObject.SetActive(!show);
+        insteadTextDay.gameObject.SetActive(!show);
+
+        if (dayIndex <= slowdownLimit) show = true;
+        else show = false;
+        slowdownLocked.gameObject.SetActive(show);
+        slowdownNumberDay.gameObject.SetActive(!show);
+        plusSlowdownDay.gameObject.SetActive(!show);
+        minusSlowdownDay.gameObject.SetActive(!show);
+        slowdownTextDay.gameObject.SetActive(!show);
     }
 
     void UpdateWeekNumberText()
@@ -415,16 +448,16 @@ public class CalendarManager : MonoBehaviour
             second.gameObject.SetActive(false);
             secondText.gameObject.SetActive(false);
             secondClosed.gameObject.SetActive(true);
-            secondTextClosed.gameObject.SetActive(true);
         }
         else
         {
             secondClosed.gameObject.SetActive(false);
-            secondTextClosed.gameObject.SetActive(false);
             second.gameObject.SetActive(true);
             secondText.gameObject.SetActive(true);
             second.text = vM.GetNamesOfDayIndex(dayIndex)[1];
         }
+
+        Locked(dayIndex);
         FindObjectOfType<PopupManagement>().EnablePopup(dayPopup);
     }
 

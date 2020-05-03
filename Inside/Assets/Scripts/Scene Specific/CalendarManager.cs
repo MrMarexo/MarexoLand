@@ -41,6 +41,8 @@ public class CalendarManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI first;
     [SerializeField] TextMeshProUGUI second;
     [SerializeField] TextMeshProUGUI secondText;
+    [SerializeField] TextMeshProUGUI secondClosed;
+    [SerializeField] TextMeshProUGUI secondTextClosed;
 
     [SerializeField] TextMeshProUGUI powerNumberDay;
 
@@ -59,6 +61,17 @@ public class CalendarManager : MonoBehaviour
     //week popup elements
     [SerializeField] TextMeshProUGUI weeklyInWeek;
     [SerializeField] TextMeshProUGUI journalWeekText;
+
+    //locked
+    [SerializeField] TextMeshProUGUI checkpointLocked;
+    [SerializeField] TextMeshProUGUI checkpointNumberLocked;
+
+    [SerializeField] TextMeshProUGUI slowdownLocked;
+    [SerializeField] TextMeshProUGUI slowdownNumberLocked;
+
+    [SerializeField] TextMeshProUGUI insteadLocked;
+    [SerializeField] TextMeshProUGUI insteadNumberLocked;
+
 
     int currentWeekIndex;
     int currentDayIndex;
@@ -396,14 +409,18 @@ public class CalendarManager : MonoBehaviour
         first.text = vM.GetNamesOfDayIndex(dayIndex)[0];
         habit.text = vM.GetNamesOfDayIndex(dayIndex)[2];
 
-        //if there is no name for the second task dont show it in the info at all
-        if (vM.GetNamesOfDayIndex(dayIndex)[1] == "")
+        //if there it is not 14+ day dont show second task
+        if (dayIndex < 14)
         {
             second.gameObject.SetActive(false);
             secondText.gameObject.SetActive(false);
+            secondClosed.gameObject.SetActive(true);
+            secondTextClosed.gameObject.SetActive(true);
         }
         else
         {
+            secondClosed.gameObject.SetActive(false);
+            secondTextClosed.gameObject.SetActive(false);
             second.gameObject.SetActive(true);
             secondText.gameObject.SetActive(true);
             second.text = vM.GetNamesOfDayIndex(dayIndex)[1];

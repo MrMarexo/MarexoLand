@@ -28,7 +28,7 @@ public class FakeCalendarManager : MonoBehaviour
 
     [SerializeField] GameObject dayPopup;
 
-    int points = 45;
+    int points = 100;
 
     int checkpointsBought = 0;
     int slowdownsBought = 0;
@@ -226,6 +226,6 @@ public class FakeCalendarManager : MonoBehaviour
         vM.SaveBoughtCheckpointsForLevel(checkpointsBought);
         vM.SaveBoughtInsteadsForLevel(insteadsBought);
         vM.SaveBoughtSlowdownsForLevel(slowdownsBought);
-        FindObjectOfType<SceneLoader>().LoadSceneByName("Day 0");
+        FindObjectOfType<SceneLoader>().LoadSceneByName("0");
     }
 }

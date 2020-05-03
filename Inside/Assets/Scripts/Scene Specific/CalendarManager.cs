@@ -425,7 +425,7 @@ public class CalendarManager : MonoBehaviour
         vM.SaveBoughtInsteadsForLevel(insteadsBought);
         vM.SaveBoughtSlowdownsForLevel(slowdownsBought);
         will.SetWillpower(power);
-        FindObjectOfType<SceneLoader>().LoadSceneByName("Day " + playLevelNumber.ToString());
+        FindObjectOfType<SceneLoader>().LoadSceneByName(playLevelNumber.ToString());
     }
 
     public void ClosePopup()

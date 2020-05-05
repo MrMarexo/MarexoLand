@@ -13,6 +13,7 @@ public class Level : MonoBehaviour
     Background bg;
     PlayerLight pLight;
     Willpower willpower;
+    DateManagement dM;
     
 
     LayerMask enemyLayer;
@@ -126,6 +127,7 @@ public class Level : MonoBehaviour
         bg = FindObjectOfType<Background>();
         pLight = FindObjectOfType<PlayerLight>();
         willpower = FindObjectOfType<Willpower>();
+        dM = FindObjectOfType<DateManagement>();
 
 
         TurnOffDev();

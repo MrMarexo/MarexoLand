@@ -89,10 +89,7 @@ public class CalendarManager : MonoBehaviour
     [SerializeField] int slowdownPrice = 5;
     [SerializeField] int insteadPrice = 5;
 
-    //day limits for skills
-    [SerializeField] int checkpointLimit = 1;
-    [SerializeField] int slowdownLimit = 3;
-    [SerializeField] int insteadLimit = 5;
+    
 
     //will be taken from value management
     int power;
@@ -128,7 +125,7 @@ public class CalendarManager : MonoBehaviour
     void Locked(int dayIndex)
     {
         bool show = false;
-        if (dayIndex <= checkpointLimit) show = true;
+        if (dayIndex <= dM.GetCheckpointLimit()) show = true;
         else show = false;
         checkpointLocked.gameObject.SetActive(show);
         checkpointNumberDay.gameObject.SetActive(!show);
@@ -136,7 +133,7 @@ public class CalendarManager : MonoBehaviour
         minusCheckpointDay.gameObject.SetActive(!show);
         checkpointTextDay.gameObject.SetActive(!show);
 
-        if (dayIndex <= insteadLimit) show = true;
+        if (dayIndex <= dM.GetInsteadLimit()) show = true;
         else show = false;
         insteadLocked.gameObject.SetActive(show);
         insteadNumberDay.gameObject.SetActive(!show);
@@ -144,7 +141,7 @@ public class CalendarManager : MonoBehaviour
         minusInsteadDay.gameObject.SetActive(!show);
         insteadTextDay.gameObject.SetActive(!show);
 
-        if (dayIndex <= slowdownLimit) show = true;
+        if (dayIndex <= dM.GetSlowdownLimit()) show = true;
         else show = false;
         slowdownLocked.gameObject.SetActive(show);
         slowdownNumberDay.gameObject.SetActive(!show);

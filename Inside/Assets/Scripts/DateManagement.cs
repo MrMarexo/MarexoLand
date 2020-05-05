@@ -9,6 +9,11 @@ public class DateManagement : MonoBehaviour
     ValueManagement vM;
     Willpower willpower;
 
+    //day limits for skills
+    [SerializeField] int checkpointLimit = 1;
+    [SerializeField] int slowdownLimit = 3;
+    [SerializeField] int insteadLimit = 5;
+
 
     //current date
     DateTime curDate;
@@ -141,6 +146,21 @@ public class DateManagement : MonoBehaviour
     public int GetCurrentWeek()
     {
         return currentWeekIndex;
+    }
+
+    public int GetCheckpointLimit()
+    {
+        return checkpointLimit;
+    }
+
+    public int GetSlowdownLimit()
+    {
+        return slowdownLimit;
+    }
+
+    public int GetInsteadLimit()
+    {
+        return insteadLimit;
     }
 
     

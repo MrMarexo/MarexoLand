@@ -46,7 +46,7 @@ public class ValueManagement : MonoBehaviour
     private void Awake()
     {
         ///////////////////////for testing purposes ---deletes all prefs for all scripts
-        //PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteAll();
         ///////////////////////
 
         DeleteGamePrefs();

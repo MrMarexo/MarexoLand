@@ -8,10 +8,16 @@ public class Willpower : MonoBehaviour
 
     int state;
 
-    private void Start()
+    private void Awake()
     {
         willpower = PlayerPrefs.GetInt("willpower", 100);
+
+        //for testing only
+        willpower = 100;
+        ///////////////
+        
         UpdateWillpowerState();
+
     }
 
     public void UpdateWillpowerDaily(int daysPassed)
@@ -48,6 +54,7 @@ public class Willpower : MonoBehaviour
         {
             state = 0;
         }
+        Debug.Log(state);
         SaveWillpower();
     }
     

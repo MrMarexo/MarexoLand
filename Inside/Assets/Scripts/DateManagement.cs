@@ -52,6 +52,7 @@ public class DateManagement : MonoBehaviour
         if (Convert.ToInt32(timeElapsed) == 30f)
         {
             UpdateCurDay();
+            Debug.Log("updated");
         }
     }
 

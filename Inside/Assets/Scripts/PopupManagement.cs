@@ -70,6 +70,7 @@ public class PopupManagement : MonoBehaviour
 
     public void DisablePopup()
     {
+        Debug.Log(EventSystem.current.currentSelectedGameObject.transform.parent.parent.gameObject.name);
         GameObject popup = EventSystem.current.currentSelectedGameObject.transform.parent.parent.gameObject;
         StartCoroutine(LoadPopup(popup, false, timeToLoadPopup));
     }

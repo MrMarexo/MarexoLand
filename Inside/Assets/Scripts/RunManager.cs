@@ -229,6 +229,7 @@ public class RunManager : MonoBehaviour
 
     public void ClosePopup()
     {
+        Debug.Log("run manager close popup runs");
         pM.DisablePopup();
     }
 
